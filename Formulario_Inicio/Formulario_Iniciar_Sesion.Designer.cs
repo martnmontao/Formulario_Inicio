@@ -1,6 +1,6 @@
 ﻿namespace Formulario_Inicio
 {
-    partial class Fomurlario_Iniciar_Sesion
+    partial class Formulario_Iniciar_Sesion
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fomurlario_Iniciar_Sesion));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_Iniciar_Sesion));
             lblLogin = new Label();
             pnlDolar = new Panel();
             lblEmpresa = new Label();
@@ -69,10 +69,10 @@
             // 
             lblEmpresa.AutoSize = true;
             lblEmpresa.BackColor = Color.Transparent;
-            lblEmpresa.Font = new Font("Tempus Sans ITC", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEmpresa.Font = new Font("OldSansBlack", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point);
             lblEmpresa.Location = new Point(53, 9);
             lblEmpresa.Name = "lblEmpresa";
-            lblEmpresa.Size = new Size(190, 31);
+            lblEmpresa.Size = new Size(191, 30);
             lblEmpresa.TabIndex = 0;
             lblEmpresa.Text = "AdminisTrading";
             // 
@@ -87,6 +87,7 @@
             txtUsuario.PlaceholderText = "USER";
             txtUsuario.Size = new Size(392, 15);
             txtUsuario.TabIndex = 1;
+  
             txtUsuario.Enter += txtUsuario_Enter;
             txtUsuario.Leave += txtUsuario_Leave;
             // 
@@ -119,6 +120,7 @@
             txtAcceder.TabIndex = 0;
             txtAcceder.Text = "LOGIN";
             txtAcceder.UseVisualStyleBackColor = false;
+            txtAcceder.Click += txtAcceder_Click;
             // 
             // btnCerrar
             // 

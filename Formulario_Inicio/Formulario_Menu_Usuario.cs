@@ -1,39 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Formulario_Inicio
+﻿namespace Formulario_Inicio
 {
     public partial class Formulario_Menu_Usuario : Form
     {
-        private string nombre_usuario;
-        public Formulario_Menu_Usuario(string nombre)
+        public Formulario_Menu_Usuario()
         {
             InitializeComponent();
-            this.nombre_usuario = nombre;
         }
-
         private void Formulario_Menu_Load(object sender, EventArgs e)
         {
 
-            this.lblNombreUsuario.Text = nombre_usuario;
+
 
         }
-
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void btnOpciones_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (menuVertical.Width == 260)
+            {
+                menuVertical.Width = 57;
+            }
+            else
+            {
+                menuVertical.Width = 260;
+            }
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
+        
     }
 }

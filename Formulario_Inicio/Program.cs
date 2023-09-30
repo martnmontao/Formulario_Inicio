@@ -11,7 +11,7 @@ namespace Formulario_Inicio
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Fomurlario_Iniciar_Sesion());
+            Application.Run(new Formulario_Iniciar_Sesion());
         }
     }
 }

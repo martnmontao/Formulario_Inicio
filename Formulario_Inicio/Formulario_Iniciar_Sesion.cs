@@ -1,9 +1,9 @@
 
 namespace Formulario_Inicio
 {
-    public partial class Fomurlario_Iniciar_Sesion : Form
+    public partial class Formulario_Iniciar_Sesion : Form
     {
-        public Fomurlario_Iniciar_Sesion()
+        public Formulario_Iniciar_Sesion()
         {
             InitializeComponent();
         }
@@ -59,5 +59,13 @@ namespace Formulario_Inicio
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void txtAcceder_Click(object sender, EventArgs e)
+        {
+            Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
+            formularioMenu.Show();
+        }
+
+        
     }
 }

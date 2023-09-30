@@ -28,125 +28,118 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblTitulo = new Label();
-            lblUsuario = new Label();
-            lblNombreUsuario = new Label();
-            btnSalir = new Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_Menu_Usuario));
             toolStripComboBox1 = new ToolStripComboBox();
-            menuStrip1 = new MenuStrip();
-            iNICIOToolStripMenuItem = new ToolStripMenuItem();
-            eSTToolStripMenuItem = new ToolStripMenuItem();
-            menuStrip1.SuspendLayout();
+            menuVertical = new Panel();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            barraTitulo = new Panel();
+            btnOpciones = new PictureBox();
+            panelContenedor = new Panel();
+            menuVertical.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            barraTitulo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnOpciones).BeginInit();
             SuspendLayout();
-            // 
-            // lblTitulo
-            // 
-            lblTitulo.AutoSize = true;
-            lblTitulo.BackColor = SystemColors.MenuHighlight;
-            lblTitulo.BorderStyle = BorderStyle.Fixed3D;
-            lblTitulo.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTitulo.ForeColor = SystemColors.GradientActiveCaption;
-            lblTitulo.Location = new Point(302, 39);
-            lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(197, 27);
-            lblTitulo.TabIndex = 0;
-            lblTitulo.Text = "BOLSA DE VALORES";
-            // 
-            // lblUsuario
-            // 
-            lblUsuario.AutoSize = true;
-            lblUsuario.BackColor = SystemColors.MenuHighlight;
-            lblUsuario.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblUsuario.ForeColor = SystemColors.GradientActiveCaption;
-            lblUsuario.Location = new Point(535, 45);
-            lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(69, 21);
-            lblUsuario.TabIndex = 1;
-            lblUsuario.Text = "Usuario:";
-            // 
-            // lblNombreUsuario
-            // 
-            lblNombreUsuario.AutoSize = true;
-            lblNombreUsuario.BackColor = SystemColors.Highlight;
-            lblNombreUsuario.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblNombreUsuario.ForeColor = SystemColors.GradientActiveCaption;
-            lblNombreUsuario.Location = new Point(655, 45);
-            lblNombreUsuario.Name = "lblNombreUsuario";
-            lblNombreUsuario.Size = new Size(77, 21);
-            lblNombreUsuario.TabIndex = 2;
-            lblNombreUsuario.Text = "NOMBRE";
-            // 
-            // btnSalir
-            // 
-            btnSalir.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSalir.ForeColor = SystemColors.Highlight;
-            btnSalir.Location = new Point(669, 460);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 34);
-            btnSalir.TabIndex = 3;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            btnSalir.Click += btnSalir_Click;
             // 
             // toolStripComboBox1
             // 
             toolStripComboBox1.Name = "toolStripComboBox1";
             toolStripComboBox1.Size = new Size(121, 23);
             // 
-            // menuStrip1
+            // menuVertical
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { iNICIOToolStripMenuItem, eSTToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
-            menuStrip1.TabIndex = 4;
-            menuStrip1.Text = "menuStrip1";
+            menuVertical.BackColor = Color.FromArgb(236, 207, 44);
+            menuVertical.Controls.Add(label1);
+            menuVertical.Controls.Add(pictureBox1);
+            menuVertical.Dock = DockStyle.Left;
+            menuVertical.Location = new Point(0, 0);
+            menuVertical.Name = "menuVertical";
+            menuVertical.Size = new Size(260, 607);
+            menuVertical.TabIndex = 0;
             // 
-            // iNICIOToolStripMenuItem
+            // label1
             // 
-            iNICIOToolStripMenuItem.Name = "iNICIOToolStripMenuItem";
-            iNICIOToolStripMenuItem.Size = new Size(54, 20);
-            iNICIOToolStripMenuItem.Text = "INICIO";
+            label1.AutoSize = true;
+            label1.Font = new Font("OldSansBlack", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(62, 17);
+            label1.Name = "label1";
+            label1.Size = new Size(191, 30);
+            label1.TabIndex = 1;
+            label1.Text = "AdminisTrading";
             // 
-            // eSTToolStripMenuItem
+            // pictureBox1
             // 
-            eSTToolStripMenuItem.Name = "eSTToolStripMenuItem";
-            eSTToolStripMenuItem.Size = new Size(37, 20);
-            eSTToolStripMenuItem.Text = "EST";
+            pictureBox1.Image = Properties.Resources.ImagenDolar2;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(56, 69);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
-            // Formulario_Menu
+            // barraTitulo
+            // 
+            barraTitulo.BackColor = Color.FromArgb(236, 207, 44);
+            barraTitulo.Controls.Add(btnOpciones);
+            barraTitulo.Dock = DockStyle.Top;
+            barraTitulo.Location = new Point(260, 0);
+            barraTitulo.Name = "barraTitulo";
+            barraTitulo.Size = new Size(667, 50);
+            barraTitulo.TabIndex = 1;
+            // 
+            // btnOpciones
+            // 
+            btnOpciones.Image = (Image)resources.GetObject("btnOpciones.Image");
+            btnOpciones.Location = new Point(6, 9);
+            btnOpciones.Name = "btnOpciones";
+            btnOpciones.Size = new Size(35, 35);
+            btnOpciones.SizeMode = PictureBoxSizeMode.Zoom;
+            btnOpciones.TabIndex = 0;
+            btnOpciones.TabStop = false;
+            btnOpciones.Click += btnOpciones_Click;
+            // 
+            // panelContenedor
+            // 
+            panelContenedor.BackColor = Color.FromArgb(252, 202, 114);
+            panelContenedor.Dock = DockStyle.Fill;
+            panelContenedor.Location = new Point(260, 50);
+            panelContenedor.Name = "panelContenedor";
+            panelContenedor.Size = new Size(667, 557);
+            panelContenedor.TabIndex = 2;
+          
+            // 
+            // Formulario_Menu_Usuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Imagen_Menu_Parcial;
+            BackColor = Color.FromArgb(9, 37, 113);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 506);
+            ClientSize = new Size(927, 607);
             ControlBox = false;
-            Controls.Add(btnSalir);
-            Controls.Add(lblNombreUsuario);
-            Controls.Add(lblUsuario);
-            Controls.Add(lblTitulo);
-            Controls.Add(menuStrip1);
+            Controls.Add(panelContenedor);
+            Controls.Add(barraTitulo);
+            Controls.Add(menuVertical);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Formulario_Menu";
+            Name = "Formulario_Menu_Usuario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_Menu";
             Load += Formulario_Menu_Load;
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
+            menuVertical.ResumeLayout(false);
+            menuVertical.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            barraTitulo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btnOpciones).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label lblTitulo;
-        private Label lblUsuario;
-        private Label lblNombreUsuario;
-        private Button btnSalir;
         private ToolStripComboBox toolStripComboBox1;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem iNICIOToolStripMenuItem;
-        private ToolStripMenuItem eSTToolStripMenuItem;
+        private Panel menuVertical;
+        protected Panel barraTitulo;
+        private Panel panelContenedor;
+        private PictureBox btnOpciones;
+        private Label label1;
+        private PictureBox pictureBox1;
     }
 }
