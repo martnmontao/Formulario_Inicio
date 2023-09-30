@@ -7,7 +7,7 @@ namespace Formulario_Inicio
         {
             InitializeComponent();
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private void Fomurlario_Iniciar_Sesion_Load(object sender, EventArgs e)
         {
 
         }
@@ -37,7 +37,7 @@ namespace Formulario_Inicio
             {
                 txtContraseña.Text = "";
                 txtContraseña.ForeColor = Color.LightGray;
-            }
+            }//PUTO
         }
 
         private void txtContraseña_Leave(object sender, EventArgs e)

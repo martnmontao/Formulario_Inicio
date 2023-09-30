@@ -164,7 +164,7 @@
             Opacity = 0.85D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FORMULARIO";
-            Load += Form1_Load;
+            Load += Fomurlario_Iniciar_Sesion_Load;
             pnlDolar.ResumeLayout(false);
             pnlDolar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)btnCerrar).EndInit();
