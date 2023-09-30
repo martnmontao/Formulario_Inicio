@@ -69,12 +69,12 @@
             // 
             lblEmpresa.AutoSize = true;
             lblEmpresa.BackColor = Color.Transparent;
-            lblEmpresa.Font = new Font("OldSansBlack", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEmpresa.Location = new Point(53, 9);
+            lblEmpresa.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblEmpresa.Location = new Point(63, 9);
             lblEmpresa.Name = "lblEmpresa";
-            lblEmpresa.Size = new Size(191, 30);
+            lblEmpresa.Size = new Size(164, 33);
             lblEmpresa.TabIndex = 0;
-            lblEmpresa.Text = "AdminisTrading";
+            lblEmpresa.Text = "InverLux";
             // 
             // txtUsuario
             // 
@@ -84,10 +84,9 @@
             txtUsuario.ForeColor = Color.DimGray;
             txtUsuario.Location = new Point(343, 108);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.PlaceholderText = "USER";
+            txtUsuario.PlaceholderText = "Username";
             txtUsuario.Size = new Size(392, 15);
             txtUsuario.TabIndex = 1;
-  
             txtUsuario.Enter += txtUsuario_Enter;
             txtUsuario.Leave += txtUsuario_Leave;
             // 
@@ -99,7 +98,7 @@
             txtContraseña.ForeColor = Color.DimGray;
             txtContraseña.Location = new Point(343, 183);
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.PlaceholderText = "PASSWORD";
+            txtContraseña.PlaceholderText = "Password";
             txtContraseña.Size = new Size(392, 15);
             txtContraseña.TabIndex = 2;
             txtContraseña.Enter += txtContraseña_Enter;
@@ -108,6 +107,7 @@
             // txtAcceder
             // 
             txtAcceder.BackColor = Color.FromArgb(40, 40, 40);
+            txtAcceder.Cursor = Cursors.Hand;
             txtAcceder.FlatAppearance.BorderSize = 0;
             txtAcceder.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
             txtAcceder.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
@@ -118,7 +118,7 @@
             txtAcceder.Name = "txtAcceder";
             txtAcceder.Size = new Size(392, 40);
             txtAcceder.TabIndex = 0;
-            txtAcceder.Text = "LOGIN";
+            txtAcceder.Text = "LOG IN";
             txtAcceder.UseVisualStyleBackColor = false;
             txtAcceder.Click += txtAcceder_Click;
             // 
@@ -146,7 +146,7 @@
             btnMinimizar.TabStop = false;
             btnMinimizar.Click += btnMinimizar_Click;
             // 
-            // Fomurlario_Iniciar_Sesion
+            // Formulario_Iniciar_Sesion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -162,7 +162,7 @@
             Controls.Add(pnlDolar);
             Controls.Add(lblLogin);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Fomurlario_Iniciar_Sesion";
+            Name = "Formulario_Iniciar_Sesion";
             Opacity = 0.85D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FORMULARIO";

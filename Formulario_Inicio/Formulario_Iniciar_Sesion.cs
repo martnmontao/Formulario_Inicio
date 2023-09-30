@@ -25,7 +25,7 @@ namespace Formulario_Inicio
         {
             if (txtUsuario.Text == "")
             {
-                txtUsuario.Text = "USER";
+                txtUsuario.Text = "Username";
                 txtUsuario.ForeColor = Color.DimGray;
             }
         }
@@ -33,7 +33,7 @@ namespace Formulario_Inicio
         private void txtContraseña_Enter(object sender, EventArgs e)
         {
             txtContraseña.UseSystemPasswordChar = true;
-            if (txtContraseña.Text == "PASSWORD")
+            if (txtContraseña.Text == "Password")
             {
                 txtContraseña.Text = "";
                 txtContraseña.ForeColor = Color.LightGray;
@@ -66,6 +66,6 @@ namespace Formulario_Inicio
             formularioMenu.Show();
         }
 
-        
+
     }
 }

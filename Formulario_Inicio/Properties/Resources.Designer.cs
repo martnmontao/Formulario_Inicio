@@ -63,6 +63,26 @@ namespace Formulario_Inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoConfiguracion2 {
+            get {
+                object obj = ResourceManager.GetObject("iconoConfiguracion2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoInversion {
+            get {
+                object obj = ResourceManager.GetObject("iconoInversion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Imagen_Inicio_sesion {
             get {
                 object obj = ResourceManager.GetObject("Imagen_Inicio_sesion", resourceCulture);
@@ -86,6 +106,26 @@ namespace Formulario_Inicio.Properties {
         internal static System.Drawing.Bitmap imagenDeEquis {
             get {
                 object obj = ResourceManager.GetObject("imagenDeEquis", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagenDeEquis1 {
+            get {
+                object obj = ResourceManager.GetObject("imagenDeEquis1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagenDeEquis2 {
+            get {
+                object obj = ResourceManager.GetObject("imagenDeEquis2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +196,26 @@ namespace Formulario_Inicio.Properties {
         internal static System.Drawing.Bitmap minimizar1 {
             get {
                 object obj = ResourceManager.GetObject("minimizar1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap minimizar2 {
+            get {
+                object obj = ResourceManager.GetObject("minimizar2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap minimizar3 {
+            get {
+                object obj = ResourceManager.GetObject("minimizar3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
