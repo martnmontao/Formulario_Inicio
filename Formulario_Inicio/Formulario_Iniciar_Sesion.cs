@@ -58,7 +58,7 @@ namespace Formulario_Inicio
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-        }
+        }//a
 
         private void txtAcceder_Click(object sender, EventArgs e)
         {
