@@ -14,13 +14,13 @@
         }
         private void btnOpciones_Click(object sender, EventArgs e)
         {
-            if (menuVertical.Width == 237)
+            if (menuVertical.Width == 233)
             {
                 menuVertical.Width = 60;
             }
             else
             {
-                menuVertical.Width = 237;
+                menuVertical.Width = 233;
             }
         }
 
@@ -36,29 +36,19 @@
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnMaximizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-            btnNormalizar.Visible = true;
-            btnMaximizar.Visible = false;
-        }
-
-        private void btnNormalizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Normal;
-            btnNormalizar.Visible = false;
-            btnMaximizar.Visible = true;
-
-        }
-
         private void btnInvertir_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnConfiguracion_Click(object sender, EventArgs e)
-        {
 
+
+        private void btnInformacion_Click(object sender, EventArgs e)
+        {
+            Formulario_InformacionEmpresa fInfo = new Formulario_InformacionEmpresa();
+            fInfo.Show();
         }
+
+
     }
 }

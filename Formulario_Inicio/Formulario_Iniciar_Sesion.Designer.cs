@@ -45,14 +45,14 @@
             // lblLogin
             // 
             lblLogin.AutoSize = true;
-            lblLogin.BackColor = Color.Transparent;
-            lblLogin.Font = new Font("Century Schoolbook", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLogin.ForeColor = Color.LightGray;
-            lblLogin.Location = new Point(486, 32);
+            lblLogin.BackColor = Color.FromArgb(40, 40, 40);
+            lblLogin.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLogin.ForeColor = Color.Black;
+            lblLogin.Location = new Point(405, 25);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(108, 33);
+            lblLogin.Size = new Size(272, 33);
             lblLogin.TabIndex = 0;
-            lblLogin.Text = "LOGIN";
+            lblLogin.Text = "INICIAR SESION";
             // 
             // pnlDolar
             // 
@@ -118,17 +118,18 @@
             txtAcceder.Name = "txtAcceder";
             txtAcceder.Size = new Size(392, 40);
             txtAcceder.TabIndex = 0;
-            txtAcceder.Text = "LOG IN";
+            txtAcceder.Text = "INGRESAR";
             txtAcceder.UseVisualStyleBackColor = false;
             txtAcceder.Click += txtAcceder_Click;
             // 
             // btnCerrar
             // 
             btnCerrar.BackColor = Color.FromArgb(15, 15, 15);
+            btnCerrar.Cursor = Cursors.Hand;
             btnCerrar.Image = (Image)resources.GetObject("btnCerrar.Image");
-            btnCerrar.Location = new Point(764, 0);
+            btnCerrar.Location = new Point(751, 0);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(15, 15);
+            btnCerrar.Size = new Size(28, 24);
             btnCerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btnCerrar.TabIndex = 5;
             btnCerrar.TabStop = false;
@@ -137,10 +138,11 @@
             // btnMinimizar
             // 
             btnMinimizar.BackColor = Color.FromArgb(15, 15, 15);
+            btnMinimizar.Cursor = Cursors.Hand;
             btnMinimizar.Image = Properties.Resources.minimizar1;
-            btnMinimizar.Location = new Point(743, 0);
+            btnMinimizar.Location = new Point(720, 0);
             btnMinimizar.Name = "btnMinimizar";
-            btnMinimizar.Size = new Size(15, 15);
+            btnMinimizar.Size = new Size(34, 24);
             btnMinimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btnMinimizar.TabIndex = 6;
             btnMinimizar.TabStop = false;
@@ -163,7 +165,6 @@
             Controls.Add(lblLogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Iniciar_Sesion";
-            Opacity = 0.85D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FORMULARIO";
             Load += Fomurlario_Iniciar_Sesion_Load;

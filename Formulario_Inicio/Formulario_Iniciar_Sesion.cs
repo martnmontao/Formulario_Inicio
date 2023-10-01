@@ -64,6 +64,7 @@ namespace Formulario_Inicio
         {
             Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
             formularioMenu.Show();
+            this.Hide();
         }
 
 

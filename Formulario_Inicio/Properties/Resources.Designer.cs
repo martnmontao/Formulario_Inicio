@@ -83,6 +83,16 @@ namespace Formulario_Inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoVolver {
+            get {
+                object obj = ResourceManager.GetObject("iconoVolver", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Imagen_Inicio_sesion {
             get {
                 object obj = ResourceManager.GetObject("Imagen_Inicio_sesion", resourceCulture);
@@ -156,6 +166,16 @@ namespace Formulario_Inicio.Properties {
         internal static System.Drawing.Bitmap ImagenDolar2 {
             get {
                 object obj = ResourceManager.GetObject("ImagenDolar2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImagenDolar3 {
+            get {
+                object obj = ResourceManager.GetObject("ImagenDolar3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
