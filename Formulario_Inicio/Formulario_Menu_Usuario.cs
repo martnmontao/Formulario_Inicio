@@ -1,14 +1,18 @@
-﻿namespace Formulario_Inicio
+﻿using System.Drawing.Text;
+
+namespace Formulario_Inicio
 {
     public partial class Formulario_Menu_Usuario : Form
     {
+
+
         public Formulario_Menu_Usuario()
         {
             InitializeComponent();
         }
         private void Formulario_Menu_Load(object sender, EventArgs e)
         {
-
+            
 
 
         }
@@ -26,7 +30,7 @@
 
 
 
-        private void btmCerrarClick_Click(object sender, EventArgs e)
+        private void btnCerrarClick_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -41,12 +45,11 @@
 
         }
 
-
-
         private void btnInformacion_Click(object sender, EventArgs e)
         {
             Formulario_InformacionEmpresa fInfo = new Formulario_InformacionEmpresa();
             fInfo.Show();
+
         }
 
 

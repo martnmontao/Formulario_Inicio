@@ -1,4 +1,7 @@
 
+
+using Biblioteca_Clases;
+
 namespace Formulario_Inicio
 {
     public partial class Formulario_Iniciar_Sesion : Form
@@ -33,18 +36,18 @@ namespace Formulario_Inicio
         private void txtContraseña_Enter(object sender, EventArgs e)
         {
             txtContraseña.UseSystemPasswordChar = true;
-            if (txtContraseña.Text == "Password")
+            if (txtContraseña.Text == "Usuario")
             {
                 txtContraseña.Text = "";
                 txtContraseña.ForeColor = Color.LightGray;
-            }//PUTO
+            }
         }
 
         private void txtContraseña_Leave(object sender, EventArgs e)
         {
             if (txtContraseña.Text == "")
             {
-                txtContraseña.Text = "PASSWORD";
+                txtContraseña.Text = "Contraseña";
                 txtContraseña.ForeColor = Color.DimGray;
                 txtContraseña.UseSystemPasswordChar = false;
             }
@@ -58,13 +61,28 @@ namespace Formulario_Inicio
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-        }//a
+        }
 
-        private void txtAcceder_Click(object sender, EventArgs e)
+        private void btnAcceder_Click(object sender, EventArgs e)
         {
-            Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
-            formularioMenu.Show();
+            string nombre = txtUsuario.Text;
+            string contraseña = txtContraseña.Text;
+
+            if (txtUsuario.Text == "Apache" && txtContraseña.Text == "1")
+            {
+                Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "13213");
+                formularioAdmin.Show();
+            }
+            else
+            {
+                // Persona usuario = new Persona(nombre);
+                Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
+                formularioMenu.Show();
+
+            }
+
             this.Hide();
+
         }
 
 

@@ -124,17 +124,29 @@
   <data name="minimizar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minimizar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="minimizar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimizar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="usuarioIcono1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\usuarioIcono1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="usuarioIcono-removebg-preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\usuarioIcono-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="minimizar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minimizar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconoConfiguracion2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoConfiguracion2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ImagenDolar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImagenDolar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imagenDeEquis2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenDeEquis2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="usuarioIcono" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\usuarioIcono.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="menuIcono1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menuIcono1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="usuarioIcono2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\usuarioIcono2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ImagenDolar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagenDolar3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,8 +160,8 @@
   <data name="minimizar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minimizar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ImagenDolar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ImagenDolar2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconoConfiguracion2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoConfiguracion2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iconoInversion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoInversion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,19 +169,31 @@
   <data name="Imagen_Menu_Parcial" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Imagen_Menu_Parcial.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="imagenFondoUsuarios" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenFondoUsuarios.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Imagen_Inicio_sesion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Imagen_Inicio_sesion.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minimizar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minimizar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imagenDeEquis2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenDeEquis2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImagenDolar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImagenDolar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ImagenDolar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagenDolar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImagenDolar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImagenDolar2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="menuIcono" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menuIcono.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iconoVolver" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoVolver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconoVolver1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoVolver1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

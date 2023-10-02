@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_Menu_Usuario));
             toolStripComboBox1 = new ToolStripComboBox();
             menuVertical = new Panel();
+            lblIdUsuario = new Label();
+            lblNombreUsuario = new Label();
+            btnIconoUsuario = new PictureBox();
             btnInformacion = new Button();
             btnConfiguracion = new Button();
             btnInvertir = new Button();
@@ -39,14 +42,15 @@
             pictureBox1 = new PictureBox();
             barraTitulo = new Panel();
             btnMinimizarClick = new PictureBox();
-            btmCerrarClick = new PictureBox();
+            btnCerrarClick = new PictureBox();
             btnOpciones = new PictureBox();
             panelContenedor = new Panel();
             menuVertical.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnIconoUsuario).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             barraTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnMinimizarClick).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btmCerrarClick).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnCerrarClick).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnOpciones).BeginInit();
             panelContenedor.SuspendLayout();
             SuspendLayout();
@@ -59,6 +63,9 @@
             // menuVertical
             // 
             menuVertical.BackColor = Color.FromArgb(255, 197, 0);
+            menuVertical.Controls.Add(lblIdUsuario);
+            menuVertical.Controls.Add(lblNombreUsuario);
+            menuVertical.Controls.Add(btnIconoUsuario);
             menuVertical.Controls.Add(btnInformacion);
             menuVertical.Controls.Add(btnConfiguracion);
             menuVertical.Controls.Add(btnInvertir);
@@ -68,6 +75,36 @@
             menuVertical.Name = "menuVertical";
             menuVertical.Size = new Size(233, 468);
             menuVertical.TabIndex = 0;
+            // 
+            // lblIdUsuario
+            // 
+            lblIdUsuario.AutoSize = true;
+            lblIdUsuario.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblIdUsuario.Location = new Point(76, 46);
+            lblIdUsuario.Name = "lblIdUsuario";
+            lblIdUsuario.Size = new Size(92, 15);
+            lblIdUsuario.TabIndex = 9;
+            lblIdUsuario.Text = "ID Usuario";
+            // 
+            // lblNombreUsuario
+            // 
+            lblNombreUsuario.AutoSize = true;
+            lblNombreUsuario.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombreUsuario.Location = new Point(76, 12);
+            lblNombreUsuario.Name = "lblNombreUsuario";
+            lblNombreUsuario.Size = new Size(136, 15);
+            lblNombreUsuario.TabIndex = 8;
+            lblNombreUsuario.Text = "Nombre Usuario";
+            // 
+            // btnIconoUsuario
+            // 
+            btnIconoUsuario.Image = Properties.Resources.usuarioIcono2;
+            btnIconoUsuario.Location = new Point(0, 0);
+            btnIconoUsuario.Name = "btnIconoUsuario";
+            btnIconoUsuario.Size = new Size(70, 70);
+            btnIconoUsuario.SizeMode = PictureBoxSizeMode.Zoom;
+            btnIconoUsuario.TabIndex = 7;
+            btnIconoUsuario.TabStop = false;
             // 
             // btnInformacion
             // 
@@ -79,7 +116,7 @@
             btnInformacion.ForeColor = SystemColors.ActiveCaptionText;
             btnInformacion.Image = (Image)resources.GetObject("btnInformacion.Image");
             btnInformacion.ImageAlign = ContentAlignment.MiddleLeft;
-            btnInformacion.Location = new Point(0, 37);
+            btnInformacion.Location = new Point(0, 91);
             btnInformacion.Name = "btnInformacion";
             btnInformacion.Padding = new Padding(14, 0, 0, 0);
             btnInformacion.Size = new Size(230, 34);
@@ -98,7 +135,7 @@
             btnConfiguracion.ForeColor = SystemColors.ActiveCaptionText;
             btnConfiguracion.Image = (Image)resources.GetObject("btnConfiguracion.Image");
             btnConfiguracion.ImageAlign = ContentAlignment.BottomLeft;
-            btnConfiguracion.Location = new Point(0, 93);
+            btnConfiguracion.Location = new Point(-3, 165);
             btnConfiguracion.Name = "btnConfiguracion";
             btnConfiguracion.Padding = new Padding(14, 0, 0, 0);
             btnConfiguracion.Size = new Size(233, 34);
@@ -116,7 +153,7 @@
             btnInvertir.ForeColor = SystemColors.ActiveCaptionText;
             btnInvertir.Image = (Image)resources.GetObject("btnInvertir.Image");
             btnInvertir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnInvertir.Location = new Point(0, 199);
+            btnInvertir.Location = new Point(-3, 306);
             btnInvertir.Name = "btnInvertir";
             btnInvertir.Padding = new Padding(15, 0, 0, 0);
             btnInvertir.Size = new Size(233, 34);
@@ -134,7 +171,7 @@
             btnIngresarDinero.ForeColor = SystemColors.ActiveCaptionText;
             btnIngresarDinero.Image = (Image)resources.GetObject("btnIngresarDinero.Image");
             btnIngresarDinero.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIngresarDinero.Location = new Point(3, 145);
+            btnIngresarDinero.Location = new Point(0, 236);
             btnIngresarDinero.Name = "btnIngresarDinero";
             btnIngresarDinero.Padding = new Padding(2, 0, 0, 0);
             btnIngresarDinero.Size = new Size(230, 34);
@@ -155,7 +192,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.ImagenDolar2;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(400, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(57, 55);
@@ -168,7 +205,7 @@
             barraTitulo.BackColor = Color.FromArgb(255, 197, 0);
             barraTitulo.Controls.Add(pictureBox1);
             barraTitulo.Controls.Add(btnMinimizarClick);
-            barraTitulo.Controls.Add(btmCerrarClick);
+            barraTitulo.Controls.Add(btnCerrarClick);
             barraTitulo.Controls.Add(label1);
             barraTitulo.Controls.Add(btnOpciones);
             barraTitulo.Dock = DockStyle.Top;
@@ -190,18 +227,18 @@
             btnMinimizarClick.TabStop = false;
             btnMinimizarClick.Click += btnMinimizarClick_Click;
             // 
-            // btmCerrarClick
+            // btnCerrarClick
             // 
-            btmCerrarClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btmCerrarClick.BackgroundImage = Properties.Resources.imagenDeEquis2;
-            btmCerrarClick.BackgroundImageLayout = ImageLayout.Zoom;
-            btmCerrarClick.Cursor = Cursors.Hand;
-            btmCerrarClick.Location = new Point(1010, 0);
-            btmCerrarClick.Name = "btmCerrarClick";
-            btmCerrarClick.Size = new Size(31, 31);
-            btmCerrarClick.TabIndex = 1;
-            btmCerrarClick.TabStop = false;
-            btmCerrarClick.Click += btmCerrarClick_Click;
+            btnCerrarClick.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCerrarClick.BackgroundImage = Properties.Resources.imagenDeEquis2;
+            btnCerrarClick.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCerrarClick.Cursor = Cursors.Hand;
+            btnCerrarClick.Location = new Point(1010, 0);
+            btnCerrarClick.Name = "btnCerrarClick";
+            btnCerrarClick.Size = new Size(31, 31);
+            btnCerrarClick.TabIndex = 1;
+            btnCerrarClick.TabStop = false;
+            btnCerrarClick.Click += btnCerrarClick_Click;
             // 
             // btnOpciones
             // 
@@ -241,11 +278,13 @@
             Text = "Formulario_Menu";
             Load += Formulario_Menu_Load;
             menuVertical.ResumeLayout(false);
+            menuVertical.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)btnIconoUsuario).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             barraTitulo.ResumeLayout(false);
             barraTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)btnMinimizarClick).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btmCerrarClick).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnCerrarClick).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnOpciones).EndInit();
             panelContenedor.ResumeLayout(false);
             ResumeLayout(false);
@@ -260,11 +299,14 @@
         private Label label1;
         private PictureBox pictureBox1;
         private PictureBox btnMinimizarClick;
-        private PictureBox btmCerrarClick;
+        private PictureBox btnCerrarClick;
         private Button btnIngresarDinero;
         private Button btnConfiguracion;
         private Button btnInformacion;
         private Button btnInvertir;
         private Button button1;
+        private Label lblNombreUsuario;
+        private PictureBox btnIconoUsuario;
+        private Label lblIdUsuario;
     }
 }

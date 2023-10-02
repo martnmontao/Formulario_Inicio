@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_InformacionEmpresa));
             lblInformacion = new Label();
             lblDescripcion = new Label();
             label1 = new Label();
@@ -35,14 +36,16 @@
             label3 = new Label();
             panel1 = new Panel();
             btnVolver = new PictureBox();
+            panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)btnVolver).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // lblInformacion
             // 
             lblInformacion.AutoSize = true;
             lblInformacion.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblInformacion.Location = new Point(368, 9);
+            lblInformacion.Location = new Point(371, 9);
             lblInformacion.Name = "lblInformacion";
             lblInformacion.Size = new Size(283, 33);
             lblInformacion.TabIndex = 0;
@@ -90,7 +93,7 @@
             // 
             // panel1
             // 
-            panel1.BackgroundImage = Properties.Resources.ImagenDolar3;
+            panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
             panel1.Location = new Point(411, 176);
             panel1.Name = "panel1";
@@ -103,10 +106,21 @@
             btnVolver.Image = Properties.Resources.iconoVolver;
             btnVolver.Location = new Point(0, 0);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(54, 50);
+            btnVolver.Size = new Size(57, 58);
             btnVolver.TabIndex = 6;
             btnVolver.TabStop = false;
             btnVolver.Click += btnVolver_Click;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = SystemColors.AppWorkspace;
+            panel2.Controls.Add(lblInformacion);
+            panel2.Controls.Add(btnVolver);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1041, 58);
+            panel2.TabIndex = 7;
             // 
             // Formulario_InformacionEmpresa
             // 
@@ -114,18 +128,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 197, 0);
             ClientSize = new Size(1041, 518);
-            Controls.Add(btnVolver);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(lblDescripcion);
-            Controls.Add(lblInformacion);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_InformacionEmpresa";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_InformacionEmpresa";
             ((System.ComponentModel.ISupportInitialize)btnVolver).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -139,5 +154,6 @@
         private Label label3;
         private Panel panel1;
         private PictureBox btnVolver;
+        private Panel panel2;
     }
 }

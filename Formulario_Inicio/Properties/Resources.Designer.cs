@@ -93,6 +93,16 @@ namespace Formulario_Inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoVolver1 {
+            get {
+                object obj = ResourceManager.GetObject("iconoVolver1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Imagen_Inicio_sesion {
             get {
                 object obj = ResourceManager.GetObject("Imagen_Inicio_sesion", resourceCulture);
@@ -183,6 +193,36 @@ namespace Formulario_Inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ImagenDolar4 {
+            get {
+                object obj = ResourceManager.GetObject("ImagenDolar4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImagenDolar5 {
+            get {
+                object obj = ResourceManager.GetObject("ImagenDolar5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagenFondoUsuarios {
+            get {
+                object obj = ResourceManager.GetObject("imagenFondoUsuarios", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap menuIcono {
             get {
                 object obj = ResourceManager.GetObject("menuIcono", resourceCulture);
@@ -236,6 +276,46 @@ namespace Formulario_Inicio.Properties {
         internal static System.Drawing.Bitmap minimizar3 {
             get {
                 object obj = ResourceManager.GetObject("minimizar3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap usuarioIcono {
+            get {
+                object obj = ResourceManager.GetObject("usuarioIcono", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap usuarioIcono_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("usuarioIcono-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap usuarioIcono1 {
+            get {
+                object obj = ResourceManager.GetObject("usuarioIcono1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap usuarioIcono2 {
+            get {
+                object obj = ResourceManager.GetObject("usuarioIcono2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

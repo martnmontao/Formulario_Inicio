@@ -34,7 +34,7 @@
             lblEmpresa = new Label();
             txtUsuario = new TextBox();
             txtContraseña = new TextBox();
-            txtAcceder = new Button();
+            btnAcceder = new Button();
             btnCerrar = new PictureBox();
             btnMinimizar = new PictureBox();
             pnlDolar.SuspendLayout();
@@ -84,7 +84,7 @@
             txtUsuario.ForeColor = Color.DimGray;
             txtUsuario.Location = new Point(343, 108);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.PlaceholderText = "Username";
+            txtUsuario.PlaceholderText = "Usuario";
             txtUsuario.Size = new Size(392, 15);
             txtUsuario.TabIndex = 1;
             txtUsuario.Enter += txtUsuario_Enter;
@@ -98,29 +98,29 @@
             txtContraseña.ForeColor = Color.DimGray;
             txtContraseña.Location = new Point(343, 183);
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.PlaceholderText = "Password";
+            txtContraseña.PlaceholderText = "Contraseña";
             txtContraseña.Size = new Size(392, 15);
             txtContraseña.TabIndex = 2;
             txtContraseña.Enter += txtContraseña_Enter;
             txtContraseña.Leave += txtContraseña_Leave;
             // 
-            // txtAcceder
+            // btnAcceder
             // 
-            txtAcceder.BackColor = Color.FromArgb(40, 40, 40);
-            txtAcceder.Cursor = Cursors.Hand;
-            txtAcceder.FlatAppearance.BorderSize = 0;
-            txtAcceder.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
-            txtAcceder.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
-            txtAcceder.FlatStyle = FlatStyle.Flat;
-            txtAcceder.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            txtAcceder.ForeColor = Color.LightGray;
-            txtAcceder.Location = new Point(343, 263);
-            txtAcceder.Name = "txtAcceder";
-            txtAcceder.Size = new Size(392, 40);
-            txtAcceder.TabIndex = 0;
-            txtAcceder.Text = "INGRESAR";
-            txtAcceder.UseVisualStyleBackColor = false;
-            txtAcceder.Click += txtAcceder_Click;
+            btnAcceder.BackColor = Color.FromArgb(40, 40, 40);
+            btnAcceder.Cursor = Cursors.Hand;
+            btnAcceder.FlatAppearance.BorderSize = 0;
+            btnAcceder.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
+            btnAcceder.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnAcceder.FlatStyle = FlatStyle.Flat;
+            btnAcceder.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAcceder.ForeColor = Color.LightGray;
+            btnAcceder.Location = new Point(343, 263);
+            btnAcceder.Name = "btnAcceder";
+            btnAcceder.Size = new Size(392, 40);
+            btnAcceder.TabIndex = 0;
+            btnAcceder.Text = "INGRESAR";
+            btnAcceder.UseVisualStyleBackColor = false;
+            btnAcceder.Click += btnAcceder_Click;
             // 
             // btnCerrar
             // 
@@ -158,7 +158,7 @@
             ControlBox = false;
             Controls.Add(btnMinimizar);
             Controls.Add(btnCerrar);
-            Controls.Add(txtAcceder);
+            Controls.Add(btnAcceder);
             Controls.Add(txtContraseña);
             Controls.Add(txtUsuario);
             Controls.Add(pnlDolar);
@@ -182,7 +182,7 @@
         private Panel pnlDolar;
         private TextBox txtUsuario;
         private TextBox txtContraseña;
-        private Button txtAcceder;
+        private Button btnAcceder;
         private PictureBox btnCerrar;
         private PictureBox btnMinimizar;
         private Label lblEmpresa;
