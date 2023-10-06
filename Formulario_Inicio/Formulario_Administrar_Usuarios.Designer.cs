@@ -28,53 +28,74 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            btnVolver = new PictureBox();
             label1 = new Label();
-            pictureBox1 = new PictureBox();
-            dataGridView1 = new DataGridView();
+            gridUsuarios = new DataGridView();
+            btnCargarUsuarios = new Button();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnVolver).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridUsuarios).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(231, 186, 75);
-            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(btnVolver);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 51);
+            panel1.Size = new Size(968, 51);
             panel1.TabIndex = 0;
+            // 
+            // btnVolver
+            // 
+            btnVolver.Image = Properties.Resources.iconoVolver1;
+            btnVolver.Location = new Point(0, 0);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(49, 50);
+            btnVolver.TabIndex = 1;
+            btnVolver.TabStop = false;
+            btnVolver.Click += btnVolver_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(242, 9);
+            label1.Location = new Point(337, 9);
             label1.Name = "label1";
             label1.Size = new Size(296, 33);
             label1.TabIndex = 0;
             label1.Text = "Lista de usuarios";
             // 
-            // pictureBox1
+            // gridUsuarios
             // 
-            pictureBox1.Image = Properties.Resources.iconoVolver1;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(49, 50);
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
+            gridUsuarios.BackgroundColor = Color.FromArgb(255, 192, 128);
+            gridUsuarios.BorderStyle = BorderStyle.None;
+            gridUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridUsuarios.Location = new Point(64, 57);
+            gridUsuarios.Name = "gridUsuarios";
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 192, 128);
+            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.IndianRed;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 224, 192);
+            dataGridViewCellStyle1.SelectionForeColor = Color.IndianRed;
+            gridUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            gridUsuarios.RowTemplate.Height = 25;
+            gridUsuarios.Size = new Size(705, 412);
+            gridUsuarios.TabIndex = 1;
             // 
-            // dataGridView1
+            // btnCargarUsuarios
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(85, 57);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(432, 381);
-            dataGridView1.TabIndex = 1;
+            btnCargarUsuarios.Location = new Point(830, 66);
+            btnCargarUsuarios.Name = "btnCargarUsuarios";
+            btnCargarUsuarios.Size = new Size(124, 23);
+            btnCargarUsuarios.TabIndex = 2;
+            btnCargarUsuarios.Text = "Cargar usuarios";
+            btnCargarUsuarios.UseVisualStyleBackColor = true;
+            btnCargarUsuarios.Click += btnCargarUsuarios_Click;
             // 
             // Formulario_Administrar_Usuarios
             // 
@@ -82,17 +103,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(246, 212, 94);
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(968, 596);
+            Controls.Add(btnCargarUsuarios);
+            Controls.Add(gridUsuarios);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Administrar_Usuarios";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_Administrar_Usuarios";
             Load += Formulario_Administrar_Usuarios_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnVolver).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridUsuarios).EndInit();
             ResumeLayout(false);
         }
 
@@ -100,7 +123,8 @@
 
         private Panel panel1;
         private Label label1;
-        private PictureBox pictureBox1;
-        private DataGridView dataGridView1;
+        private PictureBox btnVolver;
+        private DataGridView gridUsuarios;
+        private Button btnCargarUsuarios;
     }
 }

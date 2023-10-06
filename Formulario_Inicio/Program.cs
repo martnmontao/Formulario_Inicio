@@ -1,3 +1,5 @@
+using Biblioteca_Clases;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,18 @@ namespace Formulario_Inicio
         [STAThread]
         static void Main()
         {
+            
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
+          
+            
             Application.Run(new Formulario_Iniciar_Sesion());
+            
+            
+
+            
+ 
         }
     }
 }

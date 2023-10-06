@@ -150,6 +150,7 @@
             Controls.Add(panelIzquierdo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Admin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_Admin";
             Load += Formulario_Admin_Load;
             panelIzquierdo.ResumeLayout(false);

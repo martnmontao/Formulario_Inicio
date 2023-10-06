@@ -1,7 +1,6 @@
 
 
 using Biblioteca_Clases;
-
 namespace Formulario_Inicio
 {
     public partial class Formulario_Iniciar_Sesion : Form
@@ -67,23 +66,47 @@ namespace Formulario_Inicio
         {
             string nombre = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
+            
 
             if (txtUsuario.Text == "Apache" && txtContraseña.Text == "1")
             {
                 Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "13213");
                 formularioAdmin.Show();
+                //Persona usuario = new Usuario(nombre, "651651", 0);
+
             }
             else
             {
-                // Persona usuario = new Persona(nombre);
+                
+                try
+                {
+                    List<Persona> lista = new List<Persona>();
+                    Persona usuario = new Usuario(nombre, "651651", 0);
+                    lista.Add(usuario);
+
+
+                    Serializadora.EscribirJson(usuario);
+                    
+                    
+                    //Serializadora.EscribirXML(lista);
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
                 Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
                 formularioMenu.Show();
-
+                  
             }
 
             this.Hide();
 
         }
+
+        
 
 
     }

@@ -6,14 +6,30 @@ using System.Threading.Tasks;
 
 namespace Biblioteca_Clases
 {
-    internal class Usuario : Persona
-    {
+    [Serializable]
 
-        public Usuario(string nombre, string idUsuario):base(nombre, idUsuario) 
+    public class Usuario : Persona
+    {
+        
+        private float sueldo;
+
+        public Usuario()
         {
-        
+            
         }
-        
+        public Usuario(string nombre, string idUsuario, int sueldo):base(nombre, idUsuario) 
+        {
+            this.sueldo = sueldo;
+        }
+
+        public float Sueldo { get => sueldo; set => sueldo = value; }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Sueldo: {this.Sueldo}";
+        }
+
+
 
 
     }

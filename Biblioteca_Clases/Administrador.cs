@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca_Clases
 {
+    [Serializable]
     public class Administrador : Persona
     {
         public Administrador(string nombre, string id):base(nombre, id)
