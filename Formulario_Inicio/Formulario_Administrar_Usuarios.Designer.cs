@@ -34,6 +34,9 @@
             label1 = new Label();
             gridUsuarios = new DataGridView();
             btnCargarUsuarios = new Button();
+            btnValidarUsuarios = new Button();
+            btnEliminarUsuarios = new Button();
+            bntUsuariosARegistrar = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnVolver).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridUsuarios).BeginInit();
@@ -77,6 +80,7 @@
             gridUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridUsuarios.Location = new Point(64, 57);
             gridUsuarios.Name = "gridUsuarios";
+            gridUsuarios.ReadOnly = true;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 192, 128);
             dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = Color.IndianRed;
@@ -84,18 +88,48 @@
             dataGridViewCellStyle1.SelectionForeColor = Color.IndianRed;
             gridUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle1;
             gridUsuarios.RowTemplate.Height = 25;
-            gridUsuarios.Size = new Size(705, 412);
+            gridUsuarios.Size = new Size(419, 412);
             gridUsuarios.TabIndex = 1;
             // 
             // btnCargarUsuarios
             // 
-            btnCargarUsuarios.Location = new Point(830, 66);
+            btnCargarUsuarios.Location = new Point(64, 493);
             btnCargarUsuarios.Name = "btnCargarUsuarios";
-            btnCargarUsuarios.Size = new Size(124, 23);
+            btnCargarUsuarios.Size = new Size(144, 44);
             btnCargarUsuarios.TabIndex = 2;
-            btnCargarUsuarios.Text = "Cargar usuarios";
+            btnCargarUsuarios.Text = "Usuarios";
             btnCargarUsuarios.UseVisualStyleBackColor = true;
             btnCargarUsuarios.Click += btnCargarUsuarios_Click;
+            // 
+            // btnValidarUsuarios
+            // 
+            btnValidarUsuarios.Location = new Point(447, 493);
+            btnValidarUsuarios.Name = "btnValidarUsuarios";
+            btnValidarUsuarios.Size = new Size(135, 44);
+            btnValidarUsuarios.TabIndex = 3;
+            btnValidarUsuarios.Text = "Validar usuarios";
+            btnValidarUsuarios.UseVisualStyleBackColor = true;
+            btnValidarUsuarios.Click += btnValidarUsuarios_Click;
+            // 
+            // btnEliminarUsuarios
+            // 
+            btnEliminarUsuarios.Location = new Point(637, 493);
+            btnEliminarUsuarios.Name = "btnEliminarUsuarios";
+            btnEliminarUsuarios.Size = new Size(132, 44);
+            btnEliminarUsuarios.TabIndex = 4;
+            btnEliminarUsuarios.Text = "Eliminar usuario";
+            btnEliminarUsuarios.UseVisualStyleBackColor = true;
+            btnEliminarUsuarios.Click += btnEliminarUsuarios_Click;
+            // 
+            // bntUsuariosARegistrar
+            // 
+            bntUsuariosARegistrar.Location = new Point(251, 493);
+            bntUsuariosARegistrar.Name = "bntUsuariosARegistrar";
+            bntUsuariosARegistrar.Size = new Size(133, 44);
+            bntUsuariosARegistrar.TabIndex = 5;
+            bntUsuariosARegistrar.Text = "Usuarios a registrar";
+            bntUsuariosARegistrar.UseVisualStyleBackColor = true;
+            bntUsuariosARegistrar.Click += bntUsuariosARegistrar_Click;
             // 
             // Formulario_Administrar_Usuarios
             // 
@@ -104,6 +138,9 @@
             BackColor = Color.FromArgb(246, 212, 94);
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(968, 596);
+            Controls.Add(bntUsuariosARegistrar);
+            Controls.Add(btnEliminarUsuarios);
+            Controls.Add(btnValidarUsuarios);
             Controls.Add(btnCargarUsuarios);
             Controls.Add(gridUsuarios);
             Controls.Add(panel1);
@@ -126,5 +163,8 @@
         private PictureBox btnVolver;
         private DataGridView gridUsuarios;
         private Button btnCargarUsuarios;
+        private Button btnValidarUsuarios;
+        private Button btnEliminarUsuarios;
+        private Button bntUsuariosARegistrar;
     }
 }

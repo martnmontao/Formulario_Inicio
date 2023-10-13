@@ -63,7 +63,7 @@
             btnAcciones.FlatStyle = FlatStyle.Flat;
             btnAcciones.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnAcciones.ForeColor = Color.LightGray;
-            btnAcciones.Location = new Point(12, 119);
+            btnAcciones.Location = new Point(13, 118);
             btnAcciones.Name = "btnAcciones";
             btnAcciones.Size = new Size(183, 40);
             btnAcciones.TabIndex = 3;

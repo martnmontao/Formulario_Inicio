@@ -25,7 +25,7 @@ namespace Formulario_Inicio
             InitializeComponent();
             this.lblNombreUsuario.Text = "Usuario: " + nombre;
             this.lblIdUsuario.Text = "Id: " + idUsuario;
-            this.administrador = new Administrador(nombre, idUsuario);
+            //this.administrador = new Administrador(nombre, idUsuario);
 
         }
         private void Formulario_Admin_Load(object sender, EventArgs e)

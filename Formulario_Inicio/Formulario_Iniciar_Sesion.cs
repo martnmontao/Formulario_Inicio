@@ -63,7 +63,8 @@ namespace Formulario_Inicio
         }
 
         private void btnAcceder_Click(object sender, EventArgs e)
-        {
+        {   
+            string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
             string nombre = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
             
@@ -72,37 +73,39 @@ namespace Formulario_Inicio
             {
                 Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "13213");
                 formularioAdmin.Show();
-                //Persona usuario = new Usuario(nombre, "651651", 0);
-
             }
             else
             {
                 
                 try
                 {
-                    List<Persona> lista = new List<Persona>();
-                    Persona usuario = new Usuario(nombre, "651651", 0);
-                    lista.Add(usuario);
-
-
-                    Serializadora.EscribirJson(usuario);
-                    
-                    
-                    //Serializadora.EscribirXML(lista);
-
-
+                
+                    List<Usuario> listaUsuarios = new List<Usuario>();
+                    Persona persona = new Usuario(nombre, "651651", 0, contraseña);
+                    Usuario usuario = (Usuario) persona;
+                    if(usuario.VerificarUsuario(usuario))
+                    {
+                        Serializadora.EscribirJsonUsuariosARegistrar(persona,ruta);
+                        Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
+                        formularioMenu.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                       MessageBox.Show("Ya hay un usuario con ese nombre. Porfavor ingrese su contraseña.");
+                        
+                    }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-                Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
-                formularioMenu.Show();
+                
+                
                   
             }
 
-            this.Hide();
+          
 
         }
 

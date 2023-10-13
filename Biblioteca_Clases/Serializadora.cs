@@ -9,24 +9,33 @@ using Microsoft.Win32;
 //using System.Xml.Serialization;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Biblioteca_Clases
 {
     public class Serializadora
     {
-        private static string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
-        private static string ruta2 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosDos.xml";
+        
 
 
 
-
-        public static void EscribirJson(Persona persona)
+        #region EscribirJson
+        public static void EscribirJsonUsuariosARegistrar(Persona persona, string ruta)
         {
+
             Usuario usuario = (Usuario)persona;
             try
             {
-                List<Usuario> listaPersona = LeerJson();         
-                listaPersona.Add(usuario);
+                List<Usuario> listaPersona = LeerJsonUsuarios(ruta);   
+                if(usuario.VerificarUsuario(usuario) == false)
+                {
+                    listaPersona.Add(usuario);
+                }
+                else
+                {
+
+                }
+                
                 string json = JsonConvert.SerializeObject(listaPersona, Formatting.Indented);
                 File.WriteAllText(ruta, json);
             }
@@ -37,7 +46,29 @@ namespace Biblioteca_Clases
             
         }
 
-        public static List<Usuario> LeerJson()
+        public static void ModificarJson(List<Usuario> listaUsuarios, string ruta)
+        {
+         
+            try
+            {
+                string json = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented);
+                File.WriteAllText(ruta, json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+        #endregion
+
+
+
+
+
+        #region LeerJson
+        public static List<Usuario> LeerJsonUsuarios(string ruta)
         {
             List<Usuario> listaPersona = new List<Usuario>();
    
@@ -54,12 +85,14 @@ namespace Biblioteca_Clases
             return listaPersona;
         }
 
+        #endregion
 
 
-        
-        
-        
-        
+
+
+
+
+
 
 
 
