@@ -181,6 +181,9 @@
   <data name="MicrosoftNombre" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MicrosoftNombre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AppleNombre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AppleNombre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TeslaLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TeslaLogo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -220,7 +223,7 @@
   <data name="ImagenDolar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagenDolar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AppleNombre" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AppleNombre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FondoDeDepositoDinero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FondoDeDepositoDinero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

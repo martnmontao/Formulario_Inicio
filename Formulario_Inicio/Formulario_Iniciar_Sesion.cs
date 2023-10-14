@@ -79,7 +79,7 @@ namespace Formulario_Inicio
 
                 try
                 {
-                    Persona persona = new Usuario(nombre, "651651", 0, contraseña);
+                    Persona persona = new Usuario(nombre, "0", 0, 0, contraseña);
                     Usuario usuario = (Usuario)persona;
                     if (usuario.VarificarNombreYContraseña(usuario))
                     {
@@ -97,17 +97,7 @@ namespace Formulario_Inicio
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-
-
             }
-
-
-
         }
-
-
-
-
     }
 }
