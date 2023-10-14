@@ -63,53 +63,50 @@ namespace Formulario_Inicio
         }
 
         private void btnAcceder_Click(object sender, EventArgs e)
-        {   
+        {
             string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
             string nombre = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
-            
+
 
             if (txtUsuario.Text == "Apache" && txtContraseña.Text == "1")
             {
-                Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "13213");
+                Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "EL JEFE");
                 formularioAdmin.Show();
             }
             else
             {
-                
+
                 try
                 {
-                
-                    List<Usuario> listaUsuarios = new List<Usuario>();
                     Persona persona = new Usuario(nombre, "651651", 0, contraseña);
-                    Usuario usuario = (Usuario) persona;
-                    if(usuario.VerificarUsuario(usuario))
+                    Usuario usuario = (Usuario)persona;
+                    if (usuario.VarificarNombreYContraseña(usuario))
                     {
-                        Serializadora.EscribirJsonUsuariosARegistrar(persona,ruta);
+                        Serializadora.EscribirJsonUsuariosARegistrar(usuario, ruta);
                         Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
                         formularioMenu.Show();
                         this.Hide();
                     }
                     else
                     {
-                       MessageBox.Show("Ya hay un usuario con ese nombre. Porfavor ingrese su contraseña.");
-                        
+                        MessageBox.Show("Ya hay un usuario con el nombre ingresado. Porfavor ingrese su contraseña.");
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                
-                
-                  
+
+
+
             }
 
-          
+
 
         }
 
-        
+
 
 
     }

@@ -63,6 +63,56 @@ namespace Formulario_Inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AmazonLogo {
+            get {
+                object obj = ResourceManager.GetObject("AmazonLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AmazonNombre {
+            get {
+                object obj = ResourceManager.GetObject("AmazonNombre", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AmazonNombre1 {
+            get {
+                object obj = ResourceManager.GetObject("AmazonNombre1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AppleLogo {
+            get {
+                object obj = ResourceManager.GetObject("AppleLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AppleNombre {
+            get {
+                object obj = ResourceManager.GetObject("AppleNombre", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconoConfiguracion2 {
             get {
                 object obj = ResourceManager.GetObject("iconoConfiguracion2", resourceCulture);
@@ -243,6 +293,26 @@ namespace Formulario_Inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MicrosoftLogo {
+            get {
+                object obj = ResourceManager.GetObject("MicrosoftLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MicrosoftNombre {
+            get {
+                object obj = ResourceManager.GetObject("MicrosoftNombre", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap minimizar {
             get {
                 object obj = ResourceManager.GetObject("minimizar", resourceCulture);
@@ -276,6 +346,26 @@ namespace Formulario_Inicio.Properties {
         internal static System.Drawing.Bitmap minimizar3 {
             get {
                 object obj = ResourceManager.GetObject("minimizar3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TeslaLogo {
+            get {
+                object obj = ResourceManager.GetObject("TeslaLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TeslaNombre {
+            get {
+                object obj = ResourceManager.GetObject("TeslaNombre", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -20,22 +20,15 @@ namespace Biblioteca_Clases
 
 
         #region EscribirJson
-        public static void EscribirJsonUsuariosARegistrar(Persona persona, string ruta)
+        public static void EscribirJsonUsuariosARegistrar(Usuario usuario, string ruta)
         {
-
-            Usuario usuario = (Usuario)persona;
             try
             {
                 List<Usuario> listaPersona = LeerJsonUsuarios(ruta);   
-                if(usuario.VerificarUsuario(usuario) == false)
+                if(usuario.VerificarUsuarioRegistrado(usuario))
                 {
                     listaPersona.Add(usuario);
-                }
-                else
-                {
-
-                }
-                
+                }            
                 string json = JsonConvert.SerializeObject(listaPersona, Formatting.Indented);
                 File.WriteAllText(ruta, json);
             }
@@ -62,11 +55,6 @@ namespace Biblioteca_Clases
         }
 
         #endregion
-
-
-
-
-
         #region LeerJson
         public static List<Usuario> LeerJsonUsuarios(string ruta)
         {

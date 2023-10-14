@@ -23,37 +23,44 @@ namespace Biblioteca_Clases
         {
             this.sueldo = sueldo;
             this.contraseña = contraseña;
+            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
         }
 
         public float Sueldo { get => sueldo; set => sueldo = value;}
         public string Contraseña { get => contraseña; set => contraseña = value;}
 
 
-        public bool VerificarUsuario(Usuario user)
+        public bool VerificarUsuarioRegistrado(Usuario usuario)
         {
-            bool validar = false;
-            
-            List<Usuario> listaUsuariosRegistrados = Serializadora.LeerJsonUsuarios(ruta);
-            foreach (Usuario usuarioRegistrado in listaUsuariosRegistrados)
+            bool validar = true;
+            foreach(Usuario user in listaUsuarios)
             {
-
-                if (user.Nombre == usuarioRegistrado.Nombre && user.Contraseña != usuarioRegistrado.Contraseña)
-                {
-                    validar = false;
-                }
-                else if (listaUsuariosRegistrados.Contains(usuarioRegistrado))
+                if(usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
                 { 
-                    validar = true;
-                }
-                else
-                {
                     validar = false;
                 }
-
-                break;    
+                break;
             }
             
             return validar;
+        }
+
+        public bool VarificarNombreYContraseña(Usuario usuario)
+        {
+            bool verificar = true;
+            foreach(Usuario user in listaUsuarios)
+            {
+                if(usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
+                {
+                    verificar = true;
+                }
+                else if(usuario.Nombre == user.Nombre && usuario.Contraseña != user.Contraseña)
+                {
+                    verificar = false;
+                }
+                break;
+            }
+            return verificar;
         }
 
 

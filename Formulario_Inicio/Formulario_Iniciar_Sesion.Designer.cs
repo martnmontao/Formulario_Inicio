@@ -165,6 +165,7 @@
             Controls.Add(lblLogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Iniciar_Sesion";
+            RightToLeft = RightToLeft.No;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FORMULARIO";
             Load += Fomurlario_Iniciar_Sesion_Load;
