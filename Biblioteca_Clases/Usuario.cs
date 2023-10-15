@@ -15,7 +15,7 @@ namespace Biblioteca_Clases
         private float sueldo;
         private float sueldoDolares;
         private string contraseña;
-        private List<Usuario> listaUsuarios;
+        List<Usuario> listaUsuarios;
         public Usuario()
         {
             
@@ -41,8 +41,8 @@ namespace Biblioteca_Clases
                 if(usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
                 { 
                     validar = false;
+                    break;
                 }
-                break;
             }
             
             return validar;
@@ -56,28 +56,30 @@ namespace Biblioteca_Clases
                 if(usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
                 {
                     verificar = true;
+                    break;
                 }
                 else if(usuario.Nombre == user.Nombre && usuario.Contraseña != user.Contraseña)
                 {
                     verificar = false;
+                    break;
                 }
-                break;
             }
             return verificar;
         }
 
         public void ModificarSueldo(Usuario usuario, float SueldoAPesos, float SueldoADolares)
         {
-            //List<Usuario> listaSueldoModificado = listaUsuarios;
+            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
             foreach(Usuario user in listaUsuarios)
             {
                 if(usuario.nombre == user.nombre)
                 {
-                    this.SueldoDolares = SueldoADolares;
-                    this.Sueldo = SueldoAPesos;
+                    user.Sueldo = SueldoAPesos;
+                    user.SueldoDolares = SueldoADolares;
                 }
             }
 
+            Serializadora.ModificarJson(listaUsuarios, ruta);
         }
 
 

@@ -34,7 +34,8 @@ namespace Biblioteca_Clases
                     if(nombre == usuario.Nombre)
                     {
                         listaUsuariosRegistrados.Add(usuario);
-                    }    
+                        break;
+                    }
                 }
             }
             catch(Exception ex)
@@ -55,6 +56,7 @@ namespace Biblioteca_Clases
                     {
                         listaUsuarios.Remove(usuario);
                         break;
+                        
                     }
                 }
             }

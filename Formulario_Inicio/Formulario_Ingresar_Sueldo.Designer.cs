@@ -39,7 +39,7 @@
             // 
             // txtSueldoPesos
             // 
-            txtSueldoPesos.Location = new Point(102, 121);
+            txtSueldoPesos.Location = new Point(129, 114);
             txtSueldoPesos.Name = "txtSueldoPesos";
             txtSueldoPesos.Size = new Size(387, 23);
             txtSueldoPesos.TabIndex = 0;
@@ -47,7 +47,7 @@
             // btnIngresarSueldo
             // 
             btnIngresarSueldo.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnIngresarSueldo.Location = new Point(102, 365);
+            btnIngresarSueldo.Location = new Point(129, 376);
             btnIngresarSueldo.Name = "btnIngresarSueldo";
             btnIngresarSueldo.Size = new Size(387, 32);
             btnIngresarSueldo.TabIndex = 2;
@@ -57,7 +57,7 @@
             // 
             // txtSueldoDolares
             // 
-            txtSueldoDolares.Location = new Point(102, 239);
+            txtSueldoDolares.Location = new Point(129, 250);
             txtSueldoDolares.Name = "txtSueldoDolares";
             txtSueldoDolares.ReadOnly = true;
             txtSueldoDolares.Size = new Size(387, 23);
@@ -68,7 +68,7 @@
             lblInformacionSueldo.AutoSize = true;
             lblInformacionSueldo.BackColor = SystemColors.ControlDark;
             lblInformacionSueldo.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblInformacionSueldo.Location = new Point(66, 74);
+            lblInformacionSueldo.Location = new Point(89, 59);
             lblInformacionSueldo.Name = "lblInformacionSueldo";
             lblInformacionSueldo.Size = new Size(472, 24);
             lblInformacionSueldo.TabIndex = 4;
@@ -79,7 +79,7 @@
             label1.AutoSize = true;
             label1.BackColor = SystemColors.ControlDark;
             label1.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(141, 174);
+            label1.Location = new Point(167, 173);
             label1.Name = "label1";
             label1.Size = new Size(309, 24);
             label1.TabIndex = 5;
@@ -88,7 +88,7 @@
             // btnConvertir
             // 
             btnConvertir.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnConvertir.Location = new Point(199, 292);
+            btnConvertir.Location = new Point(213, 296);
             btnConvertir.Name = "btnConvertir";
             btnConvertir.Size = new Size(190, 32);
             btnConvertir.TabIndex = 6;
@@ -102,7 +102,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(619, 450);
+            ClientSize = new Size(633, 518);
             Controls.Add(btnConvertir);
             Controls.Add(label1);
             Controls.Add(lblInformacionSueldo);
@@ -111,6 +111,7 @@
             Controls.Add(txtSueldoPesos);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Ingresar_Sueldo";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_Ingresar_Sueldo";
             Load += Formulario_Ingresar_Sueldo_Load;
             ResumeLayout(false);

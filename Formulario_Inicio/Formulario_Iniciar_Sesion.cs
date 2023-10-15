@@ -84,7 +84,7 @@ namespace Formulario_Inicio
                     if (usuario.VarificarNombreYContraseña(usuario))
                     {
                         Serializadora.EscribirJsonUsuariosARegistrar(usuario, ruta);
-                        Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario();
+                        Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario(usuario);
                         formularioMenu.Show();
                         this.Hide();
                     }

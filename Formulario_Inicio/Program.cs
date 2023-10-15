@@ -23,7 +23,7 @@ namespace Formulario_Inicio
             // see https://aka.ms/applicationconfiguration.
           
             
-            Application.Run(new Formulario_Ingresar_Sueldo());
+            Application.Run(new Formulario_Iniciar_Sesion());
             
             
 

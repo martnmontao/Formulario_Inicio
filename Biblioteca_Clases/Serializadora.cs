@@ -38,6 +38,24 @@ namespace Biblioteca_Clases
             }
 
         }
+        public static void ModificarJson(List<Usuario> listaUsuarios, string ruta)
+        {
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented);
+                File.WriteAllText(ruta, json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+
+        }
+        #endregion
+        #region LeerJson
         public static List<Usuario> LeerJsonUsuarios(string ruta)
         {
             List<Usuario> listaPersona = new List<Usuario>();
@@ -58,37 +76,7 @@ namespace Biblioteca_Clases
 
             return listaPersona;
         }
-        public static void ModificarJson(List<Usuario> listaUsuarios, string ruta)
-        {
 
-            try
-            {
-                string json = JsonConvert.SerializeObject(listaUsuarios, Formatting.Indented);
-                File.WriteAllText(ruta, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-
-            #endregion
-            #region LeerJson
-
-            #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
+        #endregion
     }
 }

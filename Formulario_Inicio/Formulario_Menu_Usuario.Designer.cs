@@ -99,9 +99,9 @@
             // btnIconoUsuario
             // 
             btnIconoUsuario.Image = Properties.Resources.usuarioIcono2;
-            btnIconoUsuario.Location = new Point(0, 0);
+            btnIconoUsuario.Location = new Point(9, 0);
             btnIconoUsuario.Name = "btnIconoUsuario";
-            btnIconoUsuario.Size = new Size(70, 70);
+            btnIconoUsuario.Size = new Size(50, 61);
             btnIconoUsuario.SizeMode = PictureBoxSizeMode.Zoom;
             btnIconoUsuario.TabIndex = 7;
             btnIconoUsuario.TabStop = false;
@@ -160,6 +160,7 @@
             btnInvertir.TabIndex = 4;
             btnInvertir.Text = "Invertir";
             btnInvertir.UseVisualStyleBackColor = true;
+            btnInvertir.Click += btnInvertir_Click;
             // 
             // btnIngresarDinero
             // 
@@ -178,7 +179,7 @@
             btnIngresarDinero.TabIndex = 2;
             btnIngresarDinero.Text = "Depositar";
             btnIngresarDinero.UseVisualStyleBackColor = true;
-            btnIngresarDinero.Click += btnInvertir_Click;
+            btnIngresarDinero.Click += btnIngresarDinero_Click;
             // 
             // label1
             // 

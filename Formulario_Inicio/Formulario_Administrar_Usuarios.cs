@@ -61,7 +61,7 @@ namespace Formulario_Inicio
 
         private void btnValidarUsuarios_Click(object sender, EventArgs e)
         {
-            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[2].Value.ToString();
+            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
             admin.ValidarUsuario(listaUsuariosARegistrar, nombre);
             admin.EliminarUsuario(listaUsuariosARegistrar, nombre, rutaUsuariosARegistrar);
         }
@@ -71,7 +71,7 @@ namespace Formulario_Inicio
             listaUsuarios = Serializadora.LeerJsonUsuarios(rutaMisUsuarios);
             string a = gridUsuarios.CurrentRow.ToString();
             //int usuario = (int)gridUsuarios.CurrentRow.Index; 
-            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[2].Value.ToString();
+            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
             admin.EliminarUsuario(listaUsuarios, nombre, rutaMisUsuarios);
         }
 

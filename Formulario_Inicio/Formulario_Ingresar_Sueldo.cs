@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblioteca_Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +16,14 @@ namespace Formulario_Inicio
     {
         private float sueldoPesos;
         private float sueldoDolares;
-        public Formulario_Ingresar_Sueldo()
+        private Usuario usuario;
+        private List<Usuario> listaUsuarios;
+        string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
+        public Formulario_Ingresar_Sueldo(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
+            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
         }
         private void Formulario_Ingresar_Sueldo_Load(object sender, EventArgs e)
         {
@@ -30,7 +36,17 @@ namespace Formulario_Inicio
 
         private void btnIngresarSueldo_Click(object sender, EventArgs e)
         {
-
+            this.sueldoPesos = float.Parse(txtSueldoPesos.Text);
+            this.sueldoDolares = float.Parse(txtSueldoDolares.Text);
+            foreach (Usuario user in listaUsuarios)
+            {
+                if (this.usuario.Nombre == user.Nombre)
+                {
+                    this.usuario.ModificarSueldo(this.usuario, (this.sueldoPesos + user.Sueldo), (this.sueldoDolares + user.SueldoDolares));
+                    break;
+                }
+            }
+            //user.ModificarSueldo(this.usuario, float.Parse(txtSueldoPesos.Text), float.Parse(txtSueldoDolares.Text));
         }
         private void btnConvertir_Click(object sender, EventArgs e)
         {
