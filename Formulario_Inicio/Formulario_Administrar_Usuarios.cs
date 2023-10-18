@@ -35,21 +35,37 @@ namespace Formulario_Inicio
 
         private void btnCargarUsuarios_Click(object sender, EventArgs e)
         {
-            string filejson = File.ReadAllText(rutaMisUsuarios);
-            DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
-            gridUsuarios.DataSource = dt;
-            btnEliminarUsuarios.Visible = true;
-            btnValidarUsuarios.Visible = false;
+            try
+            {
+                string filejson = File.ReadAllText(rutaMisUsuarios);
+                DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
+                gridUsuarios.DataSource = dt;
+                btnEliminarUsuarios.Visible = true;
+                btnValidarUsuarios.Visible = false;
+
+            }
+            catch
+            {
+                MessageBox.Show("No hay una lista de usuarios.");
+            }
         }
 
 
         private void bntUsuariosARegistrar_Click(object sender, EventArgs e)
         {
-            string filejson = File.ReadAllText(rutaUsuariosARegistrar);
-            DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
-            gridUsuarios.DataSource = dt;
-            btnValidarUsuarios.Visible = true;
-            btnEliminarUsuarios.Visible = false;
+            try
+            {
+                string filejson = File.ReadAllText(rutaUsuariosARegistrar);
+                DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
+                gridUsuarios.DataSource = dt;
+                btnValidarUsuarios.Visible = true;
+                btnEliminarUsuarios.Visible = false;
+            }
+            catch
+            {
+                MessageBox.Show("No hay una lista de usuarios registrados.");
+
+            }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
