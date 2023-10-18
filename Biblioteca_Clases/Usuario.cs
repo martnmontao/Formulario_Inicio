@@ -16,11 +16,6 @@ namespace Biblioteca_Clases
         private double sueldo;
         private double sueldoDolares;
         private string contraseña;
-        private string accionApple;
-        private string accionMicrosoft;
-        private string accionTesla;
-        private string accionAmazon;
-
         List<Usuario> listaUsuarios;
         public Usuario()
         {

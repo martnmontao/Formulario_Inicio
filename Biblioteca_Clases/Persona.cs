@@ -1,11 +1,6 @@
-﻿//using System.Xml.Serialization;
-
+﻿
 namespace Biblioteca_Clases
 {
-
-    //[XmlInclude(typeof(Usuario))]
-    //[XmlInclude(typeof(Usuario))]
-
 
     public class Persona
     {
