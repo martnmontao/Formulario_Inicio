@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_Admin));
             panelIzquierdo = new Panel();
-            btnAcciones = new Button();
             btnUsuarios = new Button();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
@@ -45,30 +44,12 @@
             // 
             // panelIzquierdo
             // 
-            panelIzquierdo.BackColor = Color.FromArgb(246, 212, 94);
-            panelIzquierdo.Controls.Add(btnAcciones);
+            panelIzquierdo.BackColor = Color.FromArgb(159, 211, 213);
             panelIzquierdo.Controls.Add(btnUsuarios);
             panelIzquierdo.Location = new Point(0, 100);
             panelIzquierdo.Name = "panelIzquierdo";
             panelIzquierdo.Size = new Size(209, 496);
             panelIzquierdo.TabIndex = 1;
-            // 
-            // btnAcciones
-            // 
-            btnAcciones.BackColor = Color.FromArgb(40, 40, 40);
-            btnAcciones.Cursor = Cursors.Hand;
-            btnAcciones.FlatAppearance.BorderSize = 0;
-            btnAcciones.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
-            btnAcciones.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
-            btnAcciones.FlatStyle = FlatStyle.Flat;
-            btnAcciones.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAcciones.ForeColor = Color.LightGray;
-            btnAcciones.Location = new Point(13, 118);
-            btnAcciones.Name = "btnAcciones";
-            btnAcciones.Size = new Size(183, 40);
-            btnAcciones.TabIndex = 3;
-            btnAcciones.Text = "Acciones";
-            btnAcciones.UseVisualStyleBackColor = false;
             // 
             // btnUsuarios
             // 
@@ -90,7 +71,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(246, 212, 94);
+            panel1.BackColor = Color.FromArgb(159, 211, 213);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(lblNombreUsuario);
             panel1.Controls.Add(lblIdUsuario);
@@ -145,6 +126,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(199, 233, 234);
             ClientSize = new Size(968, 596);
             Controls.Add(panel1);
             Controls.Add(panelIzquierdo);

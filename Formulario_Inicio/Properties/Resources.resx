@@ -127,8 +127,17 @@
   <data name="minimizar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minimizar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FondoDeDepositoDinero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FondoDeDepositoDinero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="menuIcono" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menuIcono.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="botonVolver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\botonVolver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AppleLogo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AppleLogo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AmazonLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AmazonLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,9 +151,6 @@
   <data name="minimizar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minimizar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="menuIcono1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\menuIcono1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="imagenDeEquis1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenDeEquis1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -154,8 +160,8 @@
   <data name="usuarioIcono1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\usuarioIcono1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minimizar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minimizar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="menuIcono1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menuIcono1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imagenDeEquis2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenDeEquis2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,11 +172,20 @@
   <data name="imagenDeEquis" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenDeEquis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MicrosoftLogo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MicrosoftLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ImagenDolar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagenDolar1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="minimizar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimizar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="minimizar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minimizar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LogoTesla" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LogoTesla.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Imagen_Inicio_sesion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Imagen_Inicio_sesion.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,7 +238,7 @@
   <data name="ImagenDolar5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImagenDolar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FondoDeDepositoDinero" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FondoDeDepositoDinero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="botonVolver1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\botonVolver1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

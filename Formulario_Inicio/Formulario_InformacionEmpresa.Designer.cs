@@ -35,16 +35,18 @@
             label2 = new Label();
             label3 = new Label();
             panel1 = new Panel();
-            btnVolver = new PictureBox();
             panel2 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)btnVolver).BeginInit();
+            btnVolver = new PictureBox();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnVolver).BeginInit();
             SuspendLayout();
             // 
             // lblInformacion
             // 
             lblInformacion.AutoSize = true;
+            lblInformacion.BackColor = Color.Transparent;
             lblInformacion.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblInformacion.ForeColor = Color.FromArgb(79, 88, 88);
             lblInformacion.Location = new Point(371, 9);
             lblInformacion.Name = "lblInformacion";
             lblInformacion.Size = new Size(283, 33);
@@ -54,7 +56,9 @@
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
+            lblDescripcion.BackColor = Color.Transparent;
             lblDescripcion.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDescripcion.ForeColor = Color.FromArgb(79, 88, 88);
             lblDescripcion.Location = new Point(205, 94);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(584, 16);
@@ -65,16 +69,18 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.FromArgb(79, 88, 88);
             label1.Location = new Point(117, 110);
             label1.Name = "label1";
-            label1.Size = new Size(806, 16);
+            label1.Size = new Size(799, 16);
             label1.TabIndex = 2;
-            label1.Text = "En InverLux encontraras variedad acciones a las cuales puede invertir el dinero que deseas.";
+            label1.Text = "En InverLux encontraras cuatro acciones a las cuales puedes invertir el dinero que deseas.";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.FromArgb(79, 88, 88);
             label2.Location = new Point(12, 126);
             label2.Name = "label2";
             label2.Size = new Size(1025, 16);
@@ -85,6 +91,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Copperplate Gothic Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.FromArgb(79, 88, 88);
             label3.Location = new Point(293, 407);
             label3.Name = "label3";
             label3.Size = new Size(430, 30);
@@ -100,20 +107,9 @@
             panel1.Size = new Size(200, 170);
             panel1.TabIndex = 5;
             // 
-            // btnVolver
-            // 
-            btnVolver.Cursor = Cursors.Hand;
-            btnVolver.Image = Properties.Resources.iconoVolver;
-            btnVolver.Location = new Point(0, 0);
-            btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(57, 58);
-            btnVolver.TabIndex = 6;
-            btnVolver.TabStop = false;
-            btnVolver.Click += btnVolver_Click;
-            // 
             // panel2
             // 
-            panel2.BackColor = SystemColors.AppWorkspace;
+            panel2.BackColor = Color.FromArgb(159, 211, 213);
             panel2.Controls.Add(lblInformacion);
             panel2.Controls.Add(btnVolver);
             panel2.Dock = DockStyle.Top;
@@ -122,11 +118,23 @@
             panel2.Size = new Size(1041, 58);
             panel2.TabIndex = 7;
             // 
+            // btnVolver
+            // 
+            btnVolver.Cursor = Cursors.Hand;
+            btnVolver.Image = (Image)resources.GetObject("btnVolver.Image");
+            btnVolver.Location = new Point(0, 0);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(57, 58);
+            btnVolver.SizeMode = PictureBoxSizeMode.Zoom;
+            btnVolver.TabIndex = 6;
+            btnVolver.TabStop = false;
+            btnVolver.Click += btnVolver_Click;
+            // 
             // Formulario_InformacionEmpresa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(255, 197, 0);
+            BackColor = Color.FromArgb(199, 233, 234);
             ClientSize = new Size(1041, 518);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -138,9 +146,9 @@
             Name = "Formulario_InformacionEmpresa";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_InformacionEmpresa";
-            ((System.ComponentModel.ISupportInitialize)btnVolver).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)btnVolver).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -153,7 +161,7 @@
         private Label label2;
         private Label label3;
         private Panel panel1;
-        private PictureBox btnVolver;
         private Panel panel2;
+        private PictureBox btnVolver;
     }
 }

@@ -24,6 +24,7 @@ namespace Biblioteca_Clases
         }
 
 
+
         public string Nombre { get => nombre; set => nombre = value; }
         public string IdUsuario { get => idUsuario; set => idUsuario = value; }
 

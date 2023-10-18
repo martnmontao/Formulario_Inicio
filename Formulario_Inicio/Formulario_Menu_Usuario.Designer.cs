@@ -35,7 +35,6 @@
             lblNombreUsuario = new Label();
             btnIconoUsuario = new PictureBox();
             btnInformacion = new Button();
-            btnConfiguracion = new Button();
             btnInvertir = new Button();
             btnIngresarDinero = new Button();
             label1 = new Label();
@@ -45,6 +44,13 @@
             btnCerrarClick = new PictureBox();
             btnOpciones = new PictureBox();
             panelContenedor = new Panel();
+            pictureBoxLogo = new PictureBox();
+            lblSueldo = new Label();
+            lblSueldoDolares = new Label();
+            pictureBoxAmazon = new PictureBox();
+            pictureBoxTesla = new PictureBox();
+            pictureBoxMicrosoft = new PictureBox();
+            pictureBoxApple = new PictureBox();
             menuVertical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnIconoUsuario).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -53,6 +59,11 @@
             ((System.ComponentModel.ISupportInitialize)btnCerrarClick).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnOpciones).BeginInit();
             panelContenedor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxAmazon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxTesla).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxMicrosoft).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxApple).BeginInit();
             SuspendLayout();
             // 
             // toolStripComboBox1
@@ -62,12 +73,11 @@
             // 
             // menuVertical
             // 
-            menuVertical.BackColor = Color.FromArgb(255, 197, 0);
+            menuVertical.BackColor = Color.FromArgb(159, 211, 213);
             menuVertical.Controls.Add(lblIdUsuario);
             menuVertical.Controls.Add(lblNombreUsuario);
             menuVertical.Controls.Add(btnIconoUsuario);
             menuVertical.Controls.Add(btnInformacion);
-            menuVertical.Controls.Add(btnConfiguracion);
             menuVertical.Controls.Add(btnInvertir);
             menuVertical.Controls.Add(btnIngresarDinero);
             menuVertical.Dock = DockStyle.Left;
@@ -79,8 +89,10 @@
             // lblIdUsuario
             // 
             lblIdUsuario.AutoSize = true;
+            lblIdUsuario.BackColor = Color.Transparent;
             lblIdUsuario.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            lblIdUsuario.Location = new Point(76, 46);
+            lblIdUsuario.ForeColor = Color.FromArgb(79, 88, 88);
+            lblIdUsuario.Location = new Point(76, 55);
             lblIdUsuario.Name = "lblIdUsuario";
             lblIdUsuario.Size = new Size(92, 15);
             lblIdUsuario.TabIndex = 9;
@@ -89,7 +101,9 @@
             // lblNombreUsuario
             // 
             lblNombreUsuario.AutoSize = true;
+            lblNombreUsuario.BackColor = Color.Transparent;
             lblNombreUsuario.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombreUsuario.ForeColor = Color.FromArgb(79, 88, 88);
             lblNombreUsuario.Location = new Point(76, 12);
             lblNombreUsuario.Name = "lblNombreUsuario";
             lblNombreUsuario.Size = new Size(136, 15);
@@ -98,10 +112,12 @@
             // 
             // btnIconoUsuario
             // 
+            btnIconoUsuario.BackColor = Color.Transparent;
             btnIconoUsuario.Image = Properties.Resources.usuarioIcono2;
-            btnIconoUsuario.Location = new Point(9, 0);
+            btnIconoUsuario.Location = new Point(16, 3);
             btnIconoUsuario.Name = "btnIconoUsuario";
-            btnIconoUsuario.Size = new Size(50, 61);
+            btnIconoUsuario.Padding = new Padding(5, 0, 0, 0);
+            btnIconoUsuario.Size = new Size(41, 72);
             btnIconoUsuario.SizeMode = PictureBoxSizeMode.Zoom;
             btnIconoUsuario.TabIndex = 7;
             btnIconoUsuario.TabStop = false;
@@ -110,50 +126,32 @@
             // 
             btnInformacion.Cursor = Cursors.Hand;
             btnInformacion.FlatAppearance.BorderSize = 0;
-            btnInformacion.FlatAppearance.MouseOverBackColor = Color.SandyBrown;
+            btnInformacion.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 169, 171);
             btnInformacion.FlatStyle = FlatStyle.Flat;
             btnInformacion.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnInformacion.ForeColor = SystemColors.ActiveCaptionText;
+            btnInformacion.ForeColor = Color.FromArgb(79, 88, 88);
             btnInformacion.Image = (Image)resources.GetObject("btnInformacion.Image");
             btnInformacion.ImageAlign = ContentAlignment.MiddleLeft;
-            btnInformacion.Location = new Point(0, 91);
+            btnInformacion.Location = new Point(0, 271);
             btnInformacion.Name = "btnInformacion";
-            btnInformacion.Padding = new Padding(14, 0, 0, 0);
-            btnInformacion.Size = new Size(230, 34);
+            btnInformacion.Padding = new Padding(18, 0, 0, 0);
+            btnInformacion.Size = new Size(233, 34);
             btnInformacion.TabIndex = 6;
             btnInformacion.Text = "Información";
             btnInformacion.UseVisualStyleBackColor = true;
             btnInformacion.Click += btnInformacion_Click;
             // 
-            // btnConfiguracion
-            // 
-            btnConfiguracion.Cursor = Cursors.Hand;
-            btnConfiguracion.FlatAppearance.BorderSize = 0;
-            btnConfiguracion.FlatAppearance.MouseOverBackColor = Color.SandyBrown;
-            btnConfiguracion.FlatStyle = FlatStyle.Flat;
-            btnConfiguracion.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnConfiguracion.ForeColor = SystemColors.ActiveCaptionText;
-            btnConfiguracion.Image = (Image)resources.GetObject("btnConfiguracion.Image");
-            btnConfiguracion.ImageAlign = ContentAlignment.BottomLeft;
-            btnConfiguracion.Location = new Point(-3, 165);
-            btnConfiguracion.Name = "btnConfiguracion";
-            btnConfiguracion.Padding = new Padding(14, 0, 0, 0);
-            btnConfiguracion.Size = new Size(233, 34);
-            btnConfiguracion.TabIndex = 5;
-            btnConfiguracion.Text = "Configuración";
-            btnConfiguracion.UseVisualStyleBackColor = true;
-            // 
             // btnInvertir
             // 
             btnInvertir.Cursor = Cursors.Hand;
             btnInvertir.FlatAppearance.BorderSize = 0;
-            btnInvertir.FlatAppearance.MouseOverBackColor = Color.SandyBrown;
+            btnInvertir.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 169, 171);
             btnInvertir.FlatStyle = FlatStyle.Flat;
             btnInvertir.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnInvertir.ForeColor = SystemColors.ActiveCaptionText;
+            btnInvertir.ForeColor = Color.FromArgb(79, 88, 88);
             btnInvertir.Image = (Image)resources.GetObject("btnInvertir.Image");
             btnInvertir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnInvertir.Location = new Point(-3, 306);
+            btnInvertir.Location = new Point(0, 191);
             btnInvertir.Name = "btnInvertir";
             btnInvertir.Padding = new Padding(15, 0, 0, 0);
             btnInvertir.Size = new Size(233, 34);
@@ -164,21 +162,22 @@
             // 
             // btnIngresarDinero
             // 
+            btnIngresarDinero.BackColor = Color.Transparent;
             btnIngresarDinero.Cursor = Cursors.Hand;
             btnIngresarDinero.FlatAppearance.BorderSize = 0;
-            btnIngresarDinero.FlatAppearance.MouseOverBackColor = Color.SandyBrown;
+            btnIngresarDinero.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 169, 171);
             btnIngresarDinero.FlatStyle = FlatStyle.Flat;
             btnIngresarDinero.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnIngresarDinero.ForeColor = SystemColors.ActiveCaptionText;
+            btnIngresarDinero.ForeColor = Color.FromArgb(79, 88, 88);
             btnIngresarDinero.Image = (Image)resources.GetObject("btnIngresarDinero.Image");
             btnIngresarDinero.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIngresarDinero.Location = new Point(0, 236);
+            btnIngresarDinero.Location = new Point(0, 113);
             btnIngresarDinero.Name = "btnIngresarDinero";
-            btnIngresarDinero.Padding = new Padding(2, 0, 0, 0);
-            btnIngresarDinero.Size = new Size(230, 34);
+            btnIngresarDinero.Padding = new Padding(7, 0, 0, 0);
+            btnIngresarDinero.Size = new Size(233, 34);
             btnIngresarDinero.TabIndex = 2;
             btnIngresarDinero.Text = "Depositar";
-            btnIngresarDinero.UseVisualStyleBackColor = true;
+            btnIngresarDinero.UseVisualStyleBackColor = false;
             btnIngresarDinero.Click += btnIngresarDinero_Click;
             // 
             // label1
@@ -203,7 +202,7 @@
             // 
             // barraTitulo
             // 
-            barraTitulo.BackColor = Color.FromArgb(255, 197, 0);
+            barraTitulo.BackColor = Color.FromArgb(159, 211, 213);
             barraTitulo.Controls.Add(pictureBox1);
             barraTitulo.Controls.Add(btnMinimizarClick);
             barraTitulo.Controls.Add(btnCerrarClick);
@@ -245,7 +244,7 @@
             // 
             btnOpciones.Cursor = Cursors.Hand;
             btnOpciones.Image = (Image)resources.GetObject("btnOpciones.Image");
-            btnOpciones.Location = new Point(15, 9);
+            btnOpciones.Location = new Point(21, 9);
             btnOpciones.Name = "btnOpciones";
             btnOpciones.Size = new Size(35, 35);
             btnOpciones.SizeMode = PictureBoxSizeMode.Zoom;
@@ -255,7 +254,14 @@
             // 
             // panelContenedor
             // 
-            panelContenedor.BackColor = SystemColors.Control;
+            panelContenedor.BackColor = Color.FromArgb(199, 233, 234);
+            panelContenedor.Controls.Add(pictureBoxLogo);
+            panelContenedor.Controls.Add(lblSueldo);
+            panelContenedor.Controls.Add(lblSueldoDolares);
+            panelContenedor.Controls.Add(pictureBoxAmazon);
+            panelContenedor.Controls.Add(pictureBoxTesla);
+            panelContenedor.Controls.Add(pictureBoxMicrosoft);
+            panelContenedor.Controls.Add(pictureBoxApple);
             panelContenedor.Controls.Add(menuVertical);
             panelContenedor.Controls.Add(barraTitulo);
             panelContenedor.Dock = DockStyle.Fill;
@@ -263,6 +269,81 @@
             panelContenedor.Name = "panelContenedor";
             panelContenedor.Size = new Size(1041, 518);
             panelContenedor.TabIndex = 2;
+            // 
+            // pictureBoxLogo
+            // 
+            pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
+            pictureBoxLogo.Location = new Point(566, 251);
+            pictureBoxLogo.Name = "pictureBoxLogo";
+            pictureBoxLogo.Size = new Size(104, 67);
+            pictureBoxLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxLogo.TabIndex = 12;
+            pictureBoxLogo.TabStop = false;
+            // 
+            // lblSueldo
+            // 
+            lblSueldo.AutoSize = true;
+            lblSueldo.BackColor = Color.Transparent;
+            lblSueldo.Font = new Font("Copperplate Gothic Bold", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSueldo.ForeColor = Color.FromArgb(79, 88, 88);
+            lblSueldo.Location = new Point(345, 105);
+            lblSueldo.Name = "lblSueldo";
+            lblSueldo.Size = new Size(89, 26);
+            lblSueldo.TabIndex = 11;
+            lblSueldo.Text = "$Arg:";
+            // 
+            // lblSueldoDolares
+            // 
+            lblSueldoDolares.AutoSize = true;
+            lblSueldoDolares.BackColor = Color.Transparent;
+            lblSueldoDolares.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSueldoDolares.ForeColor = Color.FromArgb(79, 88, 88);
+            lblSueldoDolares.Location = new Point(747, 105);
+            lblSueldoDolares.Name = "lblSueldoDolares";
+            lblSueldoDolares.Size = new Size(131, 24);
+            lblSueldoDolares.TabIndex = 10;
+            lblSueldoDolares.Text = "$Dolares:";
+            // 
+            // pictureBoxAmazon
+            // 
+            pictureBoxAmazon.Image = (Image)resources.GetObject("pictureBoxAmazon.Image");
+            pictureBoxAmazon.Location = new Point(686, 383);
+            pictureBoxAmazon.Name = "pictureBoxAmazon";
+            pictureBoxAmazon.Size = new Size(100, 67);
+            pictureBoxAmazon.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxAmazon.TabIndex = 5;
+            pictureBoxAmazon.TabStop = false;
+            // 
+            // pictureBoxTesla
+            // 
+            pictureBoxTesla.Image = Properties.Resources.LogoTesla;
+            pictureBoxTesla.Location = new Point(812, 251);
+            pictureBoxTesla.Name = "pictureBoxTesla";
+            pictureBoxTesla.Size = new Size(100, 62);
+            pictureBoxTesla.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxTesla.TabIndex = 4;
+            pictureBoxTesla.TabStop = false;
+            // 
+            // pictureBoxMicrosoft
+            // 
+            pictureBoxMicrosoft.Image = Properties.Resources.MicrosoftLogo1;
+            pictureBoxMicrosoft.Location = new Point(444, 383);
+            pictureBoxMicrosoft.Name = "pictureBoxMicrosoft";
+            pictureBoxMicrosoft.Size = new Size(100, 67);
+            pictureBoxMicrosoft.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxMicrosoft.TabIndex = 3;
+            pictureBoxMicrosoft.TabStop = false;
+            // 
+            // pictureBoxApple
+            // 
+            pictureBoxApple.ErrorImage = null;
+            pictureBoxApple.Image = Properties.Resources.AppleLogo1;
+            pictureBoxApple.Location = new Point(334, 246);
+            pictureBoxApple.Name = "pictureBoxApple";
+            pictureBoxApple.Size = new Size(100, 67);
+            pictureBoxApple.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxApple.TabIndex = 2;
+            pictureBoxApple.TabStop = false;
             // 
             // Formulario_Menu_Usuario
             // 
@@ -288,6 +369,12 @@
             ((System.ComponentModel.ISupportInitialize)btnCerrarClick).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnOpciones).EndInit();
             panelContenedor.ResumeLayout(false);
+            panelContenedor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxAmazon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxTesla).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxMicrosoft).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxApple).EndInit();
             ResumeLayout(false);
         }
 
@@ -302,12 +389,19 @@
         private PictureBox btnMinimizarClick;
         private PictureBox btnCerrarClick;
         private Button btnIngresarDinero;
-        private Button btnConfiguracion;
+        private Button btnInfoInversiones;
         private Button btnInformacion;
         private Button btnInvertir;
         private Button button1;
         private Label lblNombreUsuario;
         private PictureBox btnIconoUsuario;
         private Label lblIdUsuario;
+        private PictureBox pictureBoxApple;
+        private PictureBox pictureBoxMicrosoft;
+        private PictureBox pictureBoxTesla;
+        private PictureBox pictureBoxAmazon;
+        private Label lblSueldoDolares;
+        private Label lblSueldo;
+        private PictureBox pictureBoxLogo;
     }
 }

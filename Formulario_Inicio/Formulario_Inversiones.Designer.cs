@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_Inversiones));
             pictureBoxLogoApple = new PictureBox();
             pictureBoxLogoMicrosoft = new PictureBox();
@@ -40,13 +41,20 @@
             lblNumeroInversionApple = new Label();
             lblNumeroInversionMicrosoft = new Label();
             lblNumeroInversionTesla = new Label();
-            lblNumeroInsersionAmazon = new Label();
+            lblNumeroInversionAmazon = new Label();
             btnInvertirApple = new Button();
             btnInvertirAmazon = new Button();
             btnInvertirTesla = new Button();
             btnInvertirMicrosoft = new Button();
             lblSueldoPesos = new Label();
             lblSueldoDolar = new Label();
+            tmrContador = new System.Windows.Forms.Timer(components);
+            txtInversionApple = new TextBox();
+            txtInversionAmazon = new TextBox();
+            txtInversionTesla = new TextBox();
+            txtInversionMicrosoft = new TextBox();
+            pictureBoxVolver = new PictureBox();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogoApple).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogoMicrosoft).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogoTesla).BeginInit();
@@ -55,6 +63,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxNombreTesla).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxNombreMicrosoft).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxNombreApple).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxVolver).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBoxLogoApple
@@ -140,107 +150,180 @@
             // lblNumeroInversionApple
             // 
             lblNumeroInversionApple.AutoSize = true;
-            lblNumeroInversionApple.Location = new Point(447, 118);
+            lblNumeroInversionApple.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNumeroInversionApple.Location = new Point(447, 110);
             lblNumeroInversionApple.Name = "lblNumeroInversionApple";
-            lblNumeroInversionApple.Size = new Size(89, 15);
+            lblNumeroInversionApple.Size = new Size(0, 24);
             lblNumeroInversionApple.TabIndex = 8;
-            lblNumeroInversionApple.Text = "inversion Apple";
             // 
             // lblNumeroInversionMicrosoft
             // 
             lblNumeroInversionMicrosoft.AutoSize = true;
+            lblNumeroInversionMicrosoft.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblNumeroInversionMicrosoft.Location = new Point(438, 229);
             lblNumeroInversionMicrosoft.Name = "lblNumeroInversionMicrosoft";
-            lblNumeroInversionMicrosoft.Size = new Size(109, 15);
+            lblNumeroInversionMicrosoft.Size = new Size(0, 24);
             lblNumeroInversionMicrosoft.TabIndex = 9;
-            lblNumeroInversionMicrosoft.Text = "Inversion Microsoft";
             // 
             // lblNumeroInversionTesla
             // 
             lblNumeroInversionTesla.AutoSize = true;
+            lblNumeroInversionTesla.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblNumeroInversionTesla.Location = new Point(447, 336);
             lblNumeroInversionTesla.Name = "lblNumeroInversionTesla";
-            lblNumeroInversionTesla.Size = new Size(83, 15);
+            lblNumeroInversionTesla.Size = new Size(0, 24);
             lblNumeroInversionTesla.TabIndex = 10;
-            lblNumeroInversionTesla.Text = "Inversion Tesla";
             // 
-            // lblNumeroInsersionAmazon
+            // lblNumeroInversionAmazon
             // 
-            lblNumeroInsersionAmazon.AutoSize = true;
-            lblNumeroInsersionAmazon.Location = new Point(447, 455);
-            lblNumeroInsersionAmazon.Name = "lblNumeroInsersionAmazon";
-            lblNumeroInsersionAmazon.Size = new Size(100, 15);
-            lblNumeroInsersionAmazon.TabIndex = 11;
-            lblNumeroInsersionAmazon.Text = "inversion amazon";
+            lblNumeroInversionAmazon.AutoSize = true;
+            lblNumeroInversionAmazon.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNumeroInversionAmazon.Location = new Point(438, 443);
+            lblNumeroInversionAmazon.Name = "lblNumeroInversionAmazon";
+            lblNumeroInversionAmazon.Size = new Size(0, 24);
+            lblNumeroInversionAmazon.TabIndex = 11;
             // 
             // btnInvertirApple
             // 
-            btnInvertirApple.Location = new Point(666, 118);
+            btnInvertirApple.BackColor = Color.FromArgb(159, 211, 213);
+            btnInvertirApple.Font = new Font("Copperplate Gothic Bold", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnInvertirApple.Location = new Point(866, 111);
             btnInvertirApple.Name = "btnInvertirApple";
             btnInvertirApple.Size = new Size(75, 23);
             btnInvertirApple.TabIndex = 12;
             btnInvertirApple.Text = "Invertir";
-            btnInvertirApple.UseVisualStyleBackColor = true;
+            btnInvertirApple.UseVisualStyleBackColor = false;
             btnInvertirApple.Click += btnInvertirApple_Click;
             // 
             // btnInvertirAmazon
             // 
-            btnInvertirAmazon.Location = new Point(666, 451);
+            btnInvertirAmazon.BackColor = Color.FromArgb(159, 211, 213);
+            btnInvertirAmazon.Font = new Font("Copperplate Gothic Bold", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnInvertirAmazon.Location = new Point(866, 442);
             btnInvertirAmazon.Name = "btnInvertirAmazon";
             btnInvertirAmazon.Size = new Size(75, 23);
             btnInvertirAmazon.TabIndex = 13;
             btnInvertirAmazon.Text = "Invertir";
-            btnInvertirAmazon.UseVisualStyleBackColor = true;
+            btnInvertirAmazon.UseVisualStyleBackColor = false;
+            btnInvertirAmazon.Click += btnInvertirAmazon_Click;
             // 
             // btnInvertirTesla
             // 
-            btnInvertirTesla.Location = new Point(666, 332);
+            btnInvertirTesla.BackColor = Color.FromArgb(159, 211, 213);
+            btnInvertirTesla.Font = new Font("Copperplate Gothic Bold", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnInvertirTesla.Location = new Point(866, 340);
             btnInvertirTesla.Name = "btnInvertirTesla";
             btnInvertirTesla.Size = new Size(75, 23);
             btnInvertirTesla.TabIndex = 14;
             btnInvertirTesla.Text = "Invertir";
-            btnInvertirTesla.UseVisualStyleBackColor = true;
+            btnInvertirTesla.UseVisualStyleBackColor = false;
+            btnInvertirTesla.Click += btnInvertirTesla_Click;
             // 
             // btnInvertirMicrosoft
             // 
-            btnInvertirMicrosoft.Location = new Point(666, 223);
+            btnInvertirMicrosoft.BackColor = Color.FromArgb(159, 211, 213);
+            btnInvertirMicrosoft.Font = new Font("Copperplate Gothic Bold", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnInvertirMicrosoft.Location = new Point(866, 233);
             btnInvertirMicrosoft.Name = "btnInvertirMicrosoft";
             btnInvertirMicrosoft.Size = new Size(75, 26);
             btnInvertirMicrosoft.TabIndex = 15;
             btnInvertirMicrosoft.Text = "Invertir";
-            btnInvertirMicrosoft.UseVisualStyleBackColor = true;
+            btnInvertirMicrosoft.UseVisualStyleBackColor = false;
+            btnInvertirMicrosoft.Click += btnInvertirMicrosoft_Click;
             // 
             // lblSueldoPesos
             // 
             lblSueldoPesos.AutoSize = true;
-            lblSueldoPesos.Location = new Point(666, 50);
+            lblSueldoPesos.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSueldoPesos.Location = new Point(264, 18);
             lblSueldoPesos.Name = "lblSueldoPesos";
-            lblSueldoPesos.Size = new Size(41, 15);
+            lblSueldoPesos.Size = new Size(90, 24);
             lblSueldoPesos.TabIndex = 16;
             lblSueldoPesos.Text = "PESOS";
             // 
             // lblSueldoDolar
             // 
             lblSueldoDolar.AutoSize = true;
-            lblSueldoDolar.Location = new Point(666, 9);
+            lblSueldoDolar.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSueldoDolar.Location = new Point(618, 18);
             lblSueldoDolar.Name = "lblSueldoDolar";
-            lblSueldoDolar.Size = new Size(45, 15);
+            lblSueldoDolar.Size = new Size(95, 24);
             lblSueldoDolar.TabIndex = 17;
             lblSueldoDolar.Text = "DOLAR";
+            // 
+            // tmrContador
+            // 
+            tmrContador.Interval = 1000;
+            tmrContador.Tick += tmrContador_Tick;
+            // 
+            // txtInversionApple
+            // 
+            txtInversionApple.Location = new Point(636, 110);
+            txtInversionApple.Name = "txtInversionApple";
+            txtInversionApple.Size = new Size(152, 23);
+            txtInversionApple.TabIndex = 18;
+            // 
+            // txtInversionAmazon
+            // 
+            txtInversionAmazon.Location = new Point(636, 443);
+            txtInversionAmazon.Name = "txtInversionAmazon";
+            txtInversionAmazon.Size = new Size(152, 23);
+            txtInversionAmazon.TabIndex = 19;
+            // 
+            // txtInversionTesla
+            // 
+            txtInversionTesla.Location = new Point(636, 340);
+            txtInversionTesla.Name = "txtInversionTesla";
+            txtInversionTesla.Size = new Size(152, 23);
+            txtInversionTesla.TabIndex = 20;
+            // 
+            // txtInversionMicrosoft
+            // 
+            txtInversionMicrosoft.Location = new Point(636, 233);
+            txtInversionMicrosoft.Name = "txtInversionMicrosoft";
+            txtInversionMicrosoft.Size = new Size(152, 23);
+            txtInversionMicrosoft.TabIndex = 21;
+            // 
+            // pictureBoxVolver
+            // 
+            pictureBoxVolver.Cursor = Cursors.Hand;
+            pictureBoxVolver.Image = (Image)resources.GetObject("pictureBoxVolver.Image");
+            pictureBoxVolver.Location = new Point(0, 0);
+            pictureBoxVolver.Name = "pictureBoxVolver";
+            pictureBoxVolver.Size = new Size(69, 60);
+            pictureBoxVolver.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxVolver.TabIndex = 22;
+            pictureBoxVolver.TabStop = false;
+            pictureBoxVolver.Click += pictureBoxVolver_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(159, 211, 213);
+            panel1.Controls.Add(pictureBoxVolver);
+            panel1.Controls.Add(lblSueldoPesos);
+            panel1.Controls.Add(lblSueldoDolar);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(994, 56);
+            panel1.TabIndex = 23;
             // 
             // Formulario_Inversiones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 530);
-            ControlBox = false;
-            Controls.Add(lblSueldoDolar);
-            Controls.Add(lblSueldoPesos);
+            BackColor = Color.FromArgb(199, 233, 234);
+            ClientSize = new Size(994, 530);
+            Controls.Add(panel1);
+            Controls.Add(txtInversionMicrosoft);
+            Controls.Add(txtInversionTesla);
+            Controls.Add(txtInversionAmazon);
+            Controls.Add(txtInversionApple);
             Controls.Add(btnInvertirMicrosoft);
             Controls.Add(btnInvertirTesla);
             Controls.Add(btnInvertirAmazon);
             Controls.Add(btnInvertirApple);
-            Controls.Add(lblNumeroInsersionAmazon);
+            Controls.Add(lblNumeroInversionAmazon);
             Controls.Add(lblNumeroInversionTesla);
             Controls.Add(lblNumeroInversionMicrosoft);
             Controls.Add(lblNumeroInversionApple);
@@ -252,7 +335,6 @@
             Controls.Add(pictureBoxLogoTesla);
             Controls.Add(pictureBoxLogoMicrosoft);
             Controls.Add(pictureBoxLogoApple);
-            Enabled = false;
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Inversiones";
             StartPosition = FormStartPosition.CenterScreen;
@@ -265,6 +347,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxNombreTesla).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxNombreMicrosoft).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxNombreApple).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxVolver).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -282,12 +367,19 @@
         private Label lblNumeroInversionApple;
         private Label lblNumeroInversionMicrosoft;
         private Label lblNumeroInversionTesla;
-        private Label lblNumeroInsersionAmazon;
+        private Label lblNumeroInversionAmazon;
         private Button btnInvertirApple;
         private Button btnInvertirAmazon;
         private Button btnInvertirTesla;
         private Button btnInvertirMicrosoft;
         private Label lblSueldoPesos;
         private Label lblSueldoDolar;
+        private System.Windows.Forms.Timer tmrContador;
+        private TextBox txtInversionApple;
+        private TextBox txtInversionAmazon;
+        private TextBox txtInversionTesla;
+        private TextBox txtInversionMicrosoft;
+        private PictureBox pictureBoxVolver;
+        private Panel panel1;
     }
 }

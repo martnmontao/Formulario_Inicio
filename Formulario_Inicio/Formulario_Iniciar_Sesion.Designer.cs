@@ -45,17 +45,18 @@
             // lblLogin
             // 
             lblLogin.AutoSize = true;
-            lblLogin.BackColor = Color.FromArgb(40, 40, 40);
+            lblLogin.BackColor = Color.Transparent;
             lblLogin.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblLogin.ForeColor = Color.Black;
             lblLogin.Location = new Point(405, 25);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(272, 33);
             lblLogin.TabIndex = 0;
-            lblLogin.Text = "INICIAR SESION";
+            lblLogin.Text = "INICIAR SESIÓN";
             // 
             // pnlDolar
             // 
+            pnlDolar.BackColor = Color.FromArgb(86, 151, 251);
             pnlDolar.BackgroundImage = (Image)resources.GetObject("pnlDolar.BackgroundImage");
             pnlDolar.BackgroundImageLayout = ImageLayout.Stretch;
             pnlDolar.Controls.Add(lblEmpresa);
@@ -80,12 +81,12 @@
             // 
             txtUsuario.BackColor = SystemColors.InactiveCaptionText;
             txtUsuario.BorderStyle = BorderStyle.None;
-            txtUsuario.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            txtUsuario.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             txtUsuario.ForeColor = Color.DimGray;
             txtUsuario.Location = new Point(343, 108);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.PlaceholderText = "Usuario";
-            txtUsuario.Size = new Size(392, 15);
+            txtUsuario.Size = new Size(392, 19);
             txtUsuario.TabIndex = 1;
             txtUsuario.Enter += txtUsuario_Enter;
             txtUsuario.Leave += txtUsuario_Leave;
@@ -94,12 +95,12 @@
             // 
             txtContraseña.BackColor = SystemColors.ActiveCaptionText;
             txtContraseña.BorderStyle = BorderStyle.None;
-            txtContraseña.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            txtContraseña.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             txtContraseña.ForeColor = Color.DimGray;
             txtContraseña.Location = new Point(343, 183);
             txtContraseña.Name = "txtContraseña";
             txtContraseña.PlaceholderText = "Contraseña";
-            txtContraseña.Size = new Size(392, 15);
+            txtContraseña.Size = new Size(392, 19);
             txtContraseña.TabIndex = 2;
             txtContraseña.Enter += txtContraseña_Enter;
             txtContraseña.Leave += txtContraseña_Leave;
@@ -152,7 +153,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Imagen_Inicio_sesion;
+            BackColor = Color.FromArgb(199, 220, 251);
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(780, 390);
             ControlBox = false;

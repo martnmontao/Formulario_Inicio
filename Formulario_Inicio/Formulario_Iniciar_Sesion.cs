@@ -65,39 +65,74 @@ namespace Formulario_Inicio
         private void btnAcceder_Click(object sender, EventArgs e)
         {
             string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
+            string rutaUsuariosRegistrados = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
             string nombre = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
+            int flag = 0;
+            List<Usuario> listaUsuarioRegistrados = Serializadora.LeerJsonUsuarios(rutaUsuariosRegistrados);
+            List<Usuario> listaUsuarioARegistrar = Serializadora.LeerJsonUsuarios(ruta);
 
-
-            if (txtUsuario.Text == "Apache" && txtContraseña.Text == "1")
+            if (contraseña.Length < 5 && nombre.Length > 5)
             {
-                Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "EL JEFE");
-                formularioAdmin.Show();
+                MessageBox.Show("Ingrese una contraseña más larga");
+            }
+            else if (nombre.Length < 5 && contraseña.Length > 5)
+            {
+                MessageBox.Show("Ingrese un nombre más largo");
             }
             else
             {
 
-                try
+                Persona persona = new Usuario(nombre.ToLower(),"0", contraseña);
+                Usuario usuario = (Usuario)persona;
+                foreach (Usuario user in listaUsuarioRegistrados)
                 {
-                    Persona persona = new Usuario(nombre, "0", 0, 0, contraseña);
-                    Usuario usuario = (Usuario)persona;
-                    if (usuario.VarificarNombreYContraseña(usuario))
+                    if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
                     {
-                        Serializadora.EscribirJsonUsuariosARegistrar(usuario, ruta);
-                        Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario(usuario);
-                        formularioMenu.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ya hay un usuario con el nombre ingresado. Porfavor ingrese su contraseña.");
+                        usuario = user;
+                        flag = 1;
+                        break;
                     }
                 }
-                catch (Exception ex)
+
+                if (txtUsuario.Text == "Apache" && txtContraseña.Text == "carlitos")
                 {
-                    Console.WriteLine(ex.Message);
+                    Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "Administrador");
+                    formularioAdmin.Show();
+                }
+                else
+                {
+
+                    try
+                    {
+                        if (usuario.VerificarNombreYContraseña(usuario))
+                        {
+                            Serializadora.EscribirJsonUsuariosARegistrar(usuario, ruta);
+
+                            if (flag == 1)
+                            {
+                                Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario(usuario);
+                                formularioMenu.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Porfavor, espere a que el administrador le dé de alta. ¡Gracias por registrarse!.");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ya hay un usuario con el nombre ingresado. Porfavor ingrese su contraseña.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
+            
+            
         }
     }
 }

@@ -28,11 +28,8 @@ namespace Formulario_Inicio
             InitializeComponent();
             this.admin = new Administrador();
             this.listaUsuariosARegistrar = Serializadora.LeerJsonUsuarios(rutaUsuariosARegistrar);
-
-        }
-
-        private void Formulario_Administrar_Usuarios_Load(object sender, EventArgs e)
-        {
+            this.btnEliminarUsuarios.Visible = false;
+            this.btnValidarUsuarios.Visible = false;
 
         }
 
@@ -41,6 +38,8 @@ namespace Formulario_Inicio
             string filejson = File.ReadAllText(rutaMisUsuarios);
             DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
             gridUsuarios.DataSource = dt;
+            btnEliminarUsuarios.Visible = true;
+            btnValidarUsuarios.Visible = false;
         }
 
 
@@ -49,7 +48,8 @@ namespace Formulario_Inicio
             string filejson = File.ReadAllText(rutaUsuariosARegistrar);
             DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
             gridUsuarios.DataSource = dt;
-
+            btnValidarUsuarios.Visible = true;
+            btnEliminarUsuarios.Visible = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -61,18 +61,35 @@ namespace Formulario_Inicio
 
         private void btnValidarUsuarios_Click(object sender, EventArgs e)
         {
-            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
-            admin.ValidarUsuario(listaUsuariosARegistrar, nombre);
-            admin.EliminarUsuario(listaUsuariosARegistrar, nombre, rutaUsuariosARegistrar);
+
+            try
+            {
+                nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
+                admin.ValidarUsuario(listaUsuariosARegistrar, nombre);
+                admin.EliminarUsuario(listaUsuariosARegistrar, nombre, rutaUsuariosARegistrar);
+            }
+            catch
+            {
+                MessageBox.Show("No hay usuarios para validar.");
+            }
+
+
         }
 
         private void btnEliminarUsuarios_Click(object sender, EventArgs e)
         {
-            listaUsuarios = Serializadora.LeerJsonUsuarios(rutaMisUsuarios);
-            string a = gridUsuarios.CurrentRow.ToString();
-            //int usuario = (int)gridUsuarios.CurrentRow.Index; 
-            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
-            admin.EliminarUsuario(listaUsuarios, nombre, rutaMisUsuarios);
+            try
+            {
+                nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
+                listaUsuarios = Serializadora.LeerJsonUsuarios(rutaMisUsuarios);
+                admin.EliminarUsuario(listaUsuarios, nombre, rutaMisUsuarios);
+            }
+            catch
+            {
+                MessageBox.Show("No hay usuarios para eliminar.");
+            }
+
+
         }
 
 

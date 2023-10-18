@@ -22,10 +22,7 @@ namespace Biblioteca_Clases
         
         }
         public void ValidarUsuario(List<Usuario> listaUsuarios, string nombre)
-
         {
-
-           
             List<Usuario> listaUsuariosRegistrados = Serializadora.LeerJsonUsuarios(ruta);
             try
             {
@@ -56,7 +53,7 @@ namespace Biblioteca_Clases
                     {
                         listaUsuarios.Remove(usuario);
                         break;
-                        
+                      
                     }
                 }
             }

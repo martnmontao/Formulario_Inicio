@@ -25,9 +25,15 @@ namespace Biblioteca_Clases
             try
             {
                 List<Usuario> listaPersona = LeerJsonUsuarios(ruta);
-                if (usuario.VerificarUsuarioRegistrado(usuario))
+                if (usuario.VerificarUsuarioEnListaARegistrar(usuario) && usuario.VerificarUsuarioEnListaRegistrados(usuario))
                 {
                     listaPersona.Add(usuario);
+                }
+                foreach (Usuario user in listaPersona)
+                {
+
+                    usuario.IdUsuario = (int.Parse(usuario.IdUsuario) + 1).ToString();
+
                 }
                 string json = JsonConvert.SerializeObject(listaPersona, Formatting.Indented);
                 File.WriteAllText(ruta, json);
@@ -59,7 +65,7 @@ namespace Biblioteca_Clases
         public static List<Usuario> LeerJsonUsuarios(string ruta)
         {
             List<Usuario> listaPersona = new List<Usuario>();
-            int contador = 0;
+
             try
             {
                 string json = File.ReadAllText(ruta);
@@ -69,11 +75,6 @@ namespace Biblioteca_Clases
             {
                 Console.WriteLine(ex.Message);
             }
-            foreach(Usuario usuario in listaPersona)
-            {
-                usuario.IdUsuario += contador.ToString();
-            }
-
             return listaPersona;
         }
 

@@ -12,29 +12,33 @@ namespace Biblioteca_Clases
     public class Usuario : Persona
     {
         private string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
-        private float sueldo;
-        private float sueldoDolares;
+        private string ruta2 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
+        private double sueldo;
+        private double sueldoDolares;
         private string contraseña;
+        private string accionApple;
+        private string accionMicrosoft;
+        private string accionTesla;
+        private string accionAmazon;
+
         List<Usuario> listaUsuarios;
         public Usuario()
         {
             
         }
-        public Usuario(string nombre, string idUsuario, float sueldo, float sueldoDolares, string contraseña):base(nombre, idUsuario) 
+        public Usuario(string nombre, string idUsuario, string contraseña):base(nombre, idUsuario) 
         {
-            this.sueldo = sueldo;
-            this.sueldoDolares = sueldoDolares;
+            this.sueldo = 0;
+            this.sueldoDolares = 0;
             this.contraseña = contraseña;
-            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
         }
 
-        public float SueldoDolares { get => sueldoDolares; set => sueldoDolares = value;}
-        public float Sueldo { get => sueldo; set => sueldo = value;}
+        public double SueldoDolares { get => sueldoDolares; set => sueldoDolares = value;}
+        public double Sueldo { get => sueldo; set => sueldo = value;}
         public string Contraseña { get => contraseña; set => contraseña = value;}
-
-
-        public bool VerificarUsuarioRegistrado(Usuario usuario)
+        public bool VerificarUsuarioEnListaRegistrados(Usuario usuario)
         {
+            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
             bool validar = true;
             foreach(Usuario user in listaUsuarios)
             {
@@ -47,9 +51,25 @@ namespace Biblioteca_Clases
             
             return validar;
         }
-
-        public bool VarificarNombreYContraseña(Usuario usuario)
+        public bool VerificarUsuarioEnListaARegistrar(Usuario usuario)
         {
+            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta2);
+            bool validar = true;
+            foreach (Usuario user in listaUsuarios)
+            {
+                if (usuario.Nombre.ToLower() == user.Nombre.ToLower() && usuario.Contraseña == user.Contraseña)
+                {
+                    validar = false;
+                    break;
+                }
+            }
+
+            return validar;
+        }
+
+        public bool VerificarNombreYContraseña(Usuario usuario)
+        {
+            listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
             bool verificar = true;
             foreach(Usuario user in listaUsuarios)
             {
@@ -67,22 +87,7 @@ namespace Biblioteca_Clases
             return verificar;
         }
 
-        public void ModificarSueldo(Usuario usuario, float SueldoAPesos, float SueldoADolares)
-        {
-            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
-            foreach(Usuario user in listaUsuarios)
-            {
-                if(usuario.nombre == user.nombre)
-                {
-                    user.Sueldo = SueldoAPesos;
-                    user.SueldoDolares = SueldoADolares;
-                }
-            }
-
-            Serializadora.ModificarJson(listaUsuarios, ruta);
-        }
-
-
+        
         public override string ToString()
         {
             return base.ToString() + $"Sueldo: {this.Sueldo}";
