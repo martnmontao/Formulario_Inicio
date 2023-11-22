@@ -28,78 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtSueldoPesos = new TextBox();
+            txtSueldo = new TextBox();
             btnIngresarSueldo = new Button();
-            txtSueldoDolares = new TextBox();
-            lblInformacionSueldo = new Label();
-            label1 = new Label();
-            btnConvertir = new Button();
             pictureBoxBotonVolver = new PictureBox();
+            btnObtenerValorDolar = new Button();
+            txtSueldoDolar = new TextBox();
+            btnVenderMep = new Button();
+            btnComprarMep = new Button();
+            lblIngresarSueldo = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBotonVolver).BeginInit();
             SuspendLayout();
             // 
-            // txtSueldoPesos
+            // txtSueldo
             // 
-            txtSueldoPesos.Location = new Point(129, 114);
-            txtSueldoPesos.Name = "txtSueldoPesos";
-            txtSueldoPesos.Size = new Size(387, 23);
-            txtSueldoPesos.TabIndex = 0;
+            txtSueldo.BackColor = SystemColors.InactiveBorder;
+            txtSueldo.Location = new Point(195, 151);
+            txtSueldo.Name = "txtSueldo";
+            txtSueldo.Size = new Size(209, 23);
+            txtSueldo.TabIndex = 0;
             // 
             // btnIngresarSueldo
             // 
             btnIngresarSueldo.BackColor = Color.FromArgb(199, 233, 234);
             btnIngresarSueldo.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnIngresarSueldo.Location = new Point(129, 376);
+            btnIngresarSueldo.Location = new Point(105, 381);
             btnIngresarSueldo.Name = "btnIngresarSueldo";
             btnIngresarSueldo.Size = new Size(387, 32);
             btnIngresarSueldo.TabIndex = 2;
-            btnIngresarSueldo.Text = "Ingresar ";
+            btnIngresarSueldo.Text = "Confirmar";
             btnIngresarSueldo.UseVisualStyleBackColor = false;
             btnIngresarSueldo.Click += btnIngresarSueldo_Click;
-            // 
-            // txtSueldoDolares
-            // 
-            txtSueldoDolares.Location = new Point(129, 250);
-            txtSueldoDolares.Name = "txtSueldoDolares";
-            txtSueldoDolares.ReadOnly = true;
-            txtSueldoDolares.Size = new Size(387, 23);
-            txtSueldoDolares.TabIndex = 3;
-            // 
-            // lblInformacionSueldo
-            // 
-            lblInformacionSueldo.AutoSize = true;
-            lblInformacionSueldo.BackColor = Color.Transparent;
-            lblInformacionSueldo.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblInformacionSueldo.ForeColor = Color.FromArgb(79, 88, 88);
-            lblInformacionSueldo.Location = new Point(90, 64);
-            lblInformacionSueldo.Name = "lblInformacionSueldo";
-            lblInformacionSueldo.Size = new Size(472, 24);
-            lblInformacionSueldo.TabIndex = 4;
-            lblInformacionSueldo.Text = "Ingrese el dinero que quiera depositar:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.FromArgb(79, 88, 88);
-            label1.Location = new Point(166, 178);
-            label1.Name = "label1";
-            label1.Size = new Size(309, 24);
-            label1.TabIndex = 5;
-            label1.Text = "Equivalencia en dolares:";
-            // 
-            // btnConvertir
-            // 
-            btnConvertir.BackColor = Color.FromArgb(199, 233, 234);
-            btnConvertir.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnConvertir.Location = new Point(230, 296);
-            btnConvertir.Name = "btnConvertir";
-            btnConvertir.Size = new Size(190, 32);
-            btnConvertir.TabIndex = 6;
-            btnConvertir.Text = "Convertir";
-            btnConvertir.UseVisualStyleBackColor = false;
-            btnConvertir.Click += btnConvertir_Click;
             // 
             // pictureBoxBotonVolver
             // 
@@ -113,20 +71,71 @@
             pictureBoxBotonVolver.TabStop = false;
             pictureBoxBotonVolver.Click += pictureBoxBotonVolver_Click;
             // 
+            // btnObtenerValorDolar
+            // 
+            btnObtenerValorDolar.BackColor = Color.FromArgb(199, 233, 234);
+            btnObtenerValorDolar.Font = new Font("Copperplate Gothic Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnObtenerValorDolar.Location = new Point(232, 313);
+            btnObtenerValorDolar.Name = "btnObtenerValorDolar";
+            btnObtenerValorDolar.Size = new Size(129, 26);
+            btnObtenerValorDolar.TabIndex = 9;
+            btnObtenerValorDolar.Text = "Obtener valor";
+            btnObtenerValorDolar.UseVisualStyleBackColor = false;
+            btnObtenerValorDolar.Click += btnObtenerValorDolar_Click;
+            // 
+            // txtSueldoDolar
+            // 
+            txtSueldoDolar.BackColor = SystemColors.InactiveBorder;
+            txtSueldoDolar.Location = new Point(195, 231);
+            txtSueldoDolar.Name = "txtSueldoDolar";
+            txtSueldoDolar.PlaceholderText = "Valor total";
+            txtSueldoDolar.Size = new Size(209, 23);
+            txtSueldoDolar.TabIndex = 8;
+            // 
+            // btnVenderMep
+            // 
+            btnVenderMep.Location = new Point(118, 83);
+            btnVenderMep.Name = "btnVenderMep";
+            btnVenderMep.Size = new Size(75, 23);
+            btnVenderMep.TabIndex = 10;
+            btnVenderMep.Text = "Vender";
+            btnVenderMep.UseVisualStyleBackColor = true;
+            btnVenderMep.Click += btnVenderMep_Click;
+            // 
+            // btnComprarMep
+            // 
+            btnComprarMep.Location = new Point(417, 83);
+            btnComprarMep.Name = "btnComprarMep";
+            btnComprarMep.Size = new Size(75, 23);
+            btnComprarMep.TabIndex = 11;
+            btnComprarMep.Text = "Comprar";
+            btnComprarMep.UseVisualStyleBackColor = true;
+            // 
+            // lblIngresarSueldo
+            // 
+            lblIngresarSueldo.AutoSize = true;
+            lblIngresarSueldo.Font = new Font("Copperplate Gothic Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblIngresarSueldo.Location = new Point(195, 34);
+            lblIngresarSueldo.Name = "lblIngresarSueldo";
+            lblIngresarSueldo.Size = new Size(218, 15);
+            lblIngresarSueldo.TabIndex = 12;
+            lblIngresarSueldo.Text = "Deposite el sueldo que desee:";
+            // 
             // Formulario_Ingresar_Sueldo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(159, 211, 213);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(633, 518);
+            ClientSize = new Size(610, 489);
+            Controls.Add(lblIngresarSueldo);
+            Controls.Add(btnComprarMep);
+            Controls.Add(btnVenderMep);
+            Controls.Add(btnObtenerValorDolar);
+            Controls.Add(txtSueldoDolar);
             Controls.Add(pictureBoxBotonVolver);
-            Controls.Add(btnConvertir);
-            Controls.Add(label1);
-            Controls.Add(lblInformacionSueldo);
-            Controls.Add(txtSueldoDolares);
             Controls.Add(btnIngresarSueldo);
-            Controls.Add(txtSueldoPesos);
+            Controls.Add(txtSueldo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Ingresar_Sueldo";
             StartPosition = FormStartPosition.CenterScreen;
@@ -139,12 +148,13 @@
 
         #endregion
 
-        private TextBox txtSueldoPesos;
+        private TextBox txtSueldo;
         private Button btnIngresarSueldo;
-        private TextBox txtSueldoDolares;
-        private Label lblInformacionSueldo;
-        private Label label1;
-        private Button btnConvertir;
         private PictureBox pictureBoxBotonVolver;
+        private Button btnObtenerValorDolar;
+        private TextBox txtSueldoDolar;
+        private Button btnVenderMep;
+        private Button btnComprarMep;
+        private Label lblIngresarSueldo;
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Biblioteca_Clases;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ namespace Formulario_Inicio
     public partial class Formulario_Inversiones : Form
     {
         private Usuario usuario;
+        private Administrador admin;
         private double porcentajeRandomApple;
         private double porcentajeRandomMicrosoft;
         private double porcentajeRandomTesla;
@@ -21,202 +24,26 @@ namespace Formulario_Inicio
         private int contador;
         private string accion;
         private double gananciaFinal;
+        private string pathActivos = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Activos.json";
+        ETipoMoneda tipoMoneda;
+        ETipoActivo tipoActivo;
+
         Formulario_Ingresar_Sueldo fi = new Formulario_Ingresar_Sueldo();
 
-        public Formulario_Inversiones()
-        {
-            InitializeComponent();
-        }
-        public Formulario_Inversiones(Usuario usuario)
+        public Formulario_Inversiones(Usuario usuario) : this()
         {
             InitializeComponent();
             this.usuario = usuario;
             this.contador = 0;
             MostrarSueldos();
-            tmrContador.Enabled = true;
         }
-
-
-        private void btnInvertirApple_Click(object sender, EventArgs e)
+        public Formulario_Inversiones()
         {
-
-            if (VerificarInversion(usuario, txtInversionApple.Text))
-            {
-                contador = 0;
-                accion = "apple";
-                tmrContador.Enabled = true;
-                MostrarBotones(false);
-            }
-            else
-            {
-                accion = "No";
-            }
-
+            //InitializeComponent();
+            admin = new Administrador();
+            usuario = new Usuario();
         }
 
-        private void btnInvertirMicrosoft_Click(object sender, EventArgs e)
-        {
-
-            if (VerificarInversion(usuario, txtInversionMicrosoft.Text))
-            {
-                contador = 0;
-                accion = "microsoft";
-                tmrContador.Enabled = true;
-                MostrarBotones(false);
-
-            }
-            else
-            {
-                accion = "No";
-            }
-
-        }
-
-        private void btnInvertirTesla_Click(object sender, EventArgs e)
-        {
-
-
-            if (VerificarInversion(usuario, txtInversionTesla.Text))
-            {
-                contador = 0;
-                accion = "tesla";
-                tmrContador.Enabled = true;
-                MostrarBotones(false);
-
-            }
-            else
-            {
-                accion = "No";
-            }
-
-        }
-
-        private void btnInvertirAmazon_Click(object sender, EventArgs e)
-        {
-
-            if (VerificarInversion(usuario, txtInversionAmazon.Text))
-            {
-                contador = 0;
-                accion = "amazon";
-                tmrContador.Enabled = true;
-                MostrarBotones(false);
-
-            }
-            else
-            {
-                accion = "No";
-            }
-
-        }
-
-        private double generarPorcentajeRandom()
-        {
-            int min = -3;
-            int max = 4;
-            double porcentajeRandom;
-            Random rnd = new Random();
-            porcentajeRandom = rnd.NextDouble() * (min - max) + (max);
-            porcentajeRandom = (Math.Truncate(porcentajeRandom * 10) / 10);
-            return porcentajeRandom;
-        }
-
-        private void tmrContador_Tick(object sender, EventArgs e)
-        {
-
-            contador++;
-            if (contador == 1 || contador == 5 || contador == 10 || contador == 15)
-            {
-                this.porcentajeRandomApple = generarPorcentajeRandom();
-                this.porcentajeRandomMicrosoft = generarPorcentajeRandom();
-                this.porcentajeRandomTesla = generarPorcentajeRandom();
-                this.porcentajeRandomAmazon = generarPorcentajeRandom();
-                if (porcentajeRandomApple > 0)
-                {
-                    lblNumeroInversionApple.ForeColor = Color.Green;
-                }
-                else
-                {
-                    lblNumeroInversionApple.ForeColor = Color.Red;
-                }
-                if (porcentajeRandomMicrosoft > 0)
-                {
-                    lblNumeroInversionMicrosoft.ForeColor = Color.Green;
-                }
-                else
-                {
-                    lblNumeroInversionMicrosoft.ForeColor = Color.Red;
-                }
-                if (porcentajeRandomTesla > 0)
-                {
-                    lblNumeroInversionTesla.ForeColor = Color.Green;
-                }
-                else
-                {
-                    lblNumeroInversionTesla.ForeColor = Color.Red;
-                }
-                if (porcentajeRandomAmazon > 0)
-                {
-                    lblNumeroInversionAmazon.ForeColor = Color.Green;
-                }
-                else
-                {
-                    lblNumeroInversionAmazon.ForeColor = Color.Red;
-
-                }
-
-                this.lblNumeroInversionApple.Text = porcentajeRandomApple.ToString();
-                this.lblNumeroInversionMicrosoft.Text = porcentajeRandomMicrosoft.ToString();
-                this.lblNumeroInversionTesla.Text = porcentajeRandomTesla.ToString();
-                this.lblNumeroInversionAmazon.Text = porcentajeRandomAmazon.ToString();
-
-                if (contador == 15)
-                {
-                    MostrarSueldos();
-                    switch (accion)
-                    {
-                        case "apple":
-                            usuario.Sueldo += GenerarGananciaFinal(txtInversionApple.Text, porcentajeRandomApple);
-                            MostrarSueldos();
-                            fi.ModificarSueldo(usuario, usuario.Sueldo, fi.ConvertirPesoADolar(usuario.Sueldo));
-                            tmrContador.Enabled = false;
-                            MostrarBotones(true);
-                            break;
-                        case "microsoft":
-                            usuario.Sueldo = usuario.Sueldo += GenerarGananciaFinal(txtInversionMicrosoft.Text, porcentajeRandomMicrosoft);
-                            MostrarSueldos();
-                            fi.ModificarSueldo(usuario, usuario.Sueldo, fi.ConvertirPesoADolar(usuario.Sueldo));
-                            tmrContador.Enabled = false;
-                            MostrarBotones(true);
-                            break;
-                        case "tesla":
-                            usuario.Sueldo = usuario.Sueldo += GenerarGananciaFinal(txtInversionTesla.Text, porcentajeRandomTesla);
-                            MostrarSueldos();
-                            fi.ModificarSueldo(usuario, usuario.Sueldo, fi.ConvertirPesoADolar(usuario.Sueldo));
-                            tmrContador.Enabled = false;
-                            MostrarBotones(true);
-                            break;
-                        case "amazon":
-                            usuario.Sueldo = usuario.Sueldo += GenerarGananciaFinal(txtInversionAmazon.Text, porcentajeRandomAmazon);
-                            MostrarSueldos();
-                            fi.ModificarSueldo(usuario, usuario.Sueldo, fi.ConvertirPesoADolar(usuario.Sueldo));
-                            tmrContador.Enabled = false;
-                            MostrarBotones(true);
-                            break;
-                        default:
-                            contador = 0;
-                            break;
-                    }
-
-                }
-            }
-
-        }
-        private double GenerarGananciaFinal(string sueldoInvertido, double porcentajeFinal)
-        {
-            this.gananciaFinal = double.Parse(sueldoInvertido) + (double.Parse(sueldoInvertido) * porcentajeFinal / 100);
-            usuario.Sueldo = usuario.Sueldo + gananciaFinal;
-            return gananciaFinal;
-        }
 
         private void pictureBoxVolver_Click(object sender, EventArgs e)
         {
@@ -225,47 +52,70 @@ namespace Formulario_Inicio
             this.Hide();
 
         }
-        private bool VerificarInversion(Usuario usuario, string txtBox)
-        {
-            bool verificado = false;
-            try
-            {
-                double inversion = double.Parse(txtBox);
-                if (inversion <= usuario.Sueldo && inversion > 0)
-                {
-                    usuario.Sueldo = usuario.Sueldo - inversion;
-                    lblSueldoPesos.Text = "$ARG: " + usuario.Sueldo.ToString();
-                    lblSueldoDolar.Text = "$USD: " + fi.ConvertirPesoADolar(usuario.Sueldo).ToString();
-                    verificado = true;
-                }
-                else if (inversion <= 0)
-                {
-                    MessageBox.Show("Ingrese una inversión válida.");
-                }
-                else
-                {
-                    MessageBox.Show("Ingrese un sueldo válido.");
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Ingrese un sueldo.");
-            }
-            return verificado;
-        }
+
         private void MostrarSueldos()
         {
             lblSueldoPesos.Text = "$ARG: " + usuario.Sueldo.ToString();
-            lblSueldoDolar.Text = "$USD: " + fi.ConvertirPesoADolar(usuario.Sueldo).ToString();
+            lblSueldoDolar.Text = "$USD: " + usuario.SueldoDolares.ToString();
         }
-        private void MostrarBotones(bool mostrar)
+        private void cmbActivos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnInvertirAmazon.Visible = mostrar;
-            btnInvertirApple.Visible = mostrar;
-            btnInvertirTesla.Visible = mostrar;
-            btnInvertirMicrosoft.Visible = mostrar;
-            pictureBoxVolver.Visible = mostrar;
+            List<Activos> listaActivos = null;
+            int indice = cmbActivos.SelectedIndex;
+            switch (indice)
+            {
+                case 0:
+                    tipoActivo = ETipoActivo.Accion;
+                    break;
+                case 1:
+                    tipoActivo = ETipoActivo.Cedear;
+                    break;
+                case 2:
+                    tipoActivo = ETipoActivo.Bono;
+                    break;
+                default:
+                    tipoActivo = ETipoActivo.MEP;
+                    break;
+            }
+            listaActivos = admin.FiltrarPorActivos(tipoActivo, pathActivos);
+            MostrarActivos(listaActivos);
+        }
+
+
+        private void MostrarActivos(List<Activos> listaActivos)
+        {
+            try
+            {
+                dgvActivos.DataSource = listaActivos;
+            }
+            catch
+            {
+                MessageBox.Show("No hay activos.");
+            }
+        }
+
+        private void btnInvertir_Click(object sender, EventArgs e)
+        {
+            var serializadorJson = new SerializadorJSON<Activos>(pathActivos);
+            string empresa;
+            Activos activo;
+            List<Activos> listaActivos = serializadorJson.Deserializar();
+            try
+            {
+                tipoMoneda = (ETipoMoneda)dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[2].Value;
+                empresa = dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[8].Value.ToString();
+                activo = usuario.ObtenerActivo(empresa, tipoMoneda);
+                Formulario_Invertir fi = new Formulario_Invertir(activo, usuario);
+                fi.Show();
+                this.Hide();
+
+            }
+            catch
+            {
+                MessageBox.Show("No hay activos.");
+            }
 
         }
+
     }
 }

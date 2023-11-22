@@ -29,27 +29,79 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_Admin));
-            panelIzquierdo = new Panel();
-            btnUsuarios = new Button();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             lblNombreUsuario = new Label();
-            lblIdUsuario = new Label();
             btnLogoUsuario = new PictureBox();
-            panelIzquierdo.SuspendLayout();
+            btnActualizarDolar = new Button();
+            txtValorCompraDolar = new TextBox();
+            btnUsuarios = new Button();
+            btnActivos = new Button();
+            txtValorVentaDolar = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnLogoUsuario).BeginInit();
             SuspendLayout();
             // 
-            // panelIzquierdo
+            // panel1
             // 
-            panelIzquierdo.BackColor = Color.FromArgb(159, 211, 213);
-            panelIzquierdo.Controls.Add(btnUsuarios);
-            panelIzquierdo.Location = new Point(0, 100);
-            panelIzquierdo.Name = "panelIzquierdo";
-            panelIzquierdo.Size = new Size(209, 496);
-            panelIzquierdo.TabIndex = 1;
+            panel1.BackColor = Color.FromArgb(159, 211, 213);
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(lblNombreUsuario);
+            panel1.Controls.Add(btnLogoUsuario);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(684, 100);
+            panel1.TabIndex = 2;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.None;
+            pictureBox1.Image = Properties.Resources.ImagenDolar5;
+            pictureBox1.Location = new Point(571, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(116, 100);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            // 
+            // lblNombreUsuario
+            // 
+            lblNombreUsuario.AutoSize = true;
+            lblNombreUsuario.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombreUsuario.Location = new Point(127, 18);
+            lblNombreUsuario.Name = "lblNombreUsuario";
+            lblNombreUsuario.Size = new Size(95, 21);
+            lblNombreUsuario.TabIndex = 2;
+            lblNombreUsuario.Text = "Nombre";
+            // 
+            // btnLogoUsuario
+            // 
+            btnLogoUsuario.Image = (Image)resources.GetObject("btnLogoUsuario.Image");
+            btnLogoUsuario.Location = new Point(0, 0);
+            btnLogoUsuario.Name = "btnLogoUsuario";
+            btnLogoUsuario.Size = new Size(101, 100);
+            btnLogoUsuario.TabIndex = 0;
+            btnLogoUsuario.TabStop = false;
+            // 
+            // btnActualizarDolar
+            // 
+            btnActualizarDolar.Location = new Point(245, 398);
+            btnActualizarDolar.Name = "btnActualizarDolar";
+            btnActualizarDolar.Size = new Size(106, 23);
+            btnActualizarDolar.TabIndex = 3;
+            btnActualizarDolar.Text = "Actualizar dolar";
+            btnActualizarDolar.UseVisualStyleBackColor = true;
+            btnActualizarDolar.Click += btnActualizarDolar_Click;
+            // 
+            // txtValorCompraDolar
+            // 
+            txtValorCompraDolar.Location = new Point(127, 262);
+            txtValorCompraDolar.Name = "txtValorCompraDolar";
+            txtValorCompraDolar.PlaceholderText = "Valor compra dolar";
+            txtValorCompraDolar.Size = new Size(443, 23);
+            txtValorCompraDolar.TabIndex = 11;
             // 
             // btnUsuarios
             // 
@@ -61,7 +113,7 @@
             btnUsuarios.FlatStyle = FlatStyle.Flat;
             btnUsuarios.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnUsuarios.ForeColor = Color.LightGray;
-            btnUsuarios.Location = new Point(13, 30);
+            btnUsuarios.Location = new Point(388, 143);
             btnUsuarios.Name = "btnUsuarios";
             btnUsuarios.Size = new Size(182, 40);
             btnUsuarios.TabIndex = 3;
@@ -69,78 +121,54 @@
             btnUsuarios.UseVisualStyleBackColor = false;
             btnUsuarios.Click += btnUsuarios_Click_1;
             // 
-            // panel1
+            // btnActivos
             // 
-            panel1.BackColor = Color.FromArgb(159, 211, 213);
-            panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(lblNombreUsuario);
-            panel1.Controls.Add(lblIdUsuario);
-            panel1.Controls.Add(btnLogoUsuario);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(968, 100);
-            panel1.TabIndex = 2;
+            btnActivos.BackColor = Color.FromArgb(40, 40, 40);
+            btnActivos.Cursor = Cursors.Hand;
+            btnActivos.FlatAppearance.BorderSize = 0;
+            btnActivos.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
+            btnActivos.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnActivos.FlatStyle = FlatStyle.Flat;
+            btnActivos.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnActivos.ForeColor = Color.LightGray;
+            btnActivos.Location = new Point(127, 143);
+            btnActivos.Name = "btnActivos";
+            btnActivos.Size = new Size(182, 40);
+            btnActivos.TabIndex = 4;
+            btnActivos.Text = "Activos";
+            btnActivos.UseVisualStyleBackColor = false;
+            btnActivos.Click += btnActivos_Click;
             // 
-            // pictureBox1
+            // txtValorVentaDolar
             // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.None;
-            pictureBox1.Image = Properties.Resources.ImagenDolar5;
-            pictureBox1.Location = new Point(852, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(116, 100);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
-            // 
-            // lblNombreUsuario
-            // 
-            lblNombreUsuario.AutoSize = true;
-            lblNombreUsuario.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblNombreUsuario.Location = new Point(124, 19);
-            lblNombreUsuario.Name = "lblNombreUsuario";
-            lblNombreUsuario.Size = new Size(95, 21);
-            lblNombreUsuario.TabIndex = 2;
-            lblNombreUsuario.Text = "Nombre";
-            // 
-            // lblIdUsuario
-            // 
-            lblIdUsuario.AutoSize = true;
-            lblIdUsuario.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblIdUsuario.Location = new Point(124, 60);
-            lblIdUsuario.Name = "lblIdUsuario";
-            lblIdUsuario.Size = new Size(124, 21);
-            lblIdUsuario.TabIndex = 1;
-            lblIdUsuario.Text = "ID Usuario";
-            // 
-            // btnLogoUsuario
-            // 
-            btnLogoUsuario.Image = (Image)resources.GetObject("btnLogoUsuario.Image");
-            btnLogoUsuario.Location = new Point(0, 0);
-            btnLogoUsuario.Name = "btnLogoUsuario";
-            btnLogoUsuario.Size = new Size(101, 100);
-            btnLogoUsuario.TabIndex = 0;
-            btnLogoUsuario.TabStop = false;
+            txtValorVentaDolar.Location = new Point(127, 310);
+            txtValorVentaDolar.Name = "txtValorVentaDolar";
+            txtValorVentaDolar.PlaceholderText = "Valor venta dolar";
+            txtValorVentaDolar.Size = new Size(443, 23);
+            txtValorVentaDolar.TabIndex = 12;
             // 
             // Formulario_Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(199, 233, 234);
-            ClientSize = new Size(968, 596);
+            ClientSize = new Size(684, 596);
+            Controls.Add(txtValorVentaDolar);
+            Controls.Add(btnActivos);
+            Controls.Add(txtValorCompraDolar);
+            Controls.Add(btnUsuarios);
+            Controls.Add(btnActualizarDolar);
             Controls.Add(panel1);
-            Controls.Add(panelIzquierdo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Admin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_Admin";
-            Load += Formulario_Admin_Load;
-            panelIzquierdo.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnLogoUsuario).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -148,10 +176,13 @@
         private Button button1;
         private Panel panel1;
         private PictureBox btnLogoUsuario;
-        private Label lblNombreUsuario;
-        private Label lblIdUsuario;
         private PictureBox pictureBox1;
-        private Button btnUsuarios;
         private Button btnAcciones;
+        private Button btnActualizarDolar;
+        private TextBox txtValorCompraDolar;
+        private Label lblNombreUsuario;
+        private Button btnUsuarios;
+        private Button btnActivos;
+        private TextBox txtValorVentaDolar;
     }
 }

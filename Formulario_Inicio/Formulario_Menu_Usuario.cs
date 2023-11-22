@@ -15,10 +15,7 @@ namespace Formulario_Inicio
         private void Formulario_Menu_Load(object sender, EventArgs e)
         {
             Formulario_Ingresar_Sueldo fi = new Formulario_Ingresar_Sueldo();
-            lblIdUsuario.Text = usuario.IdUsuario;
             lblNombreUsuario.Text = usuario.Nombre;
-            lblSueldo.Text = "$ARG: " + usuario.Sueldo.ToString();
-            lblSueldoDolares.Text = "$USD: " + fi.ConvertirPesoADolar(usuario.Sueldo).ToString();
         }
         private void btnOpciones_Click(object sender, EventArgs e)
         {
@@ -31,24 +28,7 @@ namespace Formulario_Inicio
                 menuVertical.Width = 233;
             }
 
-            if (menuVertical.Width == 77)
-            {
-                pictureBoxApple.Location = new Point(133, 248);
-                pictureBoxMicrosoft.Location = new Point(287, 383);
-                lblSueldo.Location = new Point(204, 103);
-                pictureBoxLogo.Location = new Point(474, 246);
-                pictureBoxAmazon.Location = new Point(660, 383);
-                lblSueldoDolares.Location = new Point(655, 105);
-            }
-            else
-            {
-                lblSueldo.Location = new Point(345, 105);
-                pictureBoxApple.Location = new Point(334, 246);
-                pictureBoxMicrosoft.Location = new Point(444, 383);
-                pictureBoxLogo.Location = new Point(566, 251);
-                pictureBoxAmazon.Location = new Point(680, 383);
-                lblSueldoDolares.Location = new Point(747, 105);
-            }
+
         }
 
 
@@ -65,7 +45,7 @@ namespace Formulario_Inicio
 
         private void btnIngresarDinero_Click(object sender, EventArgs e)
         {
-            Formulario_Ingresar_Sueldo formIngresarSueldo = new Formulario_Ingresar_Sueldo(usuario);
+            Formulario_Ingresar_Sueldo formIngresarSueldo = new Formulario_Ingresar_Sueldo(usuario, "pesos");
             formIngresarSueldo.Show();
             this.Hide();
         }
@@ -91,6 +71,19 @@ namespace Formulario_Inicio
             formIngresos.Show();
         }
 
+        private void btnCartera_Click(object sender, EventArgs e)
+        {
+            Formulario_Activos_Usuario fAU = new Formulario_Activos_Usuario(usuario);
+            fAU.Show();
+            this.Hide();
+        }
 
+        private void btnDolarMEP_Click(object sender, EventArgs e)
+        {
+            //Formulario_Ingresar_Sueldo formIngresarSueldo = new Formulario_Ingresar_Sueldo(usuario, "dolar");
+            Formulario_Dolar_Mep fDM = new Formulario_Dolar_Mep(usuario);
+            fDM.Show();
+            this.Hide();
+        }
     }
 }

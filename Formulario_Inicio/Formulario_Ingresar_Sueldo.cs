@@ -1,4 +1,5 @@
 ﻿using Biblioteca_Clases;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,79 +19,130 @@ namespace Formulario_Inicio
         private double sueldoDolares;
         private Usuario usuario;
         private List<Usuario> listaUsuarios;
-        string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
+        private string tipoCambio;
+        private Administrador admin;
+        string pathUsuarios = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
+        string pathAdministrador = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Administrador.json";
+
         public Formulario_Ingresar_Sueldo()
         {
 
         }
-        public Formulario_Ingresar_Sueldo(Usuario usuario)
+        public Formulario_Ingresar_Sueldo(Usuario usuario, string tipoCambio)
         {
             InitializeComponent();
             this.usuario = usuario;
-            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
+            this.tipoCambio = tipoCambio;
         }
         private void Formulario_Ingresar_Sueldo_Load(object sender, EventArgs e)
         {
-
-            txtSueldoPesos.Text = "0";
-            txtSueldoDolares.Text = "0";
-   
+            if (tipoCambio == "dolar")
+            {
+                lblIngresarSueldo.Visible = false;
+            }
+            else
+            {
+                txtSueldo.Text = "0";
+                txtSueldoDolar.Visible = false;
+                btnObtenerValorDolar.Visible = false;
+                btnComprarMep.Visible = false;
+                btnVenderMep.Visible = false;
+            }
         }
-
 
         private void btnIngresarSueldo_Click(object sender, EventArgs e)
         {
-            this.sueldoPesos = double.Parse(txtSueldoPesos.Text);
-            this.sueldoDolares = double.Parse(txtSueldoDolares.Text);
-            if (sueldoPesos > 50000)
+            var serializadoraJson = new SerializadorJSON<Usuario>(pathUsuarios);
+            listaUsuarios = serializadoraJson.Deserializar();
+            this.sueldoPesos = double.Parse(txtSueldo.Text);
+            if (tipoCambio == "pesos")
             {
-                MessageBox.Show($"No puede agregar más de $50000 a su cuenta. Su sueldo es de: {usuario.Sueldo}");
-            }
-            else if (usuario.Sueldo >= 50000 || (usuario.Sueldo + sueldoPesos) > 50000)
-            {
-                MessageBox.Show($"No puede tener más de $50000 en su cuenta. Su sueldo es de: {usuario.Sueldo}. Porfavor invierta el dinero y vuelva a intentarlo.");
+                if (sueldoPesos > 50000)
+                {
+                    MessageBox.Show($"No puede agregar más de $50000 a su cuenta. Su sueldo es de: {usuario.Sueldo}");
+                }
+                else if (usuario.Sueldo >= 50000 || (usuario.Sueldo + sueldoPesos) > 50000)
+                {
+                    MessageBox.Show($"No puede tener más de $50000 en su cuenta. Su sueldo es de: {usuario.Sueldo}. Porfavor invierta el dinero y vuelva a intentarlo.");
+                }
+
+                foreach (Usuario user in listaUsuarios)
+                {
+                    if (usuario.Dni == user.Dni)
+                    {
+                        usuario.Sueldo += sueldoPesos;
+                        ModificarSueldo(usuario, usuario.Sueldo, sueldoPesos);
+                        break;
+                    }
+                }
+
             }
 
             else
             {
                 foreach (Usuario user in listaUsuarios)
                 {
-                    if (this.usuario.Nombre == user.Nombre)
+                    if (usuario.Dni == user.Dni)
                     {
-                        usuario.Sueldo += sueldoPesos;
-                        usuario.SueldoDolares = ConvertirPesoADolar(usuario.Sueldo);
-                        ModificarSueldo(this.usuario, usuario.Sueldo, usuario.SueldoDolares);
+
+                        if (usuario.Sueldo > 0)
+                        {
+                            usuario.SueldoDolares = ConvertirPesoADolar(double.Parse(txtSueldo.Text));
+                            MessageBox.Show("Operación exitosa!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No pesee esa cantidad en su cuenta. Deposite dinero o pruebe con otra cantidad.");
+                        }
+
+
+                        ModificarSueldo(usuario, usuario.SueldoDolares, sueldoPesos);
                         break;
                     }
                 }
             }
 
         }
-        private void btnConvertir_Click(object sender, EventArgs e)
-        {
-            this.sueldoPesos = double.Parse(txtSueldoPesos.Text);
-            txtSueldoDolares.Text = ConvertirPesoADolar(sueldoPesos).ToString();
 
-        }
-        public void ModificarSueldo(Usuario usuario, double SueldoAPesos, double SueldoADolares)
+        public void ModificarSueldo(Usuario usuarioAModificar, double sueldo, double sueldoIngresado)
         {
-            listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
+            var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarios);
+            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathUsuarios);
+
+            listaUsuarios = serializadorJson.Deserializar();
             foreach (Usuario user in listaUsuarios)
             {
-                if (usuario.Nombre == user.Nombre)
+                if (usuarioAModificar.Dni == user.Dni)
                 {
-                    user.Sueldo = SueldoAPesos;
-                    user.SueldoDolares = SueldoADolares;
+                    if (tipoCambio == "pesos")
+                    {
+                        user.Sueldo = sueldo;
+
+                    }
+                    else
+                    {
+                        user.SueldoDolares += sueldo;
+                        user.Sueldo = user.Sueldo - sueldoIngresado;
+                        usuario = user;
+                    }
                 }
             }
 
-            Serializadora.ModificarJson(listaUsuarios, ruta);
+            serializadorJson2.Serializar(listaUsuarios);
         }
 
         public double ConvertirPesoADolar(double pesos)
         {
-            double valorPeso = 0.0029f;
-            this.sueldoDolares = pesos * valorPeso;
+            var serializadorJson = new SerializadorJSON<Administrador>(pathAdministrador);
+
+            double valorDolar = 0;
+            List<Administrador> listaAdministradores = serializadorJson.Deserializar();
+            foreach (Administrador adm in listaAdministradores)
+            {
+                valorDolar = adm.ValorDolarCompra;
+                break;
+            }
+            this.sueldoDolares = pesos / valorDolar;
             this.sueldoDolares = (Math.Truncate(this.sueldoDolares * 100) / 100);
             return sueldoDolares;
         }
@@ -100,6 +152,18 @@ namespace Formulario_Inicio
             Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(usuario);
             this.Hide();
             fm.Show();
+        }
+
+        private void btnObtenerValorDolar_Click(object sender, EventArgs e)
+        {
+            txtSueldoDolar.Text = ConvertirPesoADolar(double.Parse(txtSueldo.Text)).ToString();
+        }
+
+        private void btnVenderMep_Click(object sender, EventArgs e)
+        {
+            Formulario_Dolar_Mep fDM = new Formulario_Dolar_Mep(usuario);
+            fDM.Show();
+            this.Hide();
         }
     }
 }

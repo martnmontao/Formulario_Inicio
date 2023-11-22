@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using Formulario_Inicio;
+//using System.Windows.Forms;
+
 
 namespace Biblioteca_Clases
 {
@@ -11,82 +14,408 @@ namespace Biblioteca_Clases
 
     public class Usuario : Persona
     {
-        private string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
-        private string ruta2 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
+        private string pathMisUsuarios = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
+        private string pathAdministrador = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Administrador.json";
+
+        private string pathUsuarioARegistrar = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
+        private string rutaActivos = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Activos.json";
+        private bool empresa;
         private double sueldo;
         private double sueldoDolares;
-        private string contraseña;
-        List<Usuario> listaUsuarios;
+        private List<Usuario> listaUsuarios;
+        private List<Activos> listaActivos;
+        private List<Activos> listaActivosVentas;
+        private List<Activos> listaOfertasActivos;
+
         public Usuario()
         {
             
         }
-        public Usuario(string nombre, string idUsuario, string contraseña):base(nombre, idUsuario) 
+
+        public Usuario(string nombre, string dni, string contraseña):base(nombre, dni,contraseña)
         {
+
+        }
+        public Usuario(string nombre, string dni, string contraseña, bool empresa)
+        {
+            this.nombre = nombre;
+            this.dni = dni;
+            this.contraseña = contraseña;
+            this.empresa = empresa;
             this.sueldo = 0;
             this.sueldoDolares = 0;
-            this.contraseña = contraseña;
+            this.listaActivos = new List<Activos>();
+            this.listaUsuarios = new List<Usuario>();
+            this.listaActivosVentas = new List<Activos>();
+            this.ListaOfertasActivos = new List<Activos>();
         }
 
         public double SueldoDolares { get => sueldoDolares; set => sueldoDolares = value;}
         public double Sueldo { get => sueldo; set => sueldo = value;}
-        public string Contraseña { get => contraseña; set => contraseña = value;}
-        public bool VerificarUsuarioEnListaRegistrados(Usuario usuario)
+        public List<Activos> ListaActivos { get => listaActivos; set => listaActivos = value; }
+        public List<Activos> ListaActivosVentas { get => listaActivosVentas; set => listaActivosVentas = value; }
+        public bool Empresa { get => empresa; set => empresa = value; }
+        public List<Activos> ListaOfertasActivos { get => listaOfertasActivos; set => listaOfertasActivos = value; }
+
+        public void AgregarActivo(Usuario usuario, Activos activo)
         {
-            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
-            bool validar = true;
+
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
+
+
+
+            List<Usuario> listaUsuarios = serializadorJson.Deserializar();
+            List<Usuario> nuevaLista = new List<Usuario>(); 
             foreach(Usuario user in listaUsuarios)
             {
-                if(usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
-                { 
-                    validar = false;
-                    break;
+
+                if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
+                {
+                    user.ListaActivos.Add(activo);
                 }
+                nuevaLista.Add(user);
             }
-            
-            return validar;
+            serializadorJson2.Serializar(nuevaLista);
         }
-        public bool VerificarUsuarioEnListaARegistrar(Usuario usuario)
+        public bool IniciarSesion(Usuario usuario)
         {
-            this.listaUsuarios = Serializadora.LeerJsonUsuarios(ruta2);
-            bool validar = true;
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+
+            listaUsuarios = serializadorJson.Deserializar();
+            bool iniciarSesion = false;
             foreach (Usuario user in listaUsuarios)
             {
-                if (usuario.Nombre.ToLower() == user.Nombre.ToLower() && usuario.Contraseña == user.Contraseña)
+                if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña && user.dni == usuario.dni)
                 {
-                    validar = false;
+                    iniciarSesion = true;
+
                     break;
                 }
             }
 
-            return validar;
+            return iniciarSesion;
         }
-
-        public bool VerificarNombreYContraseña(Usuario usuario)
+        public Usuario DevolverUsuarios(Usuario usuario)
         {
-            listaUsuarios = Serializadora.LeerJsonUsuarios(ruta);
-            bool verificar = true;
-            foreach(Usuario user in listaUsuarios)
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+
+            listaUsuarios = serializadorJson.Deserializar();
+
+            //bool iniciarSesion = false;
+            foreach (Usuario user in listaUsuarios)
             {
-                if(usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
+                if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña && user.dni == usuario.dni)
                 {
-                    verificar = true;
+                    usuario = user;
+
                     break;
                 }
-                else if(usuario.Nombre == user.Nombre && usuario.Contraseña != user.Contraseña)
+            }
+
+            return usuario;
+        }
+        public Administrador DevolverAdminitrador(Administrador admin)
+        {
+            var serializadorJson = new SerializadorJSON<Administrador>(pathAdministrador);
+
+            List<Administrador> listaAdministradores = serializadorJson.Deserializar();
+            
+            foreach (Administrador adm in listaAdministradores)
+            {
+                if (adm.Nombre == admin.Nombre && adm.Contraseña == admin.Contraseña)
+                {
+                    admin = adm;
+
+                    break;
+                }
+            }
+
+            return admin;
+        }
+        public bool VerificarDatosIngresados(string nombre, string clave, string dni)
+        {
+            bool verificacion = true;
+            int documento;
+
+            if(nombre.Trim().Length < 5 || clave.Trim().Length < 5 || dni.Trim().Length < 7)
+            {
+                verificacion = false;
+            }
+
+            try
+            {
+                documento = int.Parse(dni);
+                if(documento < 30000000 || documento > 50000000)
+                {
+                    verificacion = false;
+                }
+            }
+            catch
+            {
+                verificacion = false;
+            }
+
+            
+            return verificacion;
+
+        }
+        public bool VerificarUsuarioRegistradoRepetido(Usuario usuario)
+        {
+            bool verificar = true;
+            var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarioARegistrar);
+
+
+
+            listaUsuarios = serializadorJson.Deserializar();
+            foreach(Usuario user in listaUsuarios)
+            {
+                if(usuario.Dni == user.Dni)
                 {
                     verificar = false;
                     break;
                 }
             }
             return verificar;
+            
         }
 
-        
-        public override string ToString()
+        public Activos ObtenerActivo(string distintivo, ETipoMoneda tipoMoneda)
         {
-            return base.ToString() + $"Sueldo: {this.Sueldo}";
+            //EN EL CASO DE COMPRARLE A UN USUARIO, DEBERA TAMBIEN RECORRER LA LISTA DE LOS ACTIVOS EN VENTAS DE CADA USUARIO, ACORDATE
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+            listaUsuarios = serializadorJson.Deserializar();
+            Activos activo = null;
+            
+            foreach (Usuario user in listaUsuarios)
+            {
+                foreach (Activos act in user.ListaActivosVentas)
+                {
+                    if (distintivo == act.Distintivo && act.Moneda == tipoMoneda)
+                    {
+                        activo = act;
+                        break;
+                    }
+                }
+
+                foreach(Activos act in user.listaActivos)
+                {
+                    if (distintivo == act.Distintivo && act.Moneda == tipoMoneda)
+                    {
+                        activo = act;
+                        break;
+                    }
+                }
+            }
+            
+            
+         
+
+            return activo;
         }
+
+
+
+        public void ComprarActivo(Usuario usuario, Activos activo,string cantidadCompra, string precioCompra)
+        {
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
+            
+            listaUsuarios = serializadorJson.Deserializar();
+
+
+
+
+            int cC = int.Parse(cantidadCompra);
+            float pC = float.Parse(precioCompra);
+            List<Activos> nuevaListaActivos = new List<Activos>();
+            Activos activoComprado = CrearActivoCompradoVendido(usuario, activo, cC, precioCompra, cantidadCompra, precioCompra);
+          
+            
+            foreach(Usuario user in listaUsuarios)
+            {
+                    
+                foreach (Activos act in user.ListaActivosVentas)
+                {
+                    if(activo.Distintivo == act.Distintivo && act.Moneda == activo.Moneda)
+                    {
+                        act.Cv -= cC;
+                        if(act.Moneda == ETipoMoneda.USD)
+                        {
+                            user.sueldoDolares += pC;
+                        }
+                        else
+                        {
+                            user.Sueldo += pC;
+                        }
+
+                    }
+                }
+                    
+                if(usuario.dni == user.dni)
+                {
+                    user.listaActivos.Add(activoComprado);
+                    if(activo.Moneda == ETipoMoneda.USD)
+                    {
+                        user.sueldoDolares -= pC;
+                    }
+                    else
+                    {
+                        user.sueldo -= pC;
+                    }
+                }
+                
+                  
+            }
+
+            serializadorJson2.Serializar(listaUsuarios);
+        }
+
+        public Usuario VenderActivoPropio(Usuario usuario, Activos activo, string cantidadCompra, string precioCompra,string cantidadVenta, string precioDeVenta)
+        {
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
+            
+
+
+            listaUsuarios = serializadorJson.Deserializar();
+            int cC = int.Parse(cantidadCompra);
+            int cV = int.Parse(cantidadVenta);
+            Activos activoAVender = CrearActivoCompradoVendido(usuario, activo, cC, precioCompra,cantidadVenta, precioDeVenta);
+            
+            foreach(Usuario user in listaUsuarios)
+            {
+                if(user.dni == usuario.dni)
+                {
+                    user.ListaActivosVentas.Add(activoAVender);
+                }
+                foreach(Activos act in user.listaActivos)
+                {
+                    if(act.Distintivo == user.dni && act.Moneda == activo.Moneda)
+                    {
+                        act.Cc -= cC;
+                        act.Cv -= cV;
+                        if(act.Cv <= 0)
+                        {
+                            user.listaActivos.Remove(act);
+                            break;
+                        }
+                        usuario = user;
+                    }
+                }
+            }
+            serializadorJson2.Serializar(listaUsuarios);
+            return usuario;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public void VenderActivoAUsuario(Usuario usuario, Activos activo,string cantidadVenta, string precioDeVenta)
+        {
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
+
+            listaUsuarios = serializadorJson.Deserializar();
+            List<Activos> nuevaListaActivos = new List<Activos>();
+            int cV = int.Parse(cantidadVenta);
+            Activos activoAVender = CrearActivoCompradoVendido(usuario, activo, cV, precioDeVenta, cantidadVenta, precioDeVenta);
+            foreach(Usuario user in listaUsuarios)
+            {
+                foreach(Activos act in user.ListaActivosVentas) 
+                {
+                    if(activo.Distintivo == user.dni && act.Moneda == activo.Moneda)
+                    {
+                        act.Cc -= cV;
+                        break;
+                    }
+                    
+                }
+
+            }
+            
+
+            serializadorJson2.Serializar(listaUsuarios);
+        }
+        public bool VerificarActivoEnUsuario(Usuario usuario, string distintivo,Activos activo)
+        {
+            bool verificar = false;
+            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+
+            listaUsuarios = serializadorJson.Deserializar();
+            
+            foreach(Usuario user in listaUsuarios)
+            {
+                if(user.dni == distintivo)
+                {
+                    foreach(Activos act in usuario.listaActivos)
+                    {
+                        if(activo.Empresa == act.Empresa)
+                        {
+                            verificar = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return verificar;
+        }
+
+        private Activos CrearActivoCompradoVendido(Usuario usuario, Activos activo, int cantidadCompra, string precioCompra,string cantidadVenta, string precioVenta) 
+        {
+            int cV = int.Parse(cantidadVenta);
+            int cC = cantidadCompra;
+            float pC = float.Parse(precioCompra);
+            float pV = float.Parse(precioVenta);
+            Activos activoAVender = null;
+            switch (activo.Activo)
+            {
+                case ETipoActivo.Cedear:
+                    activoAVender = new Cedear(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                    break;
+                case ETipoActivo.Accion:
+                    activoAVender = new Acciones(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                    break;
+                case ETipoActivo.Bono:
+                    activoAVender = new Bonos(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                    break;
+                case ETipoActivo.MEP:
+                    activoAVender = new dolarMep(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                    break;
+            }
+
+            return activoAVender;
+
+        }
+
+
+
+
 
 
 

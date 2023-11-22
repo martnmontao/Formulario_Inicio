@@ -1,17 +1,22 @@
 
-
 using Biblioteca_Clases;
 namespace Formulario_Inicio
 {
     public partial class Formulario_Iniciar_Sesion : Form
     {
+        private Administrador admin;
+        private string nombre;
+        private string contraseña;
+        private string documento;
         public Formulario_Iniciar_Sesion()
         {
             InitializeComponent();
+            //this.admin = new Administrador("carlitos", "45301748", "1");
         }
-        private void Fomurlario_Iniciar_Sesion_Load(object sender, EventArgs e)
+        private void Formulario_Iniciar_Sesion_Load(object sender, EventArgs e)
         {
-
+            //Serializadora.EscribirAdministradorJson(admin);
+            //DataBase.OpenConnection();
         }
 
         private void txtUsuario_Enter(object sender, EventArgs e)
@@ -66,73 +71,52 @@ namespace Formulario_Inicio
         {
             string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
             string rutaUsuariosRegistrados = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
-            string nombre = txtUsuario.Text;
-            string contraseña = txtContraseña.Text;
-            int flag = 0;
-            List<Usuario> listaUsuarioRegistrados = Serializadora.LeerJsonUsuarios(rutaUsuariosRegistrados);
-            List<Usuario> listaUsuarioARegistrar = Serializadora.LeerJsonUsuarios(ruta);
+            this.nombre = txtUsuario.Text;
+            this.contraseña = txtContraseña.Text;
+            this.documento = txtDocumento.Text;
+            Usuario usuario = new Usuario(nombre, documento, contraseña);
 
-            if (contraseña.Length < 5 && nombre.Length > 5)
+            if (usuario.IniciarSesion(usuario))
             {
-                MessageBox.Show("Ingrese una contraseña más larga");
-            }
-            else if (nombre.Length < 5 && contraseña.Length > 5)
-            {
-                MessageBox.Show("Ingrese un nombre más largo");
+                usuario = usuario.DevolverUsuarios(usuario);
+                DataBase.Insert(usuario);
+                Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(usuario);
+                fm.Show();
+                this.Hide();
             }
             else
             {
-
-                Persona persona = new Usuario(nombre.ToLower(),"0", contraseña);
-                Usuario usuario = (Usuario)persona;
-                foreach (Usuario user in listaUsuarioRegistrados)
-                {
-                    if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
-                    {
-                        usuario = user;
-                        flag = 1;
-                        break;
-                    }
-                }
-
-                if (txtUsuario.Text == "Apache" && txtContraseña.Text == "carlitos")
-                {
-                    Formulario_Admin formularioAdmin = new Formulario_Admin(nombre, "Administrador");
-                    formularioAdmin.Show();
-                }
-                else
-                {
-
-                    try
-                    {
-                        if (usuario.VerificarNombreYContraseña(usuario))
-                        {
-                            Serializadora.EscribirJsonUsuariosARegistrar(usuario, ruta);
-
-                            if (flag == 1)
-                            {
-                                Formulario_Menu_Usuario formularioMenu = new Formulario_Menu_Usuario(usuario);
-                                formularioMenu.Show();
-                                this.Hide();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Porfavor, espere a que el administrador le dé de alta. ¡Gracias por registrarse!.");
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Ya hay un usuario con el nombre ingresado. Porfavor ingrese su contraseña.");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
+                MessageBox.Show("El usuario ingresado no existe o aún un administrador no lo ha validado. Porfavor vuelva a intentarlo o registrese.");
             }
-            
-            
+
         }
+        private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Formulario_Registro fr = new Formulario_Registro();
+            fr.Show();
+            this.Hide();
+        }
+
+        private void btnIniciarAdmin_Click(object sender, EventArgs e)
+        {
+            Usuario usuario = new Usuario();
+
+            this.nombre = txtUsuario.Text;
+            this.contraseña = txtContraseña.Text;
+            Administrador admin = new Administrador(nombre, txtDocumento.Text, contraseña);
+            admin = usuario.DevolverAdminitrador(admin);
+
+            if (admin.verificarAdministrador(nombre, contraseña))
+            {
+                Formulario_Admin fa = new Formulario_Admin(admin);
+                fa.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Usted no es administrador");
+            }
+        }
+
     }
 }

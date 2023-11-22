@@ -16,8 +16,8 @@ namespace Formulario_Inicio
 {
     public partial class Formulario_Administrar_Usuarios : Form
     {
-        private string rutaMisUsuarios = @"C:\Users\Lomu\Desktop\MisUsuarios.json";
-        private string rutaUsuariosARegistrar = @"C:\Users\Lomu\Desktop\MisUsuariosARegistrar.json";
+        private string pathUsuarios = @"C:\Users\Lomu\Desktop\MisUsuarios.json";
+        private string pathUsuariosARegistrar = @"C:\Users\Lomu\Desktop\MisUsuariosARegistrar.json";
         private Administrador admin;
         private List<Usuario> listaUsuarios;
         private List<Usuario> listaUsuariosARegistrar;
@@ -27,9 +27,10 @@ namespace Formulario_Inicio
         {
             InitializeComponent();
             this.admin = new Administrador();
-            this.listaUsuariosARegistrar = Serializadora.LeerJsonUsuarios(rutaUsuariosARegistrar);
             this.btnEliminarUsuarios.Visible = false;
             this.btnValidarUsuarios.Visible = false;
+            this.btnVerificarEmpresa.Visible = false;
+            MostrarGrid(pathUsuarios);
 
         }
 
@@ -37,12 +38,10 @@ namespace Formulario_Inicio
         {
             try
             {
-                string filejson = File.ReadAllText(rutaMisUsuarios);
-                DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
-                gridUsuarios.DataSource = dt;
+                MostrarGrid(pathUsuarios);
                 btnEliminarUsuarios.Visible = true;
                 btnValidarUsuarios.Visible = false;
-
+                btnVerificarEmpresa.Visible = true;
             }
             catch
             {
@@ -55,16 +54,14 @@ namespace Formulario_Inicio
         {
             try
             {
-                string filejson = File.ReadAllText(rutaUsuariosARegistrar);
-                DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
-                gridUsuarios.DataSource = dt;
+                MostrarGrid(pathUsuariosARegistrar);
                 btnValidarUsuarios.Visible = true;
                 btnEliminarUsuarios.Visible = false;
+                btnVerificarEmpresa.Visible = false;
             }
             catch
             {
                 MessageBox.Show("No hay una lista de usuarios registrados.");
-
             }
         }
 
@@ -78,11 +75,20 @@ namespace Formulario_Inicio
         private void btnValidarUsuarios_Click(object sender, EventArgs e)
         {
 
+            var jsonSerializador = new SerializadorJSON<Usuario>(pathUsuariosARegistrar);
+            var listaUsuariosARegistrar = jsonSerializador.Deserializar();
+            var serializadorJSON2 = new SerializadorJSON<List<Usuario>>(pathUsuarios);
+            listaUsuarios = jsonSerializador.Deserializar();
+
+
             try
             {
                 nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
-                admin.ValidarUsuario(listaUsuariosARegistrar, nombre);
-                admin.EliminarUsuario(listaUsuariosARegistrar, nombre, rutaUsuariosARegistrar);
+                listaUsuarios = admin.ValidarUsuario(listaUsuariosARegistrar, nombre);
+                admin.EliminarUsuario(listaUsuariosARegistrar, nombre, pathUsuariosARegistrar);
+                serializadorJSON2.Serializar(listaUsuarios);
+
+                MostrarGrid(pathUsuariosARegistrar);
             }
             catch
             {
@@ -94,11 +100,14 @@ namespace Formulario_Inicio
 
         private void btnEliminarUsuarios_Click(object sender, EventArgs e)
         {
+            var jsonSerializador = new SerializadorJSON<Usuario>(pathUsuarios);
+
             try
             {
                 nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
-                listaUsuarios = Serializadora.LeerJsonUsuarios(rutaMisUsuarios);
-                admin.EliminarUsuario(listaUsuarios, nombre, rutaMisUsuarios);
+                listaUsuarios = jsonSerializador.Deserializar();
+                admin.EliminarUsuario(listaUsuarios, nombre, pathUsuarios);
+                MostrarGrid(pathUsuarios);
             }
             catch
             {
@@ -108,6 +117,18 @@ namespace Formulario_Inicio
 
         }
 
+        private void btnVerificarEmpresa_Click(object sender, EventArgs e)
+        {
+            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[3].Value.ToString();
+            admin.VerificarEmpresa(nombre, pathUsuarios);
+            MostrarGrid(pathUsuarios);
+        }
 
+        private void MostrarGrid(string ruta)
+        {
+            string filejson = File.ReadAllText(ruta);
+            DataTable dt = (DataTable)JsonConvert.DeserializeObject(filejson, typeof(DataTable));
+            gridUsuarios.DataSource = dt;
+        }
     }
 }
