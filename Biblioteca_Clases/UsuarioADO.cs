@@ -13,10 +13,11 @@ namespace Biblioteca_Clases
         public string Documento { get; set; }
         public string Nombre {  get; set; }
         public string Contraseña { get; set; }
-        public float Pesos { get; set; }
-        public float Dolares {  get; set; }
+        public double Pesos { get; set; }
+        public double Dolares {  get; set; }
 
-        public UsuarioADO(string nombre, string documento, string contraseña, float pesos, float dolares):base("usuarios", ["Documento", "Nombre", "Contraseña", "Pesos", "Dolares"])
+
+        public UsuarioADO(string nombre, string documento, string contraseña, double pesos, double dolares):base("usuarios", ["Documento", "Nombre", "Contraseña", "Pesos", "Dolares"])
         {
             Nombre = nombre;
             Documento = documento;
@@ -27,13 +28,15 @@ namespace Biblioteca_Clases
 
         //Va a agregar un elemento a mySql
         public bool Add()
-        {
+        {            
+            DataBase.InsertUsuarios(Documento, Nombre, Contraseña, Pesos, Dolares);
             return true;
         }
 
         //Va a actualizar mi elemento de mySql
         public bool Update() 
         { 
+
             return true; 
         }
 
@@ -50,6 +53,13 @@ namespace Biblioteca_Clases
             return usuarios;
         }
 
+
+        public static UsuarioADO MapUsuario(MySqlDataReader reader)
+        {
+            return (UsuarioADO)reader;
+        }
+
+
         public static explicit operator UsuarioADO(MySqlDataReader reader)
         {
             var documento = reader["Documento"].ToString();
@@ -60,5 +70,14 @@ namespace Biblioteca_Clases
             return new UsuarioADO(nombre, documento, contraseña, pesos, dolares);
         }
 
+        public static explicit operator UsuarioADO(Usuario usuario)
+        {
+            var documento = usuario.Dni;
+            var nombre = usuario.Nombre;
+            var contraseña = usuario.Contraseña;
+            var pesos = usuario.Sueldo;
+            var dolares = usuario.SueldoDolares;
+            return new UsuarioADO(nombre, documento, contraseña, pesos, dolares);
+        }
     }
 }

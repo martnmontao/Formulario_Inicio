@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Biblioteca_Clases
 
         public static MySqlConnection connectionMySql;
         public static MySqlCommand commandMySql;
+
         static DataBase()
         {
 
@@ -25,44 +27,45 @@ namespace Biblioteca_Clases
             commandMySql.CommandType = System.Data.CommandType.Text;
             commandMySql.Connection = connectionMySql;
 
+        } 
 
-
-        }
-
-
-        public static void Insert(Usuario usuario)
+        
+        public static void InsertUsuarios(string documento, string nombre, string contraseña, double pesos, double dolares)
         {
             try
             {
-                connectionMySql.Open();
+                OpenConnection();
+
                 commandMySql.Parameters.Clear();
 
                 var query = $"INSERT INTO usuarios(Documento,Nombre,Contraseña,Pesos,Dolares) VALUES(@Documento, @Nombre, @Contraseña, @Pesos, @Dolares)";
-
+               
                 commandMySql.CommandText = query;
-                commandMySql.Parameters.AddWithValue("@Documento", usuario.Dni);
-                commandMySql.Parameters.AddWithValue("@Nombre", usuario.Nombre);
-                commandMySql.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
-                commandMySql.Parameters.AddWithValue("@Pesos", usuario.Sueldo);
-                commandMySql.Parameters.AddWithValue("@Dolares", usuario.SueldoDolares);
+                commandMySql.Parameters.AddWithValue("@Documento", documento);
+                commandMySql.Parameters.AddWithValue("@Nombre", nombre);
+                commandMySql.Parameters.AddWithValue("@Contraseña", contraseña);
+                commandMySql.Parameters.AddWithValue("@Pesos", pesos);
+                commandMySql.Parameters.AddWithValue("@Dolares", dolares);
 
                 commandMySql.ExecuteNonQuery();
             }
             catch
             {
-                throw;
+                Console.WriteLine("No se pudo ingresar los datos");
             }
             finally
             {
                 connectionMySql.Close();
             }
         }
-        public static List<T> Select<T>(string query) where T : UsuarioADO
+        public static List<T> Select<T>(string query, Func<MySqlDataReader, T> mapObject) where T : UsuarioADO
         {
+
             var lista = new List<T>();
+            
             try
             {
-                connectionMySql.Open();
+                OpenConnection();
 
                 commandMySql.CommandText = query;
 
@@ -70,7 +73,8 @@ namespace Biblioteca_Clases
                 {
                     while (reader.Read())
                     {
-                        T objeto = (T)reader;
+                        T objeto = mapObject(reader);
+                        lista.Add(objeto);
                     }
                 }
                 return lista;
@@ -86,7 +90,43 @@ namespace Biblioteca_Clases
 
 
         }
-        
+        public static List<T> Select<T>(string query) where T : UsuarioADO
+        {
+
+
+            try
+            {
+
+                OpenConnection();
+                List<T> listaUsuarioADO = new List<T>();
+                commandMySql.CommandText = query;
+
+                using (var reader = commandMySql.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        T usuario = (T)reader;
+                        listaUsuarioADO.Add(usuario);
+                    }
+                }
+                return listaUsuarioADO;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+
+
+        }
+
+
+
+
+
         public static void OpenConnection()
         {
             connectionMySql.Open();

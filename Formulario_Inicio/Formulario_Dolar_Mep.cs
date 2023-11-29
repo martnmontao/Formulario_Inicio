@@ -62,11 +62,16 @@ namespace Formulario_Inicio
             List<Usuario> listaUsuarios = serializadorJson.Deserializar();
             foreach (Usuario user in listaUsuarios)
             {
-                if (usuario.Dni == user.Dni)
+                if (usuario.Dni == user.Dni && user.SueldoDolares > 0)
                 {
                     user.SueldoDolares -= tkbMontoDolares.Value;
                     user.Sueldo += (Convert.ToInt32(tkbMontoDolares.Value) * admin.ValorDolarVenta);
                     MessageBox.Show("Se le ha transferido la equivalencia. Consulte su billetera para ver su dinero disponible.");
+                    break;
+                }
+                else
+                {
+                    MessageBox.Show("No posee saldo en su cuenta. Ingrese dinero para comprar Dolar MEP.");
                     break;
                 }
             }
@@ -87,7 +92,11 @@ namespace Formulario_Inicio
             }
         }
 
-
-
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(usuario);
+            this.Hide();
+            fm.Show();
+        }
     }
 }

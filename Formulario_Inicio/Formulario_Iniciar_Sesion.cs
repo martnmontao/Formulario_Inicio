@@ -69,8 +69,7 @@ namespace Formulario_Inicio
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
-            string rutaUsuariosRegistrados = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
+     
             this.nombre = txtUsuario.Text;
             this.contraseña = txtContraseña.Text;
             this.documento = txtDocumento.Text;
@@ -78,11 +77,12 @@ namespace Formulario_Inicio
 
             if (usuario.IniciarSesion(usuario))
             {
+   
                 usuario = usuario.DevolverUsuarios(usuario);
-                DataBase.Insert(usuario);
                 Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(usuario);
                 fm.Show();
                 this.Hide();
+
             }
             else
             {

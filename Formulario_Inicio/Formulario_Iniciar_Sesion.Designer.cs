@@ -50,7 +50,7 @@
             lblLogin.AutoSize = true;
             lblLogin.BackColor = Color.Transparent;
             lblLogin.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLogin.ForeColor = Color.Black;
+            lblLogin.ForeColor = Color.LightGray;
             lblLogin.Location = new Point(405, 25);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(272, 33);
@@ -59,7 +59,7 @@
             // 
             // pnlDolar
             // 
-            pnlDolar.BackColor = Color.FromArgb(86, 151, 251);
+            pnlDolar.BackColor = Color.FromArgb(23, 21, 39);
             pnlDolar.BackgroundImage = (Image)resources.GetObject("pnlDolar.BackgroundImage");
             pnlDolar.BackgroundImageLayout = ImageLayout.Stretch;
             pnlDolar.Controls.Add(lblEmpresa);
@@ -74,6 +74,7 @@
             lblEmpresa.AutoSize = true;
             lblEmpresa.BackColor = Color.Transparent;
             lblEmpresa.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblEmpresa.ForeColor = Color.LightGray;
             lblEmpresa.Location = new Point(63, 9);
             lblEmpresa.Name = "lblEmpresa";
             lblEmpresa.Size = new Size(164, 33);
@@ -155,9 +156,11 @@
             // lblRegistrarse
             // 
             lblRegistrarse.AutoSize = true;
+            lblRegistrarse.BackColor = Color.Transparent;
             lblRegistrarse.Cursor = Cursors.SizeAll;
             lblRegistrarse.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblRegistrarse.LinkColor = Color.Black;
+            lblRegistrarse.ForeColor = Color.LightGray;
+            lblRegistrarse.LinkColor = Color.LightGray;
             lblRegistrarse.Location = new Point(405, 353);
             lblRegistrarse.Name = "lblRegistrarse";
             lblRegistrarse.Size = new Size(278, 18);
@@ -200,7 +203,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(199, 220, 251);
+            BackColor = Color.FromArgb(23, 21, 24);
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(780, 390);
             ControlBox = false;

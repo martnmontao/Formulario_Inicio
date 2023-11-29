@@ -14,28 +14,44 @@ namespace Formulario_Inicio
         }
         private void Formulario_Menu_Load(object sender, EventArgs e)
         {
-            Formulario_Ingresar_Sueldo fi = new Formulario_Ingresar_Sueldo();
             lblNombreUsuario.Text = usuario.Nombre;
+            lblIdUsuario.Text = usuario.Dni;
         }
         private void btnOpciones_Click(object sender, EventArgs e)
         {
             if (menuVertical.Width == 233)
             {
                 menuVertical.Width = 77;
+                btnInformacion.Width = 55;
+                btnInvertir.Width = 55;
+                btnCartera.Width = 55;
+
+                btnInformacion.Text = "";
+                btnInvertir.Text = "";
+                btnCartera.Text = "";
+
             }
             else
             {
                 menuVertical.Width = 233;
+                btnInformacion.Width = 200;
+                btnInvertir.Width = 200;
+                btnCartera.Width = 200;
+                btnInformacion.Text = "Información";
+                btnInvertir.Text = "Mercado";
+                btnCartera.Text = "Movimientos";
+
+
             }
-
-
         }
 
 
 
         private void btnCerrarClick_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
+            Formulario_Iniciar_Sesion fIS = new Formulario_Iniciar_Sesion();
+            fIS.Show();
         }
 
         private void btnMinimizarClick_Click(object sender, EventArgs e)
@@ -45,8 +61,8 @@ namespace Formulario_Inicio
 
         private void btnIngresarDinero_Click(object sender, EventArgs e)
         {
-            Formulario_Ingresar_Sueldo formIngresarSueldo = new Formulario_Ingresar_Sueldo(usuario, "pesos");
-            formIngresarSueldo.Show();
+            Formulario_Ingresar_Sueldo fIS = new Formulario_Ingresar_Sueldo(usuario, "pesos");
+            fIS.Show();
             this.Hide();
         }
 
@@ -80,7 +96,6 @@ namespace Formulario_Inicio
 
         private void btnDolarMEP_Click(object sender, EventArgs e)
         {
-            //Formulario_Ingresar_Sueldo formIngresarSueldo = new Formulario_Ingresar_Sueldo(usuario, "dolar");
             Formulario_Dolar_Mep fDM = new Formulario_Dolar_Mep(usuario);
             fDM.Show();
             this.Hide();

@@ -13,7 +13,7 @@ namespace Formulario_Inicio
 {
     public partial class Formulario_Registro : Form
     {
-        private string pathMisUsuariosARegistrar = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
+        private string pathMisUsuariosARegistrar = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.xml";
         List<Usuario> listaUsuarioARegistrar = new List<Usuario>();
         public Formulario_Registro()
         {
@@ -25,22 +25,20 @@ namespace Formulario_Inicio
             string nombreUsuario = txtBoxNombreUsuario.Text;
             string contraseña = txtContraseña.Text;
             string dni = txtNroDocumento.Text;
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuariosARegistrar);
-            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuariosARegistrar);
+            var serializadorXML = new SerializadorXML<Usuario>(pathMisUsuariosARegistrar);
+            var serializadorXML2 = new SerializadorXML<List<Usuario>>(pathMisUsuariosARegistrar);
 
-            listaUsuarioARegistrar = serializadorJson.Deserializar();
-
-
-
+            serializadorXML2.Serializar(listaUsuarioARegistrar);
+            listaUsuarioARegistrar = serializadorXML.Deserializar();
             Usuario usuario = new Usuario(nombreUsuario, dni, contraseña, false);
             if (usuario.VerificarDatosIngresados(nombreUsuario, contraseña, dni))
             {
                 if (usuario.VerificarUsuarioRegistradoRepetido(usuario))
                 {
                     listaUsuarioARegistrar.Add(usuario);
-                    serializadorJson2.Serializar(listaUsuarioARegistrar);
+                    serializadorXML2.Serializar(listaUsuarioARegistrar);
                     MessageBox.Show("Se ha registrado con éxito!");
-                    
+
                 }
                 else
                 {
@@ -61,17 +59,7 @@ namespace Formulario_Inicio
             this.Hide();
         }
 
-        private void chkMostrarContraseña_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkMostrarContraseña.Checked)
-            {
-                txtContraseña.UseSystemPasswordChar = false;
-            }
-            else
-            {
-                txtContraseña.UseSystemPasswordChar = true;
-            }
-        }
+
 
     }
 }

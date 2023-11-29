@@ -51,10 +51,12 @@ namespace Biblioteca_Clases
             return listaUsuariosRegistrados;
         }
 
-        public void EliminarUsuario(List<Usuario> listaUsuarios, string nombre, string path)
+        public void EliminarUsuario(List<Usuario> listaUsuarios, string nombre, string path, bool xmlOJson)
         {
 
-            var serializadorJSON2 = new SerializadorJSON<List<Usuario>>(path);
+            var serializadorJSON = new SerializadorJSON<List<Usuario>>(path);
+            var serializadorXML = new SerializadorXML<List<Usuario>>(path);
+
             try
             {
                 foreach (Usuario usuario in listaUsuarios)
@@ -71,7 +73,15 @@ namespace Biblioteca_Clases
             {
                 Console.WriteLine(ex.Message);
             }
-            serializadorJSON2.Serializar(listaUsuarios);
+            if(xmlOJson)
+            {
+                serializadorJSON.Serializar(listaUsuarios);
+
+            }
+            else
+            {
+                serializadorXML.Serializar(listaUsuarios);
+            }
         }
 
         public bool verificarAdministrador(string nombre, string contraseña)
@@ -161,24 +171,38 @@ namespace Biblioteca_Clases
             serializadorJSONActivo.Serializar(listaActivos);
         }
 
-        public List<Activos> FiltrarPorActivos(ETipoActivo tipoActivo, string pathActivos)
+        public List<Activos> FiltrarPorActivos(ETipoActivo tipoActivo)
         {
-            var serializadorJSONActivo = new SerializadorJSON<Activos>(pathActivos);
+            var serializadorJSONActivo = new SerializadorJSON<Usuario>(pathUsuarios);
 
-            List<Activos> listaActivos = serializadorJSONActivo.Deserializar();
+            List<Usuario> listaUsuarios = serializadorJSONActivo.Deserializar();
             List<Activos> filtrarLista = new List<Activos>();
-            foreach(Activos tipo in listaActivos)
+
+            foreach(Usuario user in listaUsuarios)
             {
-                if(tipo.Activo == tipoActivo)
+                foreach (Activos act in user.ListaActivosVentas)
                 {
-                    filtrarLista.Add(tipo);
+                    if (act.Activo == tipoActivo && user.Empresa == true)
+                    {
+                        filtrarLista.Add(act);
+                    }
+
                 }
 
             }
             return filtrarLista;
         }
 
-        public List<Activos> FiltrarPorMoneda(ETipoMoneda tipoMoneda, Usuario usuario)
+
+
+
+
+
+
+
+
+
+        public List<Activos> FiltrarPorMoneda(ETipoMoneda tipoMoneda, Usuario usuario, string nombreEmpresa)
         {
             var serializadorJSON = new SerializadorJSON<Usuario>(pathUsuarios);
 
@@ -188,7 +212,7 @@ namespace Biblioteca_Clases
             {
                 foreach(Activos act in user.ListaActivosVentas)
                 {
-                    if(act.Moneda == tipoMoneda)
+                    if(act.Moneda == tipoMoneda && act.Empresa == nombreEmpresa)
                     {
                         filtrarLista.Add(act);
                     }
@@ -200,6 +224,13 @@ namespace Biblioteca_Clases
             }
             return filtrarLista;
         }
+
+
+
+
+
+
+
 
         public ETipoActivo IndicarTipoActivo(int indice)
         {
@@ -222,7 +253,7 @@ namespace Biblioteca_Clases
             return activo;
         }
 
-        public void VerificarEmpresa(string nombre, string pathUsuarios)
+        public List<Usuario> VerificarEmpresa(string nombre, string pathUsuarios)
         {
             var serializadorJSON = new SerializadorJSON<Usuario>(pathUsuarios);
             var serializadorJSON2 = new SerializadorJSON<List<Usuario>>(pathUsuarios);
@@ -239,9 +270,24 @@ namespace Biblioteca_Clases
             }
 
             serializadorJSON2.Serializar(listaUsuarios);
+            return listaUsuarios;
         }
     
-        
+        public void RegistrarAMySql()
+        {
+            UsuarioADO usuarioADO;
+            List<Usuario> listaUsuarios;
+            var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarios);
+            listaUsuarios = serializadorJson.Deserializar();
+            foreach(Usuario user in listaUsuarios)
+            {
+                usuarioADO = (UsuarioADO)user;
+                usuarioADO.Add();
+            }
+        }
     
+
+
+
     }
 }

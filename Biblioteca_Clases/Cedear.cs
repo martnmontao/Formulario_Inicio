@@ -19,9 +19,12 @@ namespace Biblioteca_Clases
         /*
           En Argentina, los CEDEAR se cotizan en pesos argentinos, pero representan activos en moneda extranjera. 
         Las fluctuaciones en el tipo de cambio pueden afectar el valor en pesos de tus inversiones en CEDEAR.*/
-        private int cantidad;
+ 
 
-
+        public Cedear()
+        {
+            
+        }
 
         public Cedear(string nombreActivo, int cc, float pc, int cv, float pv, ETipoActivo tipoActivo, ETipoMoneda moneda, float intereses, string distintivo) : base(nombreActivo, cc, pc, cv, pv, tipoActivo, moneda, intereses, distintivo)
         {

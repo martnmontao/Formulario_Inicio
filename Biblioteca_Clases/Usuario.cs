@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,14 +26,14 @@ namespace Biblioteca_Clases
         private List<Usuario> listaUsuarios;
         private List<Activos> listaActivos;
         private List<Activos> listaActivosVentas;
-        private List<Activos> listaOfertasActivos;
+
 
         public Usuario()
         {
-            
+
         }
 
-        public Usuario(string nombre, string dni, string contraseña):base(nombre, dni,contraseña)
+        public Usuario(string nombre, string dni, string contraseña) : base(nombre, dni, contraseña)
         {
 
         }
@@ -47,15 +48,15 @@ namespace Biblioteca_Clases
             this.listaActivos = new List<Activos>();
             this.listaUsuarios = new List<Usuario>();
             this.listaActivosVentas = new List<Activos>();
-            this.ListaOfertasActivos = new List<Activos>();
+ 
         }
 
-        public double SueldoDolares { get => sueldoDolares; set => sueldoDolares = value;}
-        public double Sueldo { get => sueldo; set => sueldo = value;}
+        public double SueldoDolares { get => sueldoDolares; set => sueldoDolares = value; }
+        public double Sueldo { get => sueldo; set => sueldo = value; }
         public List<Activos> ListaActivos { get => listaActivos; set => listaActivos = value; }
         public List<Activos> ListaActivosVentas { get => listaActivosVentas; set => listaActivosVentas = value; }
         public bool Empresa { get => empresa; set => empresa = value; }
-        public List<Activos> ListaOfertasActivos { get => listaOfertasActivos; set => listaOfertasActivos = value; }
+
 
         public void AgregarActivo(Usuario usuario, Activos activo)
         {
@@ -66,8 +67,8 @@ namespace Biblioteca_Clases
 
 
             List<Usuario> listaUsuarios = serializadorJson.Deserializar();
-            List<Usuario> nuevaLista = new List<Usuario>(); 
-            foreach(Usuario user in listaUsuarios)
+            List<Usuario> nuevaLista = new List<Usuario>();
+            foreach (Usuario user in listaUsuarios)
             {
 
                 if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña)
@@ -120,7 +121,7 @@ namespace Biblioteca_Clases
             var serializadorJson = new SerializadorJSON<Administrador>(pathAdministrador);
 
             List<Administrador> listaAdministradores = serializadorJson.Deserializar();
-            
+
             foreach (Administrador adm in listaAdministradores)
             {
                 if (adm.Nombre == admin.Nombre && adm.Contraseña == admin.Contraseña)
@@ -138,7 +139,7 @@ namespace Biblioteca_Clases
             bool verificacion = true;
             int documento;
 
-            if(nombre.Trim().Length < 5 || clave.Trim().Length < 5 || dni.Trim().Length < 7)
+            if (nombre.Trim().Length < 5 || clave.Trim().Length < 5 || dni.Trim().Length < 7)
             {
                 verificacion = false;
             }
@@ -146,7 +147,7 @@ namespace Biblioteca_Clases
             try
             {
                 documento = int.Parse(dni);
-                if(documento < 30000000 || documento > 50000000)
+                if (documento < 30000000 || documento > 50000000)
                 {
                     verificacion = false;
                 }
@@ -156,7 +157,7 @@ namespace Biblioteca_Clases
                 verificacion = false;
             }
 
-            
+
             return verificacion;
 
         }
@@ -168,17 +169,18 @@ namespace Biblioteca_Clases
 
 
             listaUsuarios = serializadorJson.Deserializar();
-            foreach(Usuario user in listaUsuarios)
+            foreach (Usuario user in listaUsuarios)
             {
-                if(usuario.Dni == user.Dni)
+                if (usuario.Dni == user.Dni)
                 {
                     verificar = false;
                     break;
                 }
             }
             return verificar;
-            
+
         }
+
 
         public Activos ObtenerActivo(string distintivo, ETipoMoneda tipoMoneda)
         {
@@ -186,7 +188,7 @@ namespace Biblioteca_Clases
             var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
             listaUsuarios = serializadorJson.Deserializar();
             Activos activo = null;
-            
+
             foreach (Usuario user in listaUsuarios)
             {
                 foreach (Activos act in user.ListaActivosVentas)
@@ -198,7 +200,7 @@ namespace Biblioteca_Clases
                     }
                 }
 
-                foreach(Activos act in user.listaActivos)
+                foreach (Activos act in user.listaActivos)
                 {
                     if (distintivo == act.Distintivo && act.Moneda == tipoMoneda)
                     {
@@ -207,13 +209,37 @@ namespace Biblioteca_Clases
                     }
                 }
             }
-            
-            
-         
+
+
+
 
             return activo;
         }
 
+
+
+        public bool verificarActivosEnUsuario(Usuario usuario, int cantidadAVender, Activos activo)
+        {
+            bool verificar = true;
+            foreach(Activos act in usuario.ListaActivos)
+            {
+                if(act.Distintivo == activo.Distintivo && cantidadAVender > activo.Cv)
+                {
+                    verificar = false;
+                    break;
+                }
+            }
+            
+            
+            if (usuario.ListaActivos.Count <= 0)
+            {
+                verificar = false;
+            }
+
+
+
+            return verificar;
+        }
 
 
         public void ComprarActivo(Usuario usuario, Activos activo,string cantidadCompra, string precioCompra)
@@ -228,10 +254,8 @@ namespace Biblioteca_Clases
 
             int cC = int.Parse(cantidadCompra);
             float pC = float.Parse(precioCompra);
-            List<Activos> nuevaListaActivos = new List<Activos>();
             Activos activoComprado = CrearActivoCompradoVendido(usuario, activo, cC, precioCompra, cantidadCompra, precioCompra);
           
-            
             foreach(Usuario user in listaUsuarios)
             {
                     
@@ -242,11 +266,11 @@ namespace Biblioteca_Clases
                         act.Cv -= cC;
                         if(act.Moneda == ETipoMoneda.USD)
                         {
-                            user.sueldoDolares += pC;
+                            user.sueldoDolares += pC*cC;
                         }
                         else
                         {
-                            user.Sueldo += pC;
+                            user.Sueldo += pC * cC;
                         }
 
                     }
@@ -257,11 +281,11 @@ namespace Biblioteca_Clases
                     user.listaActivos.Add(activoComprado);
                     if(activo.Moneda == ETipoMoneda.USD)
                     {
-                        user.sueldoDolares -= pC;
+                        user.sueldoDolares -= pC*cC;
                     }
                     else
                     {
-                        user.sueldo -= pC;
+                        user.sueldo -= pC*cC;
                     }
                 }
                 
@@ -270,6 +294,14 @@ namespace Biblioteca_Clases
 
             serializadorJson2.Serializar(listaUsuarios);
         }
+
+        
+
+
+
+
+
+
 
         public Usuario VenderActivoPropio(Usuario usuario, Activos activo, string cantidadCompra, string precioCompra,string cantidadVenta, string precioDeVenta)
         {
@@ -307,54 +339,60 @@ namespace Biblioteca_Clases
             serializadorJson2.Serializar(listaUsuarios);
             return usuario;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public void VenderActivoAUsuario(Usuario usuario, Activos activo,string cantidadVenta, string precioDeVenta)
         {
             var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
             var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
 
             listaUsuarios = serializadorJson.Deserializar();
-            List<Activos> nuevaListaActivos = new List<Activos>();
             int cV = int.Parse(cantidadVenta);
             Activos activoAVender = CrearActivoCompradoVendido(usuario, activo, cV, precioDeVenta, cantidadVenta, precioDeVenta);
             foreach(Usuario user in listaUsuarios)
             {
                 foreach(Activos act in user.ListaActivosVentas) 
                 {
-                    if(activo.Distintivo == user.dni && act.Moneda == activo.Moneda)
+                    if (activo.Distintivo == user.dni && act.Moneda == activo.Moneda && activo.Empresa == act.Empresa)
                     {
                         act.Cc -= cV;
+                        user.ListaActivos.Add(activoAVender);
+                        if(act.Cc <= 0 && act.Cv <= 0)
+                        {
+                            user.ListaActivosVentas.Remove(act);
+                        }
+                        if(act.Moneda == ETipoMoneda.USD)
+                        {
+                            user.SueldoDolares -= float.Parse(precioDeVenta);
+                        }
+                        else
+                        {
+                            user.Sueldo -= float.Parse(precioDeVenta);
+                        }
                         break;
                     }
                     
+                }
+
+                if(user.Dni == usuario.Dni)
+                {
+                    foreach(Activos act in user.ListaActivos)
+                    {
+                        if(act.Moneda == activo.Moneda && activo.Empresa == act.Empresa)
+                        {
+                            act.Cv -= cV;
+                            if(act.Cv <= 0)
+                            {
+                                act.Cv = 0;
+                            }
+                        }
+                    }
+                    if (activo.Moneda == ETipoMoneda.USD)
+                    {
+                        user.SueldoDolares += float.Parse(precioDeVenta);
+                    }
+                    else
+                    {
+                        user.Sueldo += float.Parse(precioDeVenta);
+                    }
                 }
 
             }
@@ -385,7 +423,6 @@ namespace Biblioteca_Clases
             }
             return verificar;
         }
-
         private Activos CrearActivoCompradoVendido(Usuario usuario, Activos activo, int cantidadCompra, string precioCompra,string cantidadVenta, string precioVenta) 
         {
             int cV = int.Parse(cantidadVenta);
@@ -412,7 +449,6 @@ namespace Biblioteca_Clases
             return activoAVender;
 
         }
-
 
 
 

@@ -28,109 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnComprar = new Button();
-            btnCancelar = new Button();
             dgvMercadoSecundario = new DataGridView();
-            txtPrecioFinal = new TextBox();
-            btnActualizarPrecio = new Button();
-            btnComprarActivo = new Button();
-            btnVenderActivos = new Button();
             lblPrecio = new Label();
             lblCantidad = new Label();
             txtPrecio = new TextBox();
             txtCantidad = new TextBox();
-            btnVender = new Button();
             cmbTipoMonedas = new ComboBox();
+            btnVender = new Button();
+            btnCancelar = new Button();
+            btnComprar = new Button();
+            btnVenderActivos = new Button();
+            btnComprarActivo = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMercadoSecundario).BeginInit();
             SuspendLayout();
-            // 
-            // btnComprar
-            // 
-            btnComprar.Location = new Point(454, 347);
-            btnComprar.Name = "btnComprar";
-            btnComprar.Size = new Size(235, 23);
-            btnComprar.TabIndex = 0;
-            btnComprar.Text = "Comprar";
-            btnComprar.UseVisualStyleBackColor = true;
-            btnComprar.Click += btnComprar_Click;
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.Location = new Point(120, 347);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(235, 23);
-            btnCancelar.TabIndex = 6;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
             // 
             // dgvMercadoSecundario
             // 
             dgvMercadoSecundario.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMercadoSecundario.Location = new Point(120, 91);
+            dgvMercadoSecundario.Location = new Point(35, 91);
             dgvMercadoSecundario.Name = "dgvMercadoSecundario";
             dgvMercadoSecundario.RowTemplate.Height = 25;
-            dgvMercadoSecundario.Size = new Size(563, 150);
+            dgvMercadoSecundario.ScrollBars = ScrollBars.None;
+            dgvMercadoSecundario.Size = new Size(742, 150);
             dgvMercadoSecundario.TabIndex = 8;
-            // 
-            // txtPrecioFinal
-            // 
-            txtPrecioFinal.Location = new Point(520, 272);
-            txtPrecioFinal.Name = "txtPrecioFinal";
-            txtPrecioFinal.Size = new Size(163, 23);
-            txtPrecioFinal.TabIndex = 9;
-            // 
-            // btnActualizarPrecio
-            // 
-            btnActualizarPrecio.Location = new Point(551, 301);
-            btnActualizarPrecio.Name = "btnActualizarPrecio";
-            btnActualizarPrecio.Size = new Size(109, 23);
-            btnActualizarPrecio.TabIndex = 11;
-            btnActualizarPrecio.Text = "Calcular precio";
-            btnActualizarPrecio.UseVisualStyleBackColor = true;
-            btnActualizarPrecio.Click += btnActualizarPrecio_Click;
-            // 
-            // btnComprarActivo
-            // 
-            btnComprarActivo.Location = new Point(121, 24);
-            btnComprarActivo.Name = "btnComprarActivo";
-            btnComprarActivo.Size = new Size(234, 23);
-            btnComprarActivo.TabIndex = 12;
-            btnComprarActivo.Text = "Compra";
-            btnComprarActivo.UseVisualStyleBackColor = true;
-            btnComprarActivo.Click += btnComprarActivo_Click;
-            // 
-            // btnVenderActivos
-            // 
-            btnVenderActivos.Location = new Point(449, 24);
-            btnVenderActivos.Name = "btnVenderActivos";
-            btnVenderActivos.Size = new Size(235, 23);
-            btnVenderActivos.TabIndex = 13;
-            btnVenderActivos.Text = "Venta";
-            btnVenderActivos.UseVisualStyleBackColor = true;
-            btnVenderActivos.Click += btnVenderActivos_Click;
             // 
             // lblPrecio
             // 
             lblPrecio.AutoSize = true;
-            lblPrecio.Location = new Point(320, 244);
+            lblPrecio.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblPrecio.ForeColor = Color.LightGray;
+            lblPrecio.Location = new Point(484, 244);
             lblPrecio.Name = "lblPrecio";
-            lblPrecio.Size = new Size(43, 15);
+            lblPrecio.Size = new Size(65, 15);
             lblPrecio.TabIndex = 68;
             lblPrecio.Text = "Precio:";
             // 
             // lblCantidad
             // 
             lblCantidad.AutoSize = true;
-            lblCantidad.Location = new Point(121, 244);
+            lblCantidad.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblCantidad.ForeColor = Color.LightGray;
+            lblCantidad.Location = new Point(161, 244);
             lblCantidad.Name = "lblCantidad";
-            lblCantidad.Size = new Size(58, 15);
+            lblCantidad.Size = new Size(85, 15);
             lblCantidad.TabIndex = 65;
             lblCantidad.Text = "Cantidad:";
             // 
             // txtPrecio
             // 
-            txtPrecio.Location = new Point(320, 272);
+            txtPrecio.Location = new Point(484, 272);
             txtPrecio.Name = "txtPrecio";
             txtPrecio.PlaceholderText = "Precio";
             txtPrecio.Size = new Size(163, 23);
@@ -138,21 +84,11 @@
             // 
             // txtCantidad
             // 
-            txtCantidad.Location = new Point(120, 272);
+            txtCantidad.Location = new Point(161, 272);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.PlaceholderText = "Cantidad";
             txtCantidad.Size = new Size(163, 23);
             txtCantidad.TabIndex = 55;
-            // 
-            // btnVender
-            // 
-            btnVender.Location = new Point(454, 347);
-            btnVender.Name = "btnVender";
-            btnVender.Size = new Size(237, 23);
-            btnVender.TabIndex = 69;
-            btnVender.Text = "Vender";
-            btnVender.UseVisualStyleBackColor = true;
-            btnVender.Click += btnVender_Click;
             // 
             // cmbTipoMonedas
             // 
@@ -165,25 +101,122 @@
             cmbTipoMonedas.Text = "Moneda";
             cmbTipoMonedas.SelectedIndexChanged += cmbTipoMonedas_SelectedIndexChanged;
             // 
+            // btnVender
+            // 
+            btnVender.BackColor = Color.FromArgb(40, 40, 40);
+            btnVender.Cursor = Cursors.Hand;
+            btnVender.FlatAppearance.BorderSize = 0;
+            btnVender.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnVender.FlatStyle = FlatStyle.Flat;
+            btnVender.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnVender.ForeColor = Color.LightGray;
+            btnVender.ImageAlign = ContentAlignment.MiddleLeft;
+            btnVender.Location = new Point(448, 330);
+            btnVender.Name = "btnVender";
+            btnVender.Padding = new Padding(9, 0, 0, 0);
+            btnVender.Size = new Size(235, 36);
+            btnVender.TabIndex = 71;
+            btnVender.Text = "Vender";
+            btnVender.UseVisualStyleBackColor = false;
+            btnVender.Click += btnVender_Click;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.BackColor = Color.FromArgb(40, 40, 40);
+            btnCancelar.Cursor = Cursors.Hand;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCancelar.ForeColor = Color.LightGray;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(120, 330);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Padding = new Padding(9, 0, 0, 0);
+            btnCancelar.Size = new Size(235, 36);
+            btnCancelar.TabIndex = 72;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnComprar
+            // 
+            btnComprar.BackColor = Color.FromArgb(40, 40, 40);
+            btnComprar.Cursor = Cursors.Hand;
+            btnComprar.FlatAppearance.BorderSize = 0;
+            btnComprar.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnComprar.FlatStyle = FlatStyle.Flat;
+            btnComprar.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnComprar.ForeColor = Color.LightGray;
+            btnComprar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnComprar.Location = new Point(448, 330);
+            btnComprar.Name = "btnComprar";
+            btnComprar.Padding = new Padding(9, 0, 0, 0);
+            btnComprar.Size = new Size(235, 36);
+            btnComprar.TabIndex = 73;
+            btnComprar.Text = "Comprar";
+            btnComprar.UseVisualStyleBackColor = false;
+            btnComprar.Click += btnComprar_Click;
+            // 
+            // btnVenderActivos
+            // 
+            btnVenderActivos.BackColor = Color.FromArgb(40, 40, 40);
+            btnVenderActivos.Cursor = Cursors.Hand;
+            btnVenderActivos.FlatAppearance.BorderSize = 0;
+            btnVenderActivos.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnVenderActivos.FlatStyle = FlatStyle.Flat;
+            btnVenderActivos.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnVenderActivos.ForeColor = Color.LightGray;
+            btnVenderActivos.ImageAlign = ContentAlignment.MiddleLeft;
+            btnVenderActivos.Location = new Point(516, 11);
+            btnVenderActivos.Name = "btnVenderActivos";
+            btnVenderActivos.Padding = new Padding(9, 0, 0, 0);
+            btnVenderActivos.Size = new Size(235, 36);
+            btnVenderActivos.TabIndex = 74;
+            btnVenderActivos.Text = "Venta";
+            btnVenderActivos.UseVisualStyleBackColor = false;
+            btnVenderActivos.Click += btnVenderActivos_Click;
+            // 
+            // btnComprarActivo
+            // 
+            btnComprarActivo.BackColor = Color.FromArgb(40, 40, 40);
+            btnComprarActivo.Cursor = Cursors.Hand;
+            btnComprarActivo.FlatAppearance.BorderSize = 0;
+            btnComprarActivo.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnComprarActivo.FlatStyle = FlatStyle.Flat;
+            btnComprarActivo.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnComprarActivo.ForeColor = Color.LightGray;
+            btnComprarActivo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnComprarActivo.Location = new Point(72, 11);
+            btnComprarActivo.Name = "btnComprarActivo";
+            btnComprarActivo.Padding = new Padding(9, 0, 0, 0);
+            btnComprarActivo.Size = new Size(235, 36);
+            btnComprarActivo.TabIndex = 75;
+            btnComprarActivo.Text = "Compra";
+            btnComprarActivo.UseVisualStyleBackColor = false;
+            btnComprarActivo.Click += btnComprarActivo_Click;
+            // 
             // Formulario_Invertir
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(819, 407);
-            Controls.Add(cmbTipoMonedas);
+            BackColor = Color.FromArgb(23, 21, 32);
+            ClientSize = new Size(800, 407);
+            Controls.Add(btnComprarActivo);
+            Controls.Add(btnVenderActivos);
+            Controls.Add(btnComprar);
+            Controls.Add(btnCancelar);
             Controls.Add(btnVender);
+            Controls.Add(cmbTipoMonedas);
             Controls.Add(lblPrecio);
             Controls.Add(lblCantidad);
             Controls.Add(txtPrecio);
             Controls.Add(txtCantidad);
-            Controls.Add(btnVenderActivos);
-            Controls.Add(btnComprarActivo);
-            Controls.Add(btnActualizarPrecio);
-            Controls.Add(txtPrecioFinal);
             Controls.Add(dgvMercadoSecundario);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnComprar);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Invertir";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Confirmar";
             Load += Formulario_Invertir_Load;
             ((System.ComponentModel.ISupportInitialize)dgvMercadoSecundario).EndInit();
@@ -192,19 +225,16 @@
         }
 
         #endregion
-
-        private Button btnComprar;
-        private Button btnCancelar;
         private DataGridView dgvMercadoSecundario;
-        private TextBox txtPrecioFinal;
-        private Button btnActualizarPrecio;
-        private Button btnComprarActivo;
-        private Button btnVenderActivos;
         private Label lblPrecio;
         private Label lblCantidad;
         private TextBox txtPrecio;
         private TextBox txtCantidad;
-        private Button btnVender;
         private ComboBox cmbTipoMonedas;
+        private Button btnVender;
+        private Button btnCancelar;
+        private Button btnComprar;
+        private Button btnVenderActivos;
+        private Button btnComprarActivo;
     }
 }

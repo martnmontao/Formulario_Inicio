@@ -30,72 +30,65 @@ namespace Formulario_Inicio
         private void Formulario_Activos_Usuario_Load(object sender, EventArgs e)
         {
             dgvActivosUsuario.DataSource = usuario.ListaActivos;
-            txtNombreEmpresa.AutoCompleteCustomSource = CargarDatos();
-            AlternarTextBox(true);
+            
 
-
-            if (usuario.Empresa == false)
-            {
-                txtIntereses.Visible = false;
-            }
+            
         }
 
-        private AutoCompleteStringCollection CargarDatos()
-        {
-            var serializarJsonActivos = new SerializadorJSON<Activos>(pathActivos);
-
-            List<Activos> listaActivos = serializarJsonActivos.Deserializar();
-            AutoCompleteStringCollection datos = new AutoCompleteStringCollection();
-            foreach (Activos act in listaActivos)
-            {
-                datos.Add(act.Empresa);
-            }
-            return datos;
-        }
 
         private void btnVender_Click(object sender, EventArgs e)
         {
 
-            Administrador admin = new Administrador();
-            if (usuario.Empresa == false)
+            try
             {
-                if (verificarActivosEnUsuario())
+                Administrador admin = new Administrador();
+                int cantidadAVender = int.Parse(txtCantidadVenta.Text);
+                Activos activo = null;
+                string distintivo;
+
+                if (usuario.Empresa == false)
                 {
-                    Activos activo = null;
-                    string empresa;
-                    empresa = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[8].Value.ToString();
+                    distintivo = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[8].Value.ToString();
 
-                    activo = usuario.ObtenerActivo(empresa, tipoMoneda);
-
-                    usuario.VenderActivoPropio(usuario, activo, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text);
-                    MostrarActivos(usuario.ListaActivosVentas);
-                }
-                else
-                {
-                    MessageBox.Show("No posee activos en su cuenta");
-                }
-
-
-            }
-            else
-            {
-                try
-                {
-                    txtIntereses.Text = "1";
-                    if (moneda == "ARG" || moneda == "USD")
+                    activo = usuario.ObtenerActivo(distintivo, tipoMoneda);
+                    if (usuario.verificarActivosEnUsuario(usuario, cantidadAVender, activo))
                     {
-                        admin.CrearActivo(usuario, tipoActivo, txtNombreEmpresa.Text, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, tipoMoneda, txtIntereses.Text, usuario.Dni, pathActivos);
+
+                        usuario.VenderActivoPropio(usuario, activo, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text);
+                        MostrarActivos(usuario.ListaActivosVentas);
                     }
                     else
                     {
-                        MessageBox.Show("El tipo de moneda del activo debe ser en 'USD' o en 'ARG'");
+                        MessageBox.Show("No posee esa cantidad de activos en su cuenta");
                     }
+
+
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("No se han ingresado datos válidos");
+                    try
+                    {
+                        txtIntereses.Text = "1";
+                        if (moneda == "ARG" || moneda == "USD")
+                        {
+                            admin.CrearActivo(usuario, tipoActivo, txtNombreEmpresa.Text, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, tipoMoneda, txtIntereses.Text, usuario.Dni, pathActivos);
+                        }
+                        else
+                        {
+                            MessageBox.Show("El tipo de moneda del activo debe ser en 'USD' o en 'ARG'");
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("No se han ingresado datos válidos");
+                    }
+
                 }
 
+            }
+            catch
+            {
+                MessageBox.Show("No posee activos para vender");
             }
 
 
@@ -106,19 +99,38 @@ namespace Formulario_Inicio
         private void cmbActivo_SelectedIndexChanged(object sender, EventArgs e)
         {
             int indice = cmbActivo.SelectedIndex;
-
-            btnVender.Visible = true;
+            AlternarTextBox(false);
             Administrador admin = new Administrador();
             tipoActivo = admin.IndicarTipoActivo(indice);
-            if (tipoActivo == ETipoActivo.Bono)
-            {
-                txtIntereses.Visible = true;
-            }
-            else
-            {
-                txtIntereses.Visible = false;
 
+            switch (tipoActivo)
+            {
+                case ETipoActivo.Accion:
+                    AlternarTextBox(true);
+                    txtIntereses.Visible = false;
+                    lblIntereses.Visible = false;
+                    break;
+                case ETipoActivo.Cedear:
+                    AlternarTextBox(true);
+                    txtIntereses.Visible = false;
+                    lblIntereses.Visible = false;
+                    break;
+                case ETipoActivo.Bono:
+                    AlternarTextBox(true);
+                    if(usuario.Empresa == false)
+                    {
+                        txtIntereses.Visible = false;
+                        lblIntereses.Visible = false;
+                    }
+                    break;
             }
+
+            if (usuario.Empresa == false)
+            {
+                txtNombreEmpresa.Visible = false;
+                lblEmpresa.Visible = false;
+            }
+
         }
         private void MostrarActivos(List<Activos> listaActivos)
         {
@@ -134,6 +146,8 @@ namespace Formulario_Inicio
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
+            Administrador admin = new Administrador();
+            usuario = usuario.DevolverUsuarios(usuario);
             dgvActivosUsuario.DataSource = usuario.ListaActivosVentas;
         }
 
@@ -163,36 +177,7 @@ namespace Formulario_Inicio
 
         }
 
-        private void btnGenerarOferta_Click(object sender, EventArgs e)
-        {
-            if (usuario.Empresa == false)
-            {
-                lblCantidadCompra.Visible = true;
-                lblPrecioCompra.Visible = true;
-                lblEmpresa.Visible = true;
-                lblMoneda.Visible = true;
-                lblCantidadVenta.Visible = false;
-                lblPrecioVenta.Visible = false;
-                txtMoneda.Visible = true;
-                txtNombreEmpresa.Visible = true;
-                txtCantidadCompra.Visible = true;
-                txtPrecioCompra.Visible = true;
-                txtCantidadVenta.Visible = false;
-                txtPrecioVenta.Visible = false;
-            }
-            else
-            {
-
-            }
-
-            btnVender.Visible = false;
-
-
-        }
-
-
-
-
+      
         private void AlternarTextBox(bool alternar)
         {
             this.txtCantidadVenta.Visible = alternar;
@@ -209,17 +194,10 @@ namespace Formulario_Inicio
             this.lblPrecioCompra.Visible = alternar;
             this.lblPrecioVenta.Visible = alternar;
             this.txtIntereses.Visible = alternar;
+            this.btnVender.Visible = alternar;
         }
 
-        private bool verificarActivosEnUsuario()
-        {
-            bool verificar = true;
-            if (usuario.ListaActivos.Count <= 0)
-            {
-                verificar = false;
-            }
-            return verificar;
-        }
+        
 
         private void cmbTipoMonedas_SelectedIndexChanged(object sender, EventArgs e)
         {

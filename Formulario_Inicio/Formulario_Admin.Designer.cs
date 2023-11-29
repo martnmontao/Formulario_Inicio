@@ -36,8 +36,8 @@
             btnActualizarDolar = new Button();
             txtValorCompraDolar = new TextBox();
             btnUsuarios = new Button();
-            btnActivos = new Button();
             txtValorVentaDolar = new TextBox();
+            btnSalir = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnLogoUsuario).BeginInit();
@@ -45,7 +45,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(159, 211, 213);
+            panel1.BackColor = Color.FromArgb(23, 21, 39);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(lblNombreUsuario);
             panel1.Controls.Add(btnLogoUsuario);
@@ -70,6 +70,7 @@
             // 
             lblNombreUsuario.AutoSize = true;
             lblNombreUsuario.Font = new Font("Copperplate Gothic Bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombreUsuario.ForeColor = Color.LightGray;
             lblNombreUsuario.Location = new Point(127, 18);
             lblNombreUsuario.Name = "lblNombreUsuario";
             lblNombreUsuario.Size = new Size(95, 21);
@@ -87,17 +88,20 @@
             // 
             // btnActualizarDolar
             // 
-            btnActualizarDolar.Location = new Point(245, 398);
+            btnActualizarDolar.BackColor = Color.FromArgb(40, 40, 40);
+            btnActualizarDolar.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnActualizarDolar.ForeColor = Color.LightGray;
+            btnActualizarDolar.Location = new Point(212, 339);
             btnActualizarDolar.Name = "btnActualizarDolar";
-            btnActualizarDolar.Size = new Size(106, 23);
+            btnActualizarDolar.Size = new Size(272, 43);
             btnActualizarDolar.TabIndex = 3;
             btnActualizarDolar.Text = "Actualizar dolar";
-            btnActualizarDolar.UseVisualStyleBackColor = true;
+            btnActualizarDolar.UseVisualStyleBackColor = false;
             btnActualizarDolar.Click += btnActualizarDolar_Click;
             // 
             // txtValorCompraDolar
             // 
-            txtValorCompraDolar.Location = new Point(127, 262);
+            txtValorCompraDolar.Location = new Point(127, 211);
             txtValorCompraDolar.Name = "txtValorCompraDolar";
             txtValorCompraDolar.PlaceholderText = "Valor compra dolar";
             txtValorCompraDolar.Size = new Size(443, 23);
@@ -113,48 +117,48 @@
             btnUsuarios.FlatStyle = FlatStyle.Flat;
             btnUsuarios.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnUsuarios.ForeColor = Color.LightGray;
-            btnUsuarios.Location = new Point(388, 143);
+            btnUsuarios.Location = new Point(127, 124);
             btnUsuarios.Name = "btnUsuarios";
-            btnUsuarios.Size = new Size(182, 40);
+            btnUsuarios.Size = new Size(443, 40);
             btnUsuarios.TabIndex = 3;
             btnUsuarios.Text = "Usuarios";
             btnUsuarios.UseVisualStyleBackColor = false;
             btnUsuarios.Click += btnUsuarios_Click_1;
             // 
-            // btnActivos
-            // 
-            btnActivos.BackColor = Color.FromArgb(40, 40, 40);
-            btnActivos.Cursor = Cursors.Hand;
-            btnActivos.FlatAppearance.BorderSize = 0;
-            btnActivos.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
-            btnActivos.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
-            btnActivos.FlatStyle = FlatStyle.Flat;
-            btnActivos.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnActivos.ForeColor = Color.LightGray;
-            btnActivos.Location = new Point(127, 143);
-            btnActivos.Name = "btnActivos";
-            btnActivos.Size = new Size(182, 40);
-            btnActivos.TabIndex = 4;
-            btnActivos.Text = "Activos";
-            btnActivos.UseVisualStyleBackColor = false;
-            btnActivos.Click += btnActivos_Click;
-            // 
             // txtValorVentaDolar
             // 
-            txtValorVentaDolar.Location = new Point(127, 310);
+            txtValorVentaDolar.Location = new Point(127, 284);
             txtValorVentaDolar.Name = "txtValorVentaDolar";
             txtValorVentaDolar.PlaceholderText = "Valor venta dolar";
             txtValorVentaDolar.Size = new Size(443, 23);
             txtValorVentaDolar.TabIndex = 12;
             // 
+            // btnSalir
+            // 
+            btnSalir.BackColor = Color.FromArgb(40, 40, 40);
+            btnSalir.Cursor = Cursors.Hand;
+            btnSalir.FlatAppearance.BorderSize = 0;
+            btnSalir.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
+            btnSalir.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            btnSalir.FlatStyle = FlatStyle.Flat;
+            btnSalir.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnSalir.ForeColor = Color.LightGray;
+            btnSalir.Location = new Point(12, 466);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(149, 29);
+            btnSalir.TabIndex = 13;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = false;
+            btnSalir.Click += btnSalir_Click;
+            // 
             // Formulario_Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(199, 233, 234);
-            ClientSize = new Size(684, 596);
+            BackColor = Color.FromArgb(23, 21, 24);
+            ClientSize = new Size(684, 507);
+            Controls.Add(btnSalir);
             Controls.Add(txtValorVentaDolar);
-            Controls.Add(btnActivos);
             Controls.Add(txtValorCompraDolar);
             Controls.Add(btnUsuarios);
             Controls.Add(btnActualizarDolar);
@@ -173,7 +177,7 @@
 
         #endregion
         private Panel panelIzquierdo;
-        private Button button1;
+        private Button btnSalir;
         private Panel panel1;
         private PictureBox btnLogoUsuario;
         private PictureBox pictureBox1;
@@ -182,7 +186,6 @@
         private TextBox txtValorCompraDolar;
         private Label lblNombreUsuario;
         private Button btnUsuarios;
-        private Button btnActivos;
         private TextBox txtValorVentaDolar;
     }
 }

@@ -46,7 +46,7 @@
             lblInformacion.AutoSize = true;
             lblInformacion.BackColor = Color.Transparent;
             lblInformacion.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblInformacion.ForeColor = Color.FromArgb(79, 88, 88);
+            lblInformacion.ForeColor = Color.LightGray;
             lblInformacion.Location = new Point(371, 9);
             lblInformacion.Name = "lblInformacion";
             lblInformacion.Size = new Size(283, 33);
@@ -58,7 +58,7 @@
             lblDescripcion.AutoSize = true;
             lblDescripcion.BackColor = Color.Transparent;
             lblDescripcion.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDescripcion.ForeColor = Color.FromArgb(79, 88, 88);
+            lblDescripcion.ForeColor = Color.LightGray;
             lblDescripcion.Location = new Point(205, 94);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(584, 16);
@@ -69,7 +69,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.FromArgb(79, 88, 88);
+            label1.ForeColor = Color.LightGray;
             label1.Location = new Point(117, 110);
             label1.Name = "label1";
             label1.Size = new Size(799, 16);
@@ -80,7 +80,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = Color.FromArgb(79, 88, 88);
+            label2.ForeColor = Color.LightGray;
             label2.Location = new Point(12, 126);
             label2.Name = "label2";
             label2.Size = new Size(1025, 16);
@@ -91,7 +91,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Copperplate Gothic Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.FromArgb(79, 88, 88);
+            label3.ForeColor = Color.LightGray;
             label3.Location = new Point(293, 407);
             label3.Name = "label3";
             label3.Size = new Size(430, 30);
@@ -109,7 +109,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.FromArgb(159, 211, 213);
+            panel2.BackColor = Color.FromArgb(40, 40, 40);
             panel2.Controls.Add(lblInformacion);
             panel2.Controls.Add(btnVolver);
             panel2.Dock = DockStyle.Top;
@@ -134,7 +134,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(199, 233, 234);
+            BackColor = Color.FromArgb(23, 21, 39);
             ClientSize = new Size(1041, 518);
             Controls.Add(panel2);
             Controls.Add(panel1);

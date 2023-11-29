@@ -38,32 +38,41 @@
             btnConfirmar = new Button();
             lblValorVenta = new Label();
             lblValorCompra = new Label();
+            btnVolver = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)tkbMontoDolares).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnVolver).BeginInit();
             SuspendLayout();
             // 
             // btnVenderMEP
             // 
-            btnVenderMEP.Location = new Point(57, 50);
+            btnVenderMEP.BackColor = Color.FromArgb(40, 40, 40);
+            btnVenderMEP.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnVenderMEP.ForeColor = Color.LightGray;
+            btnVenderMEP.Location = new Point(45, 64);
             btnVenderMEP.Name = "btnVenderMEP";
-            btnVenderMEP.Size = new Size(176, 23);
+            btnVenderMEP.Size = new Size(176, 42);
             btnVenderMEP.TabIndex = 0;
             btnVenderMEP.Text = "Vender";
-            btnVenderMEP.UseVisualStyleBackColor = true;
+            btnVenderMEP.UseVisualStyleBackColor = false;
             btnVenderMEP.Click += btnVenderMEP_Click;
             // 
             // btnComprarMEP
             // 
-            btnComprarMEP.Location = new Point(372, 50);
+            btnComprarMEP.BackColor = Color.FromArgb(40, 40, 40);
+            btnComprarMEP.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnComprarMEP.ForeColor = Color.LightGray;
+            btnComprarMEP.Location = new Point(337, 64);
             btnComprarMEP.Name = "btnComprarMEP";
-            btnComprarMEP.Size = new Size(178, 23);
+            btnComprarMEP.Size = new Size(178, 42);
             btnComprarMEP.TabIndex = 1;
             btnComprarMEP.Text = "Comprar";
-            btnComprarMEP.UseVisualStyleBackColor = true;
+            btnComprarMEP.UseVisualStyleBackColor = false;
             btnComprarMEP.Click += btnComprarMEP_Click;
             // 
             // tkbMontoDolares
             // 
-            tkbMontoDolares.Location = new Point(74, 180);
+            tkbMontoDolares.BackColor = Color.FromArgb(40, 40, 40);
+            tkbMontoDolares.Location = new Point(63, 199);
             tkbMontoDolares.Maximum = 10000;
             tkbMontoDolares.Name = "tkbMontoDolares";
             tkbMontoDolares.Size = new Size(412, 45);
@@ -73,71 +82,98 @@
             // lblValorDolares
             // 
             lblValorDolares.AutoSize = true;
-            lblValorDolares.Location = new Point(77, 132);
+            lblValorDolares.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblValorDolares.ForeColor = Color.LightGray;
+            lblValorDolares.Location = new Point(63, 162);
             lblValorDolares.Name = "lblValorDolares";
-            lblValorDolares.Size = new Size(103, 15);
+            lblValorDolares.Size = new Size(115, 17);
             lblValorDolares.TabIndex = 3;
             lblValorDolares.Text = "Monto en dólares:";
             // 
             // lblMontoPesos
             // 
             lblMontoPesos.AutoSize = true;
-            lblMontoPesos.Location = new Point(77, 307);
+            lblMontoPesos.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMontoPesos.ForeColor = Color.LightGray;
+            lblMontoPesos.Location = new Point(63, 291);
             lblMontoPesos.Name = "lblMontoPesos";
-            lblMontoPesos.Size = new Size(95, 15);
+            lblMontoPesos.Size = new Size(105, 17);
             lblMontoPesos.TabIndex = 4;
             lblMontoPesos.Text = "Monto en pesos:";
             // 
             // txtValorEnPesos
             // 
-            txtValorEnPesos.Location = new Point(77, 341);
+            txtValorEnPesos.Location = new Point(63, 325);
             txtValorEnPesos.Name = "txtValorEnPesos";
             txtValorEnPesos.ReadOnly = true;
-            txtValorEnPesos.Size = new Size(409, 23);
+            txtValorEnPesos.Size = new Size(412, 23);
             txtValorEnPesos.TabIndex = 5;
             // 
             // lblDolaresUsuario
             // 
             lblDolaresUsuario.AutoSize = true;
-            lblDolaresUsuario.Location = new Point(77, 244);
+            lblDolaresUsuario.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDolaresUsuario.ForeColor = Color.LightGray;
+            lblDolaresUsuario.Location = new Point(63, 247);
             lblDolaresUsuario.Name = "lblDolaresUsuario";
-            lblDolaresUsuario.Size = new Size(69, 15);
+            lblDolaresUsuario.Size = new Size(76, 17);
             lblDolaresUsuario.TabIndex = 6;
             lblDolaresUsuario.Text = "Disponible: ";
             // 
             // btnConfirmar
             // 
-            btnConfirmar.Location = new Point(188, 393);
+            btnConfirmar.BackColor = Color.FromArgb(40, 40, 40);
+            btnConfirmar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnConfirmar.ForeColor = Color.LightGray;
+            btnConfirmar.Location = new Point(63, 379);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(163, 23);
+            btnConfirmar.Size = new Size(415, 34);
             btnConfirmar.TabIndex = 7;
             btnConfirmar.Text = "Confirmar";
-            btnConfirmar.UseVisualStyleBackColor = true;
+            btnConfirmar.UseVisualStyleBackColor = false;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
             // lblValorVenta
             // 
             lblValorVenta.AutoSize = true;
-            lblValorVenta.Location = new Point(121, 95);
+            lblValorVenta.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblValorVenta.ForeColor = Color.LightGray;
+            lblValorVenta.Location = new Point(86, 126);
             lblValorVenta.Name = "lblValorVenta";
-            lblValorVenta.Size = new Size(68, 15);
+            lblValorVenta.Size = new Size(82, 17);
             lblValorVenta.TabIndex = 8;
             lblValorVenta.Text = "Valor venta:";
             // 
             // lblValorCompra
             // 
             lblValorCompra.AutoSize = true;
-            lblValorCompra.Location = new Point(436, 95);
+            lblValorCompra.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblValorCompra.ForeColor = Color.LightGray;
+            lblValorCompra.Location = new Point(382, 126);
             lblValorCompra.Name = "lblValorCompra";
-            lblValorCompra.Size = new Size(80, 15);
+            lblValorCompra.Size = new Size(93, 17);
             lblValorCompra.TabIndex = 9;
             lblValorCompra.Text = "Valor compra:";
+            // 
+            // btnVolver
+            // 
+            btnVolver.BackColor = Color.Transparent;
+            btnVolver.Image = Properties.Resources.botonVolver1;
+            btnVolver.Location = new Point(-1, 2);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(59, 50);
+            btnVolver.SizeMode = PictureBoxSizeMode.Zoom;
+            btnVolver.TabIndex = 10;
+            btnVolver.TabStop = false;
+            btnVolver.Click += btnVolver_Click;
             // 
             // Formulario_Dolar_Mep
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(594, 450);
+            BackColor = Color.FromArgb(21, 23, 39);
+            ClientSize = new Size(560, 450);
+            Controls.Add(btnVolver);
             Controls.Add(lblValorCompra);
             Controls.Add(lblValorVenta);
             Controls.Add(btnConfirmar);
@@ -148,11 +184,13 @@
             Controls.Add(tkbMontoDolares);
             Controls.Add(btnComprarMEP);
             Controls.Add(btnVenderMEP);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Formulario_Dolar_Mep";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario_Dolar_Mep";
             Load += Formulario_Dolar_Mep_Load;
             ((System.ComponentModel.ISupportInitialize)tkbMontoDolares).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnVolver).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -169,5 +207,6 @@
         private Button btnConfirmar;
         private Label lblValorVenta;
         private Label lblValorCompra;
+        private PictureBox btnVolver;
     }
 }

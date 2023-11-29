@@ -39,7 +39,7 @@ namespace Biblioteca_Clases
             {
                 if(stream != null)
                 {
-                    var xml = new XmlSerializer(typeof(List<T>));
+                    var xml = new XmlSerializer(typeof(T));
                     xml.Serialize(stream, datos);
                 }
             }

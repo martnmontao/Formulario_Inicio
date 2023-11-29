@@ -173,6 +173,16 @@ namespace Formulario_Inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoMovimientos {
+            get {
+                object obj = ResourceManager.GetObject("iconoMovimientos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconoVolver {
             get {
                 object obj = ResourceManager.GetObject("iconoVolver", resourceCulture);

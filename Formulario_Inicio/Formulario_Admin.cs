@@ -35,25 +35,20 @@ namespace Formulario_Inicio
 
         }
 
-        private void btnActivos_Click(object sender, EventArgs e)
-        {
-            Formulario_Administrar_Activos fAA = new Formulario_Administrar_Activos();
-            fAA.Show();
-            this.Hide();
-        }
-
         private void btnActualizarDolar_Click(object sender, EventArgs e)
         {
-            var serializadorJson = new SerializadorJSON<Administrador>(pathAdministrador);
+            var serializadorJson = new SerializadorJSON<List<Administrador>>(pathAdministrador);
             try
             {
+                List<Administrador> listaAdministrador = new List<Administrador>();
                 string a = txtValorCompraDolar.Text;
                 double valorDolarVenta = double.Parse(txtValorVentaDolar.Text);
                 double valorDolarCompra = double.Parse(txtValorCompraDolar.Text);
 
                 admin.ValorDolarCompra = valorDolarCompra;
                 admin.ValorDolarVenta = valorDolarVenta;
-                serializadorJson.Serializar(admin);
+                listaAdministrador.Add(admin);
+                serializadorJson.Serializar(listaAdministrador);
 
             }
             catch
@@ -62,6 +57,13 @@ namespace Formulario_Inicio
             }
 
 
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Formulario_Iniciar_Sesion fIS = new Formulario_Iniciar_Sesion();
+            fIS.Show();
         }
     }
 }

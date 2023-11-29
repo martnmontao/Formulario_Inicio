@@ -28,7 +28,6 @@ namespace Formulario_Inicio
         ETipoMoneda tipoMoneda;
         ETipoActivo tipoActivo;
 
-        Formulario_Ingresar_Sueldo fi = new Formulario_Ingresar_Sueldo();
 
         public Formulario_Inversiones(Usuario usuario) : this()
         {
@@ -66,40 +65,32 @@ namespace Formulario_Inicio
             {
                 case 0:
                     tipoActivo = ETipoActivo.Accion;
+
                     break;
                 case 1:
                     tipoActivo = ETipoActivo.Cedear;
+
                     break;
                 case 2:
                     tipoActivo = ETipoActivo.Bono;
+
                     break;
                 default:
                     tipoActivo = ETipoActivo.MEP;
+
                     break;
             }
-            listaActivos = admin.FiltrarPorActivos(tipoActivo, pathActivos);
+            listaActivos = admin.FiltrarPorActivos(tipoActivo);
             MostrarActivos(listaActivos);
         }
 
 
-        private void MostrarActivos(List<Activos> listaActivos)
-        {
-            try
-            {
-                dgvActivos.DataSource = listaActivos;
-            }
-            catch
-            {
-                MessageBox.Show("No hay activos.");
-            }
-        }
 
         private void btnInvertir_Click(object sender, EventArgs e)
         {
-            var serializadorJson = new SerializadorJSON<Activos>(pathActivos);
             string empresa;
             Activos activo;
-            List<Activos> listaActivos = serializadorJson.Deserializar();
+
             try
             {
                 tipoMoneda = (ETipoMoneda)dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[2].Value;
@@ -114,6 +105,17 @@ namespace Formulario_Inicio
             {
                 MessageBox.Show("No hay activos.");
             }
+
+        }
+
+        private void MostrarActivos(List<Activos> listaActivos)
+        {
+            dgvActivos.DataSource = listaActivos;
+
+        }
+        private void Formulario_Inversiones_Load(object sender, EventArgs e)
+        {
+
 
         }
 
