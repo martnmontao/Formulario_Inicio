@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formulario_Administrar_Usuarios));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
             btnVolver = new PictureBox();
             lblTitulo = new Label();
@@ -40,10 +41,28 @@
             gridUsuarios = new DataGridView();
             btnVerificarEmpresa = new Button();
             chkMostrarContraseña = new CheckBox();
-            btnMySql = new Button();
+            txtDocumento = new TextBox();
+            txtContraseña = new TextBox();
+            txtNombre = new TextBox();
+            btnModificarUsuario = new Button();
+            lblDocumento = new Label();
+            lblNombre = new Label();
+            lblContraseña = new Label();
+            txtID = new TextBox();
+            lblID = new Label();
+            gridUsuariosMySql = new DataGridView();
+            btnUsuariosMySql = new Button();
+            txtEmpresa = new TextBox();
+            lblEmpresa = new Label();
+            txtPesos = new TextBox();
+            txtDolares = new TextBox();
+            lblDolares = new Label();
+            lblPesos = new Label();
+            btnEliminarMySql = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnVolver).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridUsuarios).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridUsuariosMySql).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -54,7 +73,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(757, 51);
+            panel1.Size = new Size(1452, 51);
             panel1.TabIndex = 0;
             // 
             // btnVolver
@@ -73,7 +92,7 @@
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Copperplate Gothic Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblTitulo.ForeColor = Color.LightGray;
-            lblTitulo.Location = new Point(208, 9);
+            lblTitulo.Location = new Point(509, 17);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(296, 33);
             lblTitulo.TabIndex = 0;
@@ -84,11 +103,11 @@
             btnCargarUsuarios.BackColor = Color.FromArgb(40, 40, 40);
             btnCargarUsuarios.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnCargarUsuarios.ForeColor = Color.LightGray;
-            btnCargarUsuarios.Location = new Point(79, 555);
+            btnCargarUsuarios.Location = new Point(57, 555);
             btnCargarUsuarios.Name = "btnCargarUsuarios";
-            btnCargarUsuarios.Size = new Size(144, 44);
+            btnCargarUsuarios.Size = new Size(228, 44);
             btnCargarUsuarios.TabIndex = 2;
-            btnCargarUsuarios.Text = "Usuarios";
+            btnCargarUsuarios.Text = "Usuarios JSON";
             btnCargarUsuarios.UseVisualStyleBackColor = false;
             btnCargarUsuarios.Click += btnCargarUsuarios_Click;
             // 
@@ -97,9 +116,9 @@
             btnValidarUsuarios.BackColor = Color.FromArgb(40, 40, 40);
             btnValidarUsuarios.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnValidarUsuarios.ForeColor = Color.LightGray;
-            btnValidarUsuarios.Location = new Point(196, 605);
+            btnValidarUsuarios.Location = new Point(464, 621);
             btnValidarUsuarios.Name = "btnValidarUsuarios";
-            btnValidarUsuarios.Size = new Size(144, 44);
+            btnValidarUsuarios.Size = new Size(228, 44);
             btnValidarUsuarios.TabIndex = 3;
             btnValidarUsuarios.Text = "Validar usuarios";
             btnValidarUsuarios.UseVisualStyleBackColor = false;
@@ -110,9 +129,9 @@
             btnEliminarUsuarios.BackColor = Color.FromArgb(40, 40, 40);
             btnEliminarUsuarios.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnEliminarUsuarios.ForeColor = Color.LightGray;
-            btnEliminarUsuarios.Location = new Point(196, 605);
+            btnEliminarUsuarios.Location = new Point(464, 621);
             btnEliminarUsuarios.Name = "btnEliminarUsuarios";
-            btnEliminarUsuarios.Size = new Size(144, 44);
+            btnEliminarUsuarios.Size = new Size(228, 44);
             btnEliminarUsuarios.TabIndex = 4;
             btnEliminarUsuarios.Text = "Eliminar usuario";
             btnEliminarUsuarios.UseVisualStyleBackColor = false;
@@ -123,9 +142,9 @@
             bntUsuariosARegistrar.BackColor = Color.FromArgb(40, 40, 40);
             bntUsuariosARegistrar.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             bntUsuariosARegistrar.ForeColor = Color.LightGray;
-            bntUsuariosARegistrar.Location = new Point(314, 555);
+            bntUsuariosARegistrar.Location = new Point(464, 555);
             bntUsuariosARegistrar.Name = "bntUsuariosARegistrar";
-            bntUsuariosARegistrar.Size = new Size(144, 44);
+            bntUsuariosARegistrar.Size = new Size(228, 44);
             bntUsuariosARegistrar.TabIndex = 5;
             bntUsuariosARegistrar.Text = "Usuarios a registrar";
             bntUsuariosARegistrar.UseVisualStyleBackColor = false;
@@ -137,16 +156,16 @@
             gridUsuarios.BackgroundColor = Color.FromArgb(23, 21, 39);
             gridUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridUsuarios.GridColor = Color.FromArgb(40, 40, 40);
-            gridUsuarios.Location = new Point(57, 71);
+            gridUsuarios.Location = new Point(57, 106);
             gridUsuarios.Name = "gridUsuarios";
             gridUsuarios.ReadOnly = true;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(23, 21, 37);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.LightGray;
-            gridUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(23, 21, 37);
+            dataGridViewCellStyle3.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.LightGray;
+            gridUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle3;
             gridUsuarios.RowTemplate.Height = 25;
             gridUsuarios.ScrollBars = ScrollBars.None;
-            gridUsuarios.Size = new Size(635, 478);
+            gridUsuarios.Size = new Size(635, 443);
             gridUsuarios.TabIndex = 6;
             // 
             // btnVerificarEmpresa
@@ -154,9 +173,9 @@
             btnVerificarEmpresa.BackColor = Color.FromArgb(40, 40, 40);
             btnVerificarEmpresa.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnVerificarEmpresa.ForeColor = Color.LightGray;
-            btnVerificarEmpresa.Location = new Point(431, 605);
+            btnVerificarEmpresa.Location = new Point(57, 694);
             btnVerificarEmpresa.Name = "btnVerificarEmpresa";
-            btnVerificarEmpresa.Size = new Size(144, 44);
+            btnVerificarEmpresa.Size = new Size(228, 44);
             btnVerificarEmpresa.TabIndex = 8;
             btnVerificarEmpresa.Text = "Verificar empresa";
             btnVerificarEmpresa.UseVisualStyleBackColor = false;
@@ -174,18 +193,219 @@
             chkMostrarContraseña.Text = "Mostrar contraseña";
             chkMostrarContraseña.UseVisualStyleBackColor = true;
             // 
-            // btnMySql
+            // txtDocumento
             // 
-            btnMySql.BackColor = Color.FromArgb(40, 40, 40);
-            btnMySql.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnMySql.ForeColor = Color.LightGray;
-            btnMySql.Location = new Point(548, 555);
-            btnMySql.Name = "btnMySql";
-            btnMySql.Size = new Size(144, 44);
-            btnMySql.TabIndex = 15;
-            btnMySql.Text = "Registrar a MySql";
-            btnMySql.UseVisualStyleBackColor = false;
-            btnMySql.Click += btnMySql_Click;
+            txtDocumento.Location = new Point(807, 226);
+            txtDocumento.Name = "txtDocumento";
+            txtDocumento.PlaceholderText = "DOCUMENTO";
+            txtDocumento.Size = new Size(292, 23);
+            txtDocumento.TabIndex = 16;
+            txtDocumento.Visible = false;
+            // 
+            // txtContraseña
+            // 
+            txtContraseña.Location = new Point(1148, 313);
+            txtContraseña.Name = "txtContraseña";
+            txtContraseña.PlaceholderText = "CONTRASEÑA";
+            txtContraseña.Size = new Size(292, 23);
+            txtContraseña.TabIndex = 19;
+            txtContraseña.Visible = false;
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(807, 313);
+            txtNombre.Name = "txtNombre";
+            txtNombre.PlaceholderText = "NOMBRE";
+            txtNombre.Size = new Size(292, 23);
+            txtNombre.TabIndex = 20;
+            txtNombre.Visible = false;
+            // 
+            // btnModificarUsuario
+            // 
+            btnModificarUsuario.BackColor = Color.FromArgb(40, 40, 40);
+            btnModificarUsuario.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnModificarUsuario.ForeColor = Color.LightGray;
+            btnModificarUsuario.Location = new Point(807, 471);
+            btnModificarUsuario.Name = "btnModificarUsuario";
+            btnModificarUsuario.Size = new Size(292, 44);
+            btnModificarUsuario.TabIndex = 21;
+            btnModificarUsuario.Text = "Modificar usuario";
+            btnModificarUsuario.UseVisualStyleBackColor = false;
+            btnModificarUsuario.Visible = false;
+            btnModificarUsuario.Click += btnModificarUsuario_Click;
+            // 
+            // lblDocumento
+            // 
+            lblDocumento.AutoSize = true;
+            lblDocumento.BackColor = Color.Transparent;
+            lblDocumento.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDocumento.ForeColor = Color.LightGray;
+            lblDocumento.Location = new Point(807, 190);
+            lblDocumento.Name = "lblDocumento";
+            lblDocumento.Size = new Size(109, 16);
+            lblDocumento.TabIndex = 22;
+            lblDocumento.Text = "Documento:";
+            lblDocumento.Visible = false;
+            // 
+            // lblNombre
+            // 
+            lblNombre.AutoSize = true;
+            lblNombre.BackColor = Color.Transparent;
+            lblNombre.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombre.ForeColor = Color.LightGray;
+            lblNombre.Location = new Point(807, 265);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(78, 16);
+            lblNombre.TabIndex = 23;
+            lblNombre.Text = "Nombre:";
+            lblNombre.Visible = false;
+            // 
+            // lblContraseña
+            // 
+            lblContraseña.AutoSize = true;
+            lblContraseña.BackColor = Color.Transparent;
+            lblContraseña.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblContraseña.ForeColor = Color.LightGray;
+            lblContraseña.Location = new Point(1148, 265);
+            lblContraseña.Name = "lblContraseña";
+            lblContraseña.Size = new Size(116, 16);
+            lblContraseña.TabIndex = 24;
+            lblContraseña.Text = "Contraseña:";
+            lblContraseña.Visible = false;
+            // 
+            // txtID
+            // 
+            txtID.Location = new Point(807, 147);
+            txtID.Name = "txtID";
+            txtID.PlaceholderText = "ID";
+            txtID.Size = new Size(292, 23);
+            txtID.TabIndex = 25;
+            txtID.Visible = false;
+            // 
+            // lblID
+            // 
+            lblID.AutoSize = true;
+            lblID.BackColor = Color.Transparent;
+            lblID.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblID.ForeColor = Color.LightGray;
+            lblID.Location = new Point(807, 106);
+            lblID.Name = "lblID";
+            lblID.Size = new Size(30, 16);
+            lblID.TabIndex = 26;
+            lblID.Text = "ID:";
+            lblID.Visible = false;
+            // 
+            // gridUsuariosMySql
+            // 
+            gridUsuariosMySql.AllowUserToResizeRows = false;
+            gridUsuariosMySql.BackgroundColor = Color.FromArgb(23, 21, 39);
+            gridUsuariosMySql.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridUsuariosMySql.GridColor = Color.FromArgb(40, 40, 40);
+            gridUsuariosMySql.Location = new Point(57, 106);
+            gridUsuariosMySql.Name = "gridUsuariosMySql";
+            gridUsuariosMySql.ReadOnly = true;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(23, 21, 37);
+            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = Color.LightGray;
+            gridUsuariosMySql.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            gridUsuariosMySql.RowTemplate.Height = 25;
+            gridUsuariosMySql.ScrollBars = ScrollBars.None;
+            gridUsuariosMySql.Size = new Size(635, 443);
+            gridUsuariosMySql.TabIndex = 29;
+            gridUsuariosMySql.CellClick += gridUsuariosMySql_CellClick;
+            // 
+            // btnUsuariosMySql
+            // 
+            btnUsuariosMySql.BackColor = Color.FromArgb(40, 40, 40);
+            btnUsuariosMySql.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUsuariosMySql.ForeColor = Color.LightGray;
+            btnUsuariosMySql.Location = new Point(57, 621);
+            btnUsuariosMySql.Name = "btnUsuariosMySql";
+            btnUsuariosMySql.Size = new Size(228, 44);
+            btnUsuariosMySql.TabIndex = 30;
+            btnUsuariosMySql.Text = "Usuarios MySql";
+            btnUsuariosMySql.UseVisualStyleBackColor = false;
+            btnUsuariosMySql.Click += btnUsuariosMySql_Click;
+            // 
+            // txtEmpresa
+            // 
+            txtEmpresa.Location = new Point(807, 403);
+            txtEmpresa.Name = "txtEmpresa";
+            txtEmpresa.PlaceholderText = "Empresa";
+            txtEmpresa.Size = new Size(292, 23);
+            txtEmpresa.TabIndex = 31;
+            txtEmpresa.Visible = false;
+            // 
+            // lblEmpresa
+            // 
+            lblEmpresa.AutoSize = true;
+            lblEmpresa.BackColor = Color.Transparent;
+            lblEmpresa.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblEmpresa.ForeColor = Color.LightGray;
+            lblEmpresa.Location = new Point(807, 366);
+            lblEmpresa.Name = "lblEmpresa";
+            lblEmpresa.Size = new Size(84, 16);
+            lblEmpresa.TabIndex = 32;
+            lblEmpresa.Text = "Empresa:";
+            lblEmpresa.Visible = false;
+            // 
+            // txtPesos
+            // 
+            txtPesos.Location = new Point(1148, 147);
+            txtPesos.Name = "txtPesos";
+            txtPesos.PlaceholderText = "Pesos";
+            txtPesos.Size = new Size(292, 23);
+            txtPesos.TabIndex = 33;
+            txtPesos.Visible = false;
+            // 
+            // txtDolares
+            // 
+            txtDolares.Location = new Point(1148, 226);
+            txtDolares.Name = "txtDolares";
+            txtDolares.PlaceholderText = "Dolares";
+            txtDolares.Size = new Size(292, 23);
+            txtDolares.TabIndex = 34;
+            txtDolares.Visible = false;
+            // 
+            // lblDolares
+            // 
+            lblDolares.AutoSize = true;
+            lblDolares.BackColor = Color.Transparent;
+            lblDolares.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDolares.ForeColor = Color.LightGray;
+            lblDolares.Location = new Point(1148, 190);
+            lblDolares.Name = "lblDolares";
+            lblDolares.Size = new Size(84, 16);
+            lblDolares.TabIndex = 35;
+            lblDolares.Text = "Dolares:";
+            lblDolares.Visible = false;
+            // 
+            // lblPesos
+            // 
+            lblPesos.AutoSize = true;
+            lblPesos.BackColor = Color.Transparent;
+            lblPesos.Font = new Font("Copperplate Gothic Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblPesos.ForeColor = Color.LightGray;
+            lblPesos.Location = new Point(1148, 106);
+            lblPesos.Name = "lblPesos";
+            lblPesos.Size = new Size(62, 16);
+            lblPesos.TabIndex = 36;
+            lblPesos.Text = "Pesos:";
+            lblPesos.Visible = false;
+            // 
+            // btnEliminarMySql
+            // 
+            btnEliminarMySql.BackColor = Color.FromArgb(40, 40, 40);
+            btnEliminarMySql.Font = new Font("Copperplate Gothic Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEliminarMySql.ForeColor = Color.LightGray;
+            btnEliminarMySql.Location = new Point(1137, 471);
+            btnEliminarMySql.Name = "btnEliminarMySql";
+            btnEliminarMySql.Size = new Size(292, 44);
+            btnEliminarMySql.TabIndex = 37;
+            btnEliminarMySql.Text = "Eliminar usuario MySql";
+            btnEliminarMySql.UseVisualStyleBackColor = false;
+            btnEliminarMySql.Visible = false;
+            btnEliminarMySql.Click += btnEliminarMySql_Click;
             // 
             // Formulario_Administrar_Usuarios
             // 
@@ -193,8 +413,25 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(23, 21, 39);
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(757, 683);
-            Controls.Add(btnMySql);
+            ClientSize = new Size(1452, 807);
+            Controls.Add(btnEliminarMySql);
+            Controls.Add(lblPesos);
+            Controls.Add(lblDolares);
+            Controls.Add(txtDolares);
+            Controls.Add(txtPesos);
+            Controls.Add(lblEmpresa);
+            Controls.Add(txtEmpresa);
+            Controls.Add(btnUsuariosMySql);
+            Controls.Add(gridUsuariosMySql);
+            Controls.Add(lblID);
+            Controls.Add(txtID);
+            Controls.Add(lblContraseña);
+            Controls.Add(lblNombre);
+            Controls.Add(lblDocumento);
+            Controls.Add(btnModificarUsuario);
+            Controls.Add(txtNombre);
+            Controls.Add(txtContraseña);
+            Controls.Add(txtDocumento);
             Controls.Add(chkMostrarContraseña);
             Controls.Add(btnVerificarEmpresa);
             Controls.Add(gridUsuarios);
@@ -212,6 +449,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)btnVolver).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridUsuarios).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridUsuariosMySql).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -228,6 +466,23 @@
         private DataGridView gridUsuarios;
         private Button btnVerificarEmpresa;
         private CheckBox chkMostrarContraseña;
-        private Button btnMySql;
+        private TextBox txtDocumento;
+        private TextBox txtContraseña;
+        private TextBox txtNombre;
+        private Button btnModificarUsuario;
+        private Label lblDocumento;
+        private Label lblNombre;
+        private Label lblContraseña;
+        private TextBox txtID;
+        private Label lblID;
+        private DataGridView gridUsuariosMySql;
+        private Button btnUsuariosMySql;
+        private TextBox txtEmpresa;
+        private Label lblEmpresa;
+        private TextBox txtPesos;
+        private TextBox txtDolares;
+        private Label lblDolares;
+        private Label lblPesos;
+        private Button btnEliminarMySql;
     }
 }

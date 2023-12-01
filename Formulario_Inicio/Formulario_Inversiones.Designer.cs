@@ -89,7 +89,7 @@
             lblSueldoPesos.AutoSize = true;
             lblSueldoPesos.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblSueldoPesos.ForeColor = Color.LightGray;
-            lblSueldoPesos.Location = new Point(98, 18);
+            lblSueldoPesos.Location = new Point(185, 18);
             lblSueldoPesos.Name = "lblSueldoPesos";
             lblSueldoPesos.Size = new Size(90, 24);
             lblSueldoPesos.TabIndex = 16;
@@ -100,7 +100,7 @@
             lblSueldoDolar.AutoSize = true;
             lblSueldoDolar.Font = new Font("Copperplate Gothic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblSueldoDolar.ForeColor = Color.LightGray;
-            lblSueldoDolar.Location = new Point(488, 18);
+            lblSueldoDolar.Location = new Point(602, 18);
             lblSueldoDolar.Name = "lblSueldoDolar";
             lblSueldoDolar.Size = new Size(95, 24);
             lblSueldoDolar.TabIndex = 17;
@@ -128,7 +128,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(861, 56);
+            panel1.Size = new Size(993, 56);
             panel1.TabIndex = 23;
             // 
             // cmbActivos
@@ -139,9 +139,9 @@
             cmbActivos.ForeColor = Color.LightGray;
             cmbActivos.FormattingEnabled = true;
             cmbActivos.Items.AddRange(new object[] { "0 - Acciones", "1 - Cedears", "2 - Bonos públicos", "3 - Dolar MEP" });
-            cmbActivos.Location = new Point(68, 66);
+            cmbActivos.Location = new Point(143, 62);
             cmbActivos.Name = "cmbActivos";
-            cmbActivos.Size = new Size(746, 24);
+            cmbActivos.Size = new Size(727, 24);
             cmbActivos.TabIndex = 24;
             cmbActivos.SelectedIndexChanged += cmbActivos_SelectedIndexChanged;
             // 
@@ -167,13 +167,13 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvActivos.DefaultCellStyle = dataGridViewCellStyle2;
             dgvActivos.EnableHeadersVisualStyles = false;
-            dgvActivos.Location = new Point(68, 124);
+            dgvActivos.Location = new Point(143, 125);
             dgvActivos.Name = "dgvActivos";
             dataGridViewCellStyle3.BackColor = Color.FromArgb(23, 21, 32);
             dgvActivos.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvActivos.RowTemplate.Height = 25;
             dgvActivos.ScrollBars = ScrollBars.None;
-            dgvActivos.Size = new Size(742, 259);
+            dgvActivos.Size = new Size(727, 259);
             dgvActivos.TabIndex = 30;
             // 
             // btnInvertir
@@ -186,10 +186,10 @@
             btnInvertir.Font = new Font("Copperplate Gothic Bold", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btnInvertir.ForeColor = Color.LightGray;
             btnInvertir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnInvertir.Location = new Point(68, 457);
+            btnInvertir.Location = new Point(143, 443);
             btnInvertir.Name = "btnInvertir";
             btnInvertir.Padding = new Padding(9, 0, 0, 0);
-            btnInvertir.Size = new Size(742, 36);
+            btnInvertir.Size = new Size(727, 36);
             btnInvertir.TabIndex = 31;
             btnInvertir.Text = "Condirmar";
             btnInvertir.UseVisualStyleBackColor = false;
@@ -200,7 +200,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(23, 21, 32);
-            ClientSize = new Size(861, 559);
+            ClientSize = new Size(993, 561);
             Controls.Add(btnInvertir);
             Controls.Add(dgvActivos);
             Controls.Add(cmbActivos);

@@ -84,6 +84,8 @@ namespace Biblioteca_Clases
             }
         }
 
+
+
         public bool verificarAdministrador(string nombre, string contraseña)
         {
             var serializadorJSON = new SerializadorJSON<Administrador>(pathAdministrador);
@@ -171,66 +173,51 @@ namespace Biblioteca_Clases
             serializadorJSONActivo.Serializar(listaActivos);
         }
 
-        public List<Activos> FiltrarPorActivos(ETipoActivo tipoActivo)
+        public List<ActivosADO> FiltrarPorActivos(ETipoActivo tipoActivo)
         {
-            var serializadorJSONActivo = new SerializadorJSON<Usuario>(pathUsuarios);
+            
+            ActivosADO activosADO = new ActivosADO();
+            List<ActivosADO> listaActivosADO = activosADO.Select();
+            List<ActivosADO> filtrarLista = new List<ActivosADO>();
 
-            List<Usuario> listaUsuarios = serializadorJSONActivo.Deserializar();
-            List<Activos> filtrarLista = new List<Activos>();
 
-            foreach(Usuario user in listaUsuarios)
+            foreach(ActivosADO activoAdo in listaActivosADO)
             {
-                foreach (Activos act in user.ListaActivosVentas)
-                {
-                    if (act.Activo == tipoActivo && user.Empresa == true)
+                
+                    if (activoAdo.Activo == tipoActivo.ToString())
                     {
-                        filtrarLista.Add(act);
+                        filtrarLista.Add(activoAdo);
                     }
 
-                }
-
+               
             }
             return filtrarLista;
         }
 
 
+        
 
 
-
-
-
-
-
-
-        public List<Activos> FiltrarPorMoneda(ETipoMoneda tipoMoneda, Usuario usuario, string nombreEmpresa)
+        public List<ActivosADO> FiltrarPorMoneda(ETipoMoneda tipoMoneda, Usuario usuario, string nombreEmpresa)
         {
-            var serializadorJSON = new SerializadorJSON<Usuario>(pathUsuarios);
-
-            List<Usuario> listaUsuarios = serializadorJSON.Deserializar();
-            List<Activos> filtrarLista = new List<Activos>();
-            foreach(Usuario user in listaUsuarios)
+            ActivosADO actADO = new ActivosADO();
+            List<ActivosADO> listaActivosADOS = actADO.Select();
+            List<ActivosADO> filtrarLista = new List<ActivosADO>();
+            
+            foreach(ActivosADO act in listaActivosADOS)
             {
-                foreach(Activos act in user.ListaActivosVentas)
+                if(act.Moneda == tipoMoneda.ToString() && act.Empresa == nombreEmpresa)
                 {
-                    if(act.Moneda == tipoMoneda && act.Empresa == nombreEmpresa)
-                    {
-                        filtrarLista.Add(act);
-                    }
-                    if(act.Distintivo == usuario.Dni)
-                    {
-                        filtrarLista.Remove(act);
-                    }
+                    filtrarLista.Add(act);
+                }
+                if(act.Distintivo == usuario.Dni)
+                {
+                    filtrarLista.Remove(act);
                 }
             }
+            
             return filtrarLista;
         }
-
-
-
-
-
-
-
 
         public ETipoActivo IndicarTipoActivo(int indice)
         {
@@ -272,19 +259,81 @@ namespace Biblioteca_Clases
             serializadorJSON2.Serializar(listaUsuarios);
             return listaUsuarios;
         }
-    
-        public void RegistrarAMySql()
+
+        public void AgregarAMySql()
         {
-            UsuarioADO usuarioADO;
-            List<Usuario> listaUsuarios;
+            UsuarioADO usuarioADO = new UsuarioADO();
+
+
+            
+
             var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarios);
-            listaUsuarios = serializadorJson.Deserializar();
-            foreach(Usuario user in listaUsuarios)
+            List<Usuario> listaUsuarios = serializadorJson.Deserializar();
+            
+            List<UsuarioADO> listaUsuariosADO = usuarioADO.Select(); 
+            if(listaUsuariosADO.Count >= 0)
             {
-                usuarioADO = (UsuarioADO)user;
-                usuarioADO.Add();
+                foreach(Usuario usuario in listaUsuarios)
+                {   
+                   
+                    usuarioADO = (UsuarioADO)usuario;
+                    if(VerificarExistenciaUsuario(usuarioADO))
+                    {
+                        usuarioADO.Add();
+                    }
+                       
+                }
             }
         }
+    
+        public void EliminarUsuarioMySql(string id)
+        {
+            UsuarioADO usuarioADO = new UsuarioADO();
+            usuarioADO.Delete(id);
+
+        }
+
+
+        private bool VerificarExistenciaUsuario(UsuarioADO usuario)
+        {
+            UsuarioADO usuarioADO = new UsuarioADO();
+            bool verificar = true;
+            List<UsuarioADO> listaUsuariosADO = usuarioADO.Select();
+            foreach(UsuarioADO user in listaUsuariosADO)
+            {
+                if(usuario.Documento == user.Documento)
+                {
+                    verificar = false;
+                    break;
+                }
+            }
+            return verificar;
+
+        }
+
+        public void ModificarUsuarios(string id, string nombre, string contraseña, string documento, string pesos, string dolares, string empresa)
+        {
+
+
+            UsuarioADO usuarioADO = new UsuarioADO(nombre,documento,contraseña, double.Parse(pesos), double.Parse(dolares), empresa);
+            usuarioADO.Update(id);
+
+
+            
+
+
+        }
+
+        public void AgregarActivoMySql(ETipoActivo tipoActivo, string empresa, string moneda, string cantidadCompra, string precioCompra, string cantidadVenta, string precioVenta, string intereses, string distintivo)
+        {
+
+            ActivosADO activosADO = new ActivosADO(tipoActivo.ToString(), empresa, moneda, int.Parse(cantidadCompra), double.Parse(precioCompra), int.Parse(cantidadVenta), double.Parse(precioVenta), int.Parse(intereses), distintivo);
+            activosADO.Add();
+
+
+        }
+
+            
     
 
 

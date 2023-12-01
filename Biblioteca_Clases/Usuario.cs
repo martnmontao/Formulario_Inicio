@@ -242,7 +242,7 @@ namespace Biblioteca_Clases
         }
 
 
-        public void ComprarActivo(Usuario usuario, Activos activo,string cantidadCompra, string precioCompra)
+        public void ComprarActivo(string idActivo, Usuario usuario, Activos activo,string cantidadCompra, string precioCompra)
         {
             var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
             var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
@@ -264,6 +264,8 @@ namespace Biblioteca_Clases
                     if(activo.Distintivo == act.Distintivo && act.Moneda == activo.Moneda)
                     {
                         act.Cv -= cC;
+                        ActivosADO actADO = (ActivosADO)act;
+                        actADO.Update(idActivo);
                         if(act.Moneda == ETipoMoneda.USD)
                         {
                             user.sueldoDolares += pC*cC;
@@ -271,6 +273,7 @@ namespace Biblioteca_Clases
                         else
                         {
                             user.Sueldo += pC * cC;
+                            //actADO.Update(idActivo);
                         }
 
                     }

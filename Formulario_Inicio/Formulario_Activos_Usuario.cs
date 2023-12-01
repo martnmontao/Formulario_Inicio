@@ -45,15 +45,18 @@ namespace Formulario_Inicio
                 int cantidadAVender = int.Parse(txtCantidadVenta.Text);
                 Activos activo = null;
                 string distintivo;
-
+                string intereses;
+                string empresa;
                 if (usuario.Empresa == false)
                 {
+                    //intereses = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[8].Value.ToString();
+                    empresa = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[1].Value.ToString();
                     distintivo = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[8].Value.ToString();
 
                     activo = usuario.ObtenerActivo(distintivo, tipoMoneda);
                     if (usuario.verificarActivosEnUsuario(usuario, cantidadAVender, activo))
                     {
-
+                        admin.AgregarActivoMySql(tipoActivo, empresa, moneda, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, "1", usuario.Dni);
                         usuario.VenderActivoPropio(usuario, activo, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text);
                         MostrarActivos(usuario.ListaActivosVentas);
                     }
@@ -71,6 +74,8 @@ namespace Formulario_Inicio
                         txtIntereses.Text = "1";
                         if (moneda == "ARG" || moneda == "USD")
                         {
+                        
+                            admin.AgregarActivoMySql(tipoActivo, txtNombreEmpresa.Text, moneda, txtCantidadCompra.Text,txtPrecioCompra.Text, txtCantidadVenta.Text,txtPrecioVenta.Text,txtIntereses.Text, usuario.Dni);
                             admin.CrearActivo(usuario, tipoActivo, txtNombreEmpresa.Text, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, tipoMoneda, txtIntereses.Text, usuario.Dni, pathActivos);
                         }
                         else

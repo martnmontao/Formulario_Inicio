@@ -1,4 +1,5 @@
 ﻿using Biblioteca_Clases;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,18 +30,21 @@ namespace Formulario_Inicio
         ETipoActivo tipoActivo;
 
 
+
         public Formulario_Inversiones(Usuario usuario) : this()
         {
             InitializeComponent();
             this.usuario = usuario;
             this.contador = 0;
             MostrarSueldos();
+            //ConfigurarGridView();
         }
         public Formulario_Inversiones()
         {
             //InitializeComponent();
             admin = new Administrador();
             usuario = new Usuario();
+            //ConfigurarGridView();
         }
 
 
@@ -59,7 +63,7 @@ namespace Formulario_Inicio
         }
         private void cmbActivos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Activos> listaActivos = null;
+            List<ActivosADO> listaActivos = null;
             int indice = cmbActivos.SelectedIndex;
             switch (indice)
             {
@@ -90,11 +94,20 @@ namespace Formulario_Inicio
         {
             string empresa;
             Activos activo;
-
+            string moneda;
             try
             {
-                tipoMoneda = (ETipoMoneda)dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[2].Value;
-                empresa = dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[8].Value.ToString();
+                moneda = dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[2].Value.ToString();
+                if (moneda == "ARG")
+                {
+                    tipoMoneda = ETipoMoneda.ARG;
+                }
+                else
+                {
+                    tipoMoneda = ETipoMoneda.USD;
+
+                }
+                empresa = dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[7].Value.ToString();
                 activo = usuario.ObtenerActivo(empresa, tipoMoneda);
                 Formulario_Invertir fi = new Formulario_Invertir(activo, usuario);
                 fi.Show();
@@ -108,16 +121,48 @@ namespace Formulario_Inicio
 
         }
 
-        private void MostrarActivos(List<Activos> listaActivos)
+        private void MostrarActivos(List<ActivosADO> listaActivos)
         {
-            dgvActivos.DataSource = listaActivos;
+
+
+            dgvActivos.Rows.Clear();
+            foreach (ActivosADO act in listaActivos)
+            {
+                dgvActivos.Rows.Add(act.Activo, act.Empresa, act.Moneda, act.CantidadCompra, act.PrecioCompra, act.CantidadVenta, act.PrecioVenta, act.Distintivo);
+            }
+
 
         }
+        private void ConfigurarGridView()
+        {
+            dgvActivos.ColumnCount = 8;
+
+            dgvActivos.Columns[0].Name = "Activo";
+            dgvActivos.Columns[1].Name = "Empresa";
+            dgvActivos.Columns[2].Name = "Moneda";
+            dgvActivos.Columns[3].Name = "Cc";
+            dgvActivos.Columns[4].Name = "Pc";
+            dgvActivos.Columns[5].Name = "Cv";
+            dgvActivos.Columns[6].Name = "Pv";
+            dgvActivos.Columns[7].Name = "Distintivo";
+
+        }
+
+
         private void Formulario_Inversiones_Load(object sender, EventArgs e)
         {
-
+            ActivosADO actADO = new ActivosADO();
+            List<ActivosADO> listaActivos = actADO.Select();
+            ConfigurarGridView();
+            MostrarActivos(listaActivos);
 
         }
+
+
+
+
+
+
 
     }
 }

@@ -112,7 +112,6 @@ namespace Biblioteca_Clases
                     ActivoEvent evento = new ActivoEvent();
                     evento.SueldoInsuficiente = precioActivo;
                     Validar = false;
-
                     MonedaActivo(this, evento);
                 }
             }

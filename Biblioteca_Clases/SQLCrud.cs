@@ -26,18 +26,12 @@ namespace Biblioteca_Clases
 
         private string PrepareSelectQuery()
         {
-            var cols = string.Join("'", _columnas);
+            var cols = string.Join(", ", _columnas);
             var query = $"SELECT {cols} FROM {_tableName}";
             return query;
         }
 
-        private string PrepareInsertQuery()
-        {
-            //var cols = string.Join("'", _columnas);
-            var query = $"INSERT INTO {_tableName} VALUES(@Documento, @Nombre, @Contraseña, @Pesos, @Dolares)";
-            return query;
-        }
-
+        
 
     }
 }

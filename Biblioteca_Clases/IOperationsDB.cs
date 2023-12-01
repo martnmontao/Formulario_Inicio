@@ -10,9 +10,9 @@ namespace Biblioteca_Clases
     {
         bool Add();
 
-        bool Update();
+        bool Update(string id);
 
-        bool Delete();
+        bool Delete(string id);
 
         List<T> Select();
 

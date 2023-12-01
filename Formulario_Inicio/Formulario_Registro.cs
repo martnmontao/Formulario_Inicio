@@ -37,6 +37,8 @@ namespace Formulario_Inicio
                 {
                     listaUsuarioARegistrar.Add(usuario);
                     serializadorXML2.Serializar(listaUsuarioARegistrar);
+                 
+
                     MessageBox.Show("Se ha registrado con éxito!");
 
                 }

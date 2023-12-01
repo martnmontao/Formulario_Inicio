@@ -1,4 +1,5 @@
 ﻿using Biblioteca_Clases;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,7 +48,7 @@ namespace Formulario_Inicio
         {
             try
             {
-                string distintivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[8].Value.ToString();
+                string distintivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[9].Value.ToString();
                 activo = usuario.ObtenerActivo(distintivo, tipoMoneda);
                 int cantidadVenta = (int)dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[5].Value;
                 float precioVenta = float.Parse(dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[6].Value.ToString());
@@ -74,9 +75,12 @@ namespace Formulario_Inicio
 
                 if (activo.Validar)
                 {
-                    usuario.ComprarActivo(usuario, activo, txtCantidad.Text, precioVenta.ToString());
+                    string idActivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[0].Value.ToString();
+                    usuario.ComprarActivo(idActivo, usuario, activo, txtCantidad.Text, precioVenta.ToString());
+
                     MessageBox.Show("Su compra se ha realizado con exito!");
-                    MostrarDGV();
+                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activo.Empresa + "';");
+
 
                 }
 
@@ -116,7 +120,7 @@ namespace Formulario_Inicio
 
         private void Formulario_Invertir_Load(object sender, EventArgs e)
         {
-            MostrarDGV();
+            LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activo.Empresa + "';");
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -184,6 +188,7 @@ namespace Formulario_Inicio
             else if (usuario.VerificarActivoEnUsuario(usuario, distintivo, activo))
             {
                 usuario.VenderActivoAUsuario(usuario, activo, txtCantidad.Text, txtPrecio.Text);
+                LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activo.Empresa + "';");
             }
             else
             {
@@ -191,62 +196,61 @@ namespace Formulario_Inicio
 
             }
 
-            MostrarDGV();
         }
 
         private void cmbTipoMonedas_SelectedIndexChanged(object sender, EventArgs e)
         {
 
 
-            List<Activos> listaActivos = null;
+            List<ActivosADO> listaActivos = null;
             int indice = cmbTipoMonedas.SelectedIndex;
             switch (indice)
             {
                 case 0:
-                    tipoMoneda = ETipoMoneda.ARG;
-
+                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos WHERE moneda = 'ARG' AND empresa = '" + activo.Empresa + "';");
                     break;
                 case 1:
-                    tipoMoneda = ETipoMoneda.USD;
+                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos WHERE moneda = 'USD' AND empresa = '" + activo.Empresa + "';");
+
                     break;
                 default:
                     tipoMoneda = activo.Moneda;
                     break;
             }
 
-            listaActivos = admin.FiltrarPorMoneda(tipoMoneda, usuario, activo.Empresa);
-            MostrarEnDGV(listaActivos);
+
+
 
         }
 
-        private void MostrarEnDGV(List<Activos> listaActivos)
-        {
-            dgvMercadoSecundario.DataSource = listaActivos;
-        }
-        private void MostrarDGV()
-        {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarios);
 
-            List<Usuario> listaUsuarios = serializadorJson.Deserializar();
 
-            foreach (Usuario user in listaUsuarios)
+
+
+
+
+        public static void LlenarDataGridView(DataGridView dataGridView, string query)
+        {
+            try
             {
-                foreach (Activos act in user.ListaActivosVentas)
-                {
-                    if (act.Empresa == activo.Empresa)
-                    {
-                        listaActivosOperar.Add(act);
-                    }
-                    if (act.Distintivo == usuario.Dni)
-                    {
-                        listaActivosOperar.Remove(act);
-                    }
-                }
+                DataBase dataBase = new DataBase();
+
+
+                dataGridView.DataSource = null;
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, dataBase.OpenDataGridView());
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView.DataSource = dt;
+                dataBase.CloseDataGridView();
+
+
             }
+            catch (Exception)
+            {
 
-            dgvMercadoSecundario.DataSource = listaActivosOperar;
+                MessageBox.Show("No se pudo mostrar");
+            }
         }
-
 
     }
 }
