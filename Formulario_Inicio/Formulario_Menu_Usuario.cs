@@ -6,8 +6,8 @@ namespace Formulario_Inicio
     public partial class Formulario_Menu_Usuario : Form
     {
 
-        private Usuario usuario;
-        public Formulario_Menu_Usuario(Usuario usuario)
+        private UsuarioADO usuario;
+        public Formulario_Menu_Usuario(UsuarioADO usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -15,7 +15,7 @@ namespace Formulario_Inicio
         private void Formulario_Menu_Load(object sender, EventArgs e)
         {
             lblNombreUsuario.Text = usuario.Nombre;
-            lblIdUsuario.Text = usuario.Dni;
+            lblIdUsuario.Text = usuario.Documento;
         }
         private void btnOpciones_Click(object sender, EventArgs e)
         {
@@ -80,12 +80,7 @@ namespace Formulario_Inicio
             this.Hide();
         }
 
-        private void btnInfoInversiones_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Formulario_Ingresos formIngresos = new Formulario_Ingresos(usuario);
-            formIngresos.Show();
-        }
+        
 
         private void btnCartera_Click(object sender, EventArgs e)
         {

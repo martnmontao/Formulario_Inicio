@@ -108,24 +108,7 @@ namespace Biblioteca_Clases
         #endregion
 
         #region JsonActivos
-        public static void EscribirJsonActivos(Activos activo, string ruta)
-        {
-
-            try
-            {
-                List<Activos> listaActivos = LeerJsonActivos(ruta);
-                if (activo.VerificarActivoRepetido(activo, ruta))
-                {
-                    listaActivos.Add(activo);
-                }
-                string json = JsonConvert.SerializeObject(listaActivos, Formatting.Indented);
-                File.WriteAllText(ruta, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+        
         public static List<Activos> LeerJsonActivos(string ruta)
         {
 

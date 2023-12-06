@@ -28,61 +28,9 @@ namespace Biblioteca_Clases
 
 
         }
-        public List<Usuario> ValidarUsuario(List<Usuario> listaUsuarios, string nombre)
-        {
-            var serializadorJSON = new SerializadorJSON<Usuario>(pathUsuarios);
-            List<Usuario> listaUsuariosRegistrados = serializadorJSON.Deserializar();
-            try
-            {
-                foreach (Usuario usuario in listaUsuarios)
-                {
-                    if (nombre == usuario.Nombre)
-                    {
-                        listaUsuariosRegistrados.Add(usuario);
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+        
 
-            return listaUsuariosRegistrados;
-        }
-
-        public void EliminarUsuario(List<Usuario> listaUsuarios, string nombre, string path, bool xmlOJson)
-        {
-
-            var serializadorJSON = new SerializadorJSON<List<Usuario>>(path);
-            var serializadorXML = new SerializadorXML<List<Usuario>>(path);
-
-            try
-            {
-                foreach (Usuario usuario in listaUsuarios)
-                {
-                    if (nombre == usuario.Nombre)
-                    {
-                        listaUsuarios.Remove(usuario);
-                        break;
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            if(xmlOJson)
-            {
-                serializadorJSON.Serializar(listaUsuarios);
-
-            }
-            else
-            {
-                serializadorXML.Serializar(listaUsuarios);
-            }
-        }
+        
 
 
 
@@ -251,7 +199,7 @@ namespace Biblioteca_Clases
             {
                 if(user.Nombre == nombre)
                 {
-                    user.Empresa = true;
+                    user.Empresa = "true";
                     break;
                 }
             }
@@ -260,50 +208,26 @@ namespace Biblioteca_Clases
             return listaUsuarios;
         }
 
-        public void AgregarAMySql()
-        {
-            UsuarioADO usuarioADO = new UsuarioADO();
-
-
-            
-
-            var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarios);
-            List<Usuario> listaUsuarios = serializadorJson.Deserializar();
-            
-            List<UsuarioADO> listaUsuariosADO = usuarioADO.Select(); 
-            if(listaUsuariosADO.Count >= 0)
-            {
-                foreach(Usuario usuario in listaUsuarios)
-                {   
-                   
-                    usuarioADO = (UsuarioADO)usuario;
-                    if(VerificarExistenciaUsuario(usuarioADO))
-                    {
-                        usuarioADO.Add();
-                    }
-                       
-                }
-            }
-        }
+       
     
-        public void EliminarUsuarioMySql(string id)
+        public void EliminarUsuarioMySql(UsuarioADO usuario, string id, string nombreTabla)
         {
-            UsuarioADO usuarioADO = new UsuarioADO();
-            usuarioADO.Delete(id);
+            
+            usuario.Delete(id, nombreTabla);
 
         }
 
 
-        private bool VerificarExistenciaUsuario(UsuarioADO usuario)
+        public static bool VerificarExistenciaUsuario(UsuarioADO usuario)
         {
             UsuarioADO usuarioADO = new UsuarioADO();
-            bool verificar = true;
+            bool verificar = false;
             List<UsuarioADO> listaUsuariosADO = usuarioADO.Select();
             foreach(UsuarioADO user in listaUsuariosADO)
             {
                 if(usuario.Documento == user.Documento)
                 {
-                    verificar = false;
+                    verificar = true;
                     break;
                 }
             }
@@ -324,11 +248,12 @@ namespace Biblioteca_Clases
 
         }
 
-        public void AgregarActivoMySql(ETipoActivo tipoActivo, string empresa, string moneda, string cantidadCompra, string precioCompra, string cantidadVenta, string precioVenta, string intereses, string distintivo)
+        public void AgregarActivoMySql(ETipoActivo tipoActivo, string empresa, string moneda, string cantidadCompra, string precioCompra, string cantidadVenta, string precioVenta, string intereses, string distintivo, UsuarioADO usuario)
         {
-
-            ActivosADO activosADO = new ActivosADO(tipoActivo.ToString(), empresa, moneda, int.Parse(cantidadCompra), double.Parse(precioCompra), int.Parse(cantidadVenta), double.Parse(precioVenta), int.Parse(intereses), distintivo);
-            activosADO.Add();
+            DataBase db = new DataBase();
+            string idUsuario = db.DevolverIDUsuario(usuario.Documento);
+            ActivosADO activosADO = new ActivosADO(tipoActivo.ToString(), empresa, moneda, int.Parse(cantidadCompra), double.Parse(precioCompra), int.Parse(cantidadVenta), double.Parse(precioVenta), int.Parse(intereses), distintivo, idUsuario);
+            activosADO.Add("activos");
 
 
         }

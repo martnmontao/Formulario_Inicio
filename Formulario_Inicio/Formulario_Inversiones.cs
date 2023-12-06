@@ -16,7 +16,8 @@ namespace Formulario_Inicio
 {
     public partial class Formulario_Inversiones : Form
     {
-        private Usuario usuario;
+        private UsuarioADO usuario;
+        private Usuario user;
         private Administrador admin;
         private double porcentajeRandomApple;
         private double porcentajeRandomMicrosoft;
@@ -31,7 +32,7 @@ namespace Formulario_Inicio
 
 
 
-        public Formulario_Inversiones(Usuario usuario) : this()
+        public Formulario_Inversiones(UsuarioADO usuario) : this()
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -43,7 +44,7 @@ namespace Formulario_Inicio
         {
             //InitializeComponent();
             admin = new Administrador();
-            usuario = new Usuario();
+            user = new Usuario();
             //ConfigurarGridView();
         }
 
@@ -58,8 +59,8 @@ namespace Formulario_Inicio
 
         private void MostrarSueldos()
         {
-            lblSueldoPesos.Text = "$ARG: " + usuario.Sueldo.ToString();
-            lblSueldoDolar.Text = "$USD: " + usuario.SueldoDolares.ToString();
+            lblSueldoPesos.Text = "$ARG: " + usuario.Pesos.ToString();
+            lblSueldoDolar.Text = "$USD: " + usuario.Dolares.ToString();
         }
         private void cmbActivos_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -93,7 +94,7 @@ namespace Formulario_Inicio
         private void btnInvertir_Click(object sender, EventArgs e)
         {
             string empresa;
-            Activos activo;
+            ActivosADO activo;
             string moneda;
             try
             {
@@ -107,8 +108,9 @@ namespace Formulario_Inicio
                     tipoMoneda = ETipoMoneda.USD;
 
                 }
-                empresa = dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[7].Value.ToString();
-                activo = usuario.ObtenerActivo(empresa, tipoMoneda);
+                
+                string idActivo = dgvActivos.Rows[dgvActivos.CurrentRow.Index].Cells[0].Value.ToString();
+                activo = user.ObtenerActivo("activos", idActivo);
                 Formulario_Invertir fi = new Formulario_Invertir(activo, usuario);
                 fi.Show();
                 this.Hide();
@@ -151,14 +153,33 @@ namespace Formulario_Inicio
 
         private void Formulario_Inversiones_Load(object sender, EventArgs e)
         {
-            ActivosADO actADO = new ActivosADO();
-            List<ActivosADO> listaActivos = actADO.Select();
-            ConfigurarGridView();
-            MostrarActivos(listaActivos);
+            string query = "SELECT * FROM activos;";
+            LlenarDataGridView(dgvActivos, query);
 
         }
 
+        public static void LlenarDataGridView(DataGridView dataGridView, string query)
+        {
+            try
+            {
+                DataBase dataBase = new DataBase();
 
+
+                dataGridView.DataSource = null;
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, dataBase.OpenDataGridView());
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView.DataSource = dt;
+                dataBase.CloseDataGridView();
+
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("No se pudo mostrar");
+            }
+        }
 
 
 

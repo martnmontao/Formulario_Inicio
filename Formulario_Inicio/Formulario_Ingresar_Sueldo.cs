@@ -17,7 +17,7 @@ namespace Formulario_Inicio
     {
         private double sueldoPesos;
         private double sueldoDolares;
-        private Usuario usuario;
+        private UsuarioADO usuario;
         private List<Usuario> listaUsuarios;
         private string tipoCambio;
         private Administrador admin;
@@ -28,7 +28,7 @@ namespace Formulario_Inicio
         {
 
         }
-        public Formulario_Ingresar_Sueldo(Usuario usuario, string tipoCambio)
+        public Formulario_Ingresar_Sueldo(UsuarioADO usuario, string tipoCambio)
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -52,42 +52,57 @@ namespace Formulario_Inicio
 
         private void btnIngresarSueldo_Click(object sender, EventArgs e)
         {
-            var serializadoraJson = new SerializadorJSON<Usuario>(pathUsuarios);
-            listaUsuarios = serializadoraJson.Deserializar();
+            
+
+            DataBase db = new DataBase();
+
+            string idUsuario = db.DevolverIDUsuario(usuario.Documento);
+
+
+            UsuarioADO usuarioADO = db.DevolverUsuario(idUsuario);
+            List<UsuarioADO> listaUsuariosADO = usuarioADO.Select();
+
             this.sueldoPesos = double.Parse(txtSueldo.Text);
             if (tipoCambio == "pesos")
             {
                 if (sueldoPesos > 50000)
                 {
-                    MessageBox.Show($"No puede agregar más de $50000 a su cuenta. Su sueldo es de: {usuario.Sueldo}");
+                    MessageBox.Show($"No puede agregar más de $50000 a su cuenta. Su sueldo es de: {usuarioADO.Pesos}");
                 }
-                else if (usuario.Sueldo >= 50000 || (usuario.Sueldo + sueldoPesos) > 50000)
+                else if (usuario.Pesos >= 50000 || (usuario.Pesos + sueldoPesos) > 50000)
                 {
-                    MessageBox.Show($"No puede tener más de $50000 en su cuenta. Su sueldo es de: {usuario.Sueldo}. Porfavor invierta el dinero y vuelva a intentarlo.");
+                    MessageBox.Show($"No puede tener más de $50000 en su cuenta. Su sueldo es de: {usuarioADO.Pesos}. Porfavor invierta el dinero y vuelva a intentarlo.");
                 }
+                else
+                {
 
-                foreach (Usuario user in listaUsuarios)
-                {
-                    if (usuario.Dni == user.Dni)
+                    foreach (UsuarioADO userADO in listaUsuariosADO)
                     {
-                        usuario.Sueldo += sueldoPesos;
-                        ModificarSueldo(usuario, usuario.Sueldo, sueldoPesos);
-                        break;
+                        if (usuario.Documento == userADO.Documento)
+                        {
+                            usuarioADO.Pesos += sueldoPesos;
+                        
+
+                            ModificarSueldo(usuario, usuarioADO.Pesos, sueldoPesos);
+                            break;
+                        }
                     }
+                    MessageBox.Show("Se le ha depositado el dinero ingresado.");
+
                 }
 
             }
 
             else
             {
-                foreach (Usuario user in listaUsuarios)
+                foreach (UsuarioADO userADO in listaUsuariosADO)
                 {
-                    if (usuario.Dni == user.Dni)
+                    if (usuario.Documento == userADO.Documento)
                     {
 
-                        if (usuario.Sueldo > 0)
+                        if (usuario.Pesos > 0)
                         {
-                            usuario.SueldoDolares = ConvertirPesoADolar(double.Parse(txtSueldo.Text));
+                            usuario.Dolares = ConvertirPesoADolar(double.Parse(txtSueldo.Text));
                             MessageBox.Show("Operación exitosa!");
                         }
                         else
@@ -96,7 +111,7 @@ namespace Formulario_Inicio
                         }
 
 
-                        ModificarSueldo(usuario, usuario.SueldoDolares, sueldoPesos);
+                        ModificarSueldo(usuario, usuario.Dolares, sueldoPesos);
                         break;
                     }
                 }
@@ -104,31 +119,33 @@ namespace Formulario_Inicio
 
         }
 
-        public void ModificarSueldo(Usuario usuarioAModificar, double sueldo, double sueldoIngresado)
+        public void ModificarSueldo(UsuarioADO usuarioAModificar, double sueldo, double sueldoIngresado)
         {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarios);
-            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathUsuarios);
 
-            listaUsuarios = serializadorJson.Deserializar();
-            foreach (Usuario user in listaUsuarios)
+            UsuarioADO usuarioADO = (UsuarioADO)usuarioAModificar;
+            List<UsuarioADO> listaUsuariosADO = usuarioADO.Select();
+            DataBase db = new DataBase();
+            string idUsuario = db.DevolverIDUsuario(usuarioADO.Documento);
+
+            foreach (UsuarioADO userADO in listaUsuariosADO)
             {
-                if (usuarioAModificar.Dni == user.Dni)
+                if (usuarioAModificar.Documento == userADO.Documento)
                 {
                     if (tipoCambio == "pesos")
                     {
-                        user.Sueldo = sueldo;
-
+                        userADO.Pesos = sueldo;
+                        userADO.Update(idUsuario);
                     }
                     else
                     {
-                        user.SueldoDolares += sueldo;
-                        user.Sueldo = user.Sueldo - sueldoIngresado;
-                        usuario = user;
+                        userADO.Dolares += sueldo;
+                        userADO.Pesos = userADO.Pesos - sueldoIngresado;
+                        userADO.Update(idUsuario);
                     }
                 }
             }
 
-            serializadorJson2.Serializar(listaUsuarios);
+     
         }
 
         public double ConvertirPesoADolar(double pesos)
@@ -149,6 +166,13 @@ namespace Formulario_Inicio
 
         private void pictureBoxBotonVolver_Click(object sender, EventArgs e)
         {
+            DataBase db = new DataBase();
+
+            string id = db.DevolverIDUsuario(usuario.Documento);
+
+            usuario = db.DevolverUsuario(id);
+
+
             Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(usuario);
             this.Hide();
             fm.Show();

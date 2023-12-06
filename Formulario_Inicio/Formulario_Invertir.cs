@@ -14,25 +14,28 @@ namespace Formulario_Inicio
 {
     public partial class Formulario_Invertir : Form
     {
+        private ActivosADO activoADO;
         private Activos activo;
-        private Usuario usuario;
+        private UsuarioADO usuario;
         private Administrador admin;
-        private Activos activoComprado;
+        private ActivosADO activoComprado;
         List<Activos> listaActivosOperar;
         List<Activos> listaOfertasUsuarios;
         List<Activos> listaActivosVentasUsuarios;
         List<Activos> listaActivos;
+        Usuario user;
         bool empresa;
         ETipoMoneda tipoMoneda;
         private string pathActivos = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Activos.json";
         private string pathUsuarios = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
 
-        public Formulario_Invertir(Activos activo, Usuario usuario)
+        public Formulario_Invertir(ActivosADO activoADO, UsuarioADO usuario)
         {
             InitializeComponent();
-            this.activo = activo;
+            this.activoADO = activoADO;
             this.admin = new Administrador();
             this.usuario = usuario;
+            this.user = new Usuario();
             listaActivosOperar = new List<Activos>();
 
             txtPrecio.Visible = true;
@@ -48,38 +51,43 @@ namespace Formulario_Inicio
         {
             try
             {
+                DataBase db = new DataBase();
                 string distintivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[9].Value.ToString();
-                activo = usuario.ObtenerActivo(distintivo, tipoMoneda);
+                string idActivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[0].Value.ToString();
+                activoADO = user.ObtenerActivo("activos", idActivo);
                 int cantidadVenta = (int)dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[5].Value;
                 float precioVenta = float.Parse(dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[6].Value.ToString());
                 int cantidadCompraIngresada = int.Parse(txtCantidad.Text);
                 float precioIngresado = float.Parse(txtPrecio.Text);
-
-                activo.Validar = true;
-
-                activo.PrecioActivo += ManejadorPrecioCompraActivo;
-                activo.MonedaActivo += ManejadorSaldoInsuficiente;
-                activo.CantidadActivos += ManejadorCantidadCompraActivo;
+                string idUsuario = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[10].Value.ToString();
 
 
+                activoADO.Validar = true;
+
+                activoADO.PrecioActivo += ManejadorPrecioCompraActivo;
+                activoADO.MonedaActivo += ManejadorSaldoInsuficiente;
+                activoADO.CantidadActivos += ManejadorCantidadCompraActivo;
 
 
-                if (precioVenta == precioIngresado || activo.Validar == true)
+
+
+                if (precioVenta == precioIngresado || activoADO.Validar == true)
                 {
-                    activo.ValidarPrecioCompraActivo(activo, precioIngresado * cantidadCompraIngresada);
-                    activo.VerificarMoneda(precioIngresado * cantidadCompraIngresada, usuario, activo.Moneda);
-                    activo.ValidarCantidadCompraActivo(cantidadVenta, cantidadCompraIngresada);
+                    activoADO.ValidarPrecioCompraActivo(activoADO, precioIngresado * cantidadCompraIngresada);
+                    activoADO.VerificarMoneda(precioIngresado * cantidadCompraIngresada, usuario, activoADO.Moneda);
+                    activoADO.ValidarCantidadCompraActivo(cantidadVenta, cantidadCompraIngresada);
                 }
 
 
 
-                if (activo.Validar)
+                if (activoADO.Validar)
                 {
-                    string idActivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[0].Value.ToString();
-                    usuario.ComprarActivo(idActivo, usuario, activo, txtCantidad.Text, precioVenta.ToString());
 
+
+
+                    user.ComprarActivo(idActivo, usuario, activoADO, txtCantidad.Text, precioVenta.ToString(), idUsuario);
                     MessageBox.Show("Su compra se ha realizado con exito!");
-                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activo.Empresa + "';");
+                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activoADO.Empresa + "';");
 
 
                 }
@@ -120,7 +128,7 @@ namespace Formulario_Inicio
 
         private void Formulario_Invertir_Load(object sender, EventArgs e)
         {
-            LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activo.Empresa + "';");
+            LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activoADO.Empresa + "';");
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -134,8 +142,8 @@ namespace Formulario_Inicio
         private void btnVenderActivos_Click(object sender, EventArgs e)
         {
 
-            btnVender.Visible = true;
-            if (usuario.Empresa == false)
+            
+            if (usuario.Empresa == "False")
             {
 
                 txtCantidad.Visible = true;
@@ -152,7 +160,7 @@ namespace Formulario_Inicio
         {
 
 
-            if (usuario.Empresa == false)
+            if (usuario.Empresa == "False")
             {
                 btnComprar.Visible = true;
                 btnVender.Visible = false;
@@ -170,10 +178,26 @@ namespace Formulario_Inicio
         private void btnVender_Click(object sender, EventArgs e)
         {
             List<Activos> listaActivos = null;
-
-            string distintivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[8].Value.ToString();
+            user = (Usuario)usuario;
+            string distintivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[9].Value.ToString();
+            string idActivo = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[0].Value.ToString();
+            string idUsuario = dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[10].Value.ToString();
+            //DataBase db = new DataBase();
+            user = (Usuario)usuario;
             int cantidadCompra = (int)dgvMercadoSecundario.Rows[dgvMercadoSecundario.CurrentRow.Index].Cells[3].Value;
-            activo = usuario.ObtenerActivo(distintivo, tipoMoneda);
+            activoADO = user.ObtenerActivo("activos", idActivo);
+            ActivosADO actADO = new ActivosADO (activoADO.Activo,activoADO.Empresa,activoADO.Moneda,activoADO.CantidadCompra,activoADO.PrecioCompra,activoADO.CantidadVenta,activoADO.PrecioVenta,activoADO.Intereses,activoADO.Distintivo);
+            
+            
+            actADO.Distintivo = user.Dni;
+
+
+
+
+            //string idUsuarioAVender = db.DevolverIDUsuario(user.Dni);
+
+
+            //ActivosADO activoAVender = db.DevolverActivo("activossinvender",idUsuarioAVender);
 
             if (int.Parse(txtCantidad.Text) > cantidadCompra)
             {
@@ -184,11 +208,12 @@ namespace Formulario_Inicio
                 MessageBox.Show("Ingrese un valor distinto de 0 si desea vender una activo");
 
             }
-
-            else if (usuario.VerificarActivoEnUsuario(usuario, distintivo, activo))
+            else if (Usuario.VerificarActivosEnUsuario(user, cantidadCompra, actADO))
             {
-                usuario.VenderActivoAUsuario(usuario, activo, txtCantidad.Text, txtPrecio.Text);
-                LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activo.Empresa + "';");
+
+
+                user.VenderActivoAUsuario(usuario, activoADO, txtCantidad.Text, txtPrecio.Text, idUsuario, idActivo);
+                LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos where empresa = '" + activoADO.Empresa + "';");
             }
             else
             {
@@ -207,10 +232,10 @@ namespace Formulario_Inicio
             switch (indice)
             {
                 case 0:
-                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos WHERE moneda = 'ARG' AND empresa = '" + activo.Empresa + "';");
+                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos WHERE moneda = 'ARG' AND empresa = '" + activoADO.Empresa + "';");
                     break;
                 case 1:
-                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos WHERE moneda = 'USD' AND empresa = '" + activo.Empresa + "';");
+                    LlenarDataGridView(dgvMercadoSecundario, "SELECT * FROM activos WHERE moneda = 'USD' AND empresa = '" + activoADO.Empresa + "';");
 
                     break;
                 default:

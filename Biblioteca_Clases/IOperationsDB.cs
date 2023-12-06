@@ -8,11 +8,11 @@ namespace Biblioteca_Clases
 {
     public interface IOperationsDB<T>
     {
-        bool Add();
+        bool Add(string nombreTabla);
 
         bool Update(string id);
 
-        bool Delete(string id);
+        bool Delete(string id, string nombreTabla);
 
         List<T> Select();
 

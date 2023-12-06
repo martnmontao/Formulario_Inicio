@@ -20,7 +20,7 @@ namespace Biblioteca_Clases
 
         private string pathUsuarioARegistrar = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuariosARegistrar.json";
         private string rutaActivos = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Activos.json";
-        private bool empresa;
+        private string empresa;
         private double sueldo;
         private double sueldoDolares;
         private List<Usuario> listaUsuarios;
@@ -37,7 +37,7 @@ namespace Biblioteca_Clases
         {
 
         }
-        public Usuario(string nombre, string dni, string contraseña, bool empresa)
+        public Usuario(string nombre, string dni, string contraseña, string empresa)
         {
             this.nombre = nombre;
             this.dni = dni;
@@ -55,7 +55,7 @@ namespace Biblioteca_Clases
         public double Sueldo { get => sueldo; set => sueldo = value; }
         public List<Activos> ListaActivos { get => listaActivos; set => listaActivos = value; }
         public List<Activos> ListaActivosVentas { get => listaActivosVentas; set => listaActivosVentas = value; }
-        public bool Empresa { get => empresa; set => empresa = value; }
+        public string Empresa { get => empresa; set => empresa = value; }
 
 
         public void AgregarActivo(Usuario usuario, Activos activo)
@@ -81,13 +81,13 @@ namespace Biblioteca_Clases
         }
         public bool IniciarSesion(Usuario usuario)
         {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
-
-            listaUsuarios = serializadorJson.Deserializar();
+            //var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+            UsuarioADO usuarioADO = new UsuarioADO();
+            List<UsuarioADO> listaUsuariosADO = usuarioADO.Select();
             bool iniciarSesion = false;
-            foreach (Usuario user in listaUsuarios)
+            foreach (UsuarioADO userADO in listaUsuariosADO)
             {
-                if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña && user.dni == usuario.dni)
+                if (usuario.Nombre == userADO.Nombre && usuario.Contraseña == userADO.Contraseña && userADO.Documento == usuario.dni)
                 {
                     iniciarSesion = true;
 
@@ -97,24 +97,25 @@ namespace Biblioteca_Clases
 
             return iniciarSesion;
         }
-        public Usuario DevolverUsuarios(Usuario usuario)
+        public UsuarioADO DevolverUsuarios(UsuarioADO usuarioADO)
         {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
+            
+            List<UsuarioADO> listaUsuariosADO = usuarioADO.Select();
 
-            listaUsuarios = serializadorJson.Deserializar();
+            
 
             //bool iniciarSesion = false;
-            foreach (Usuario user in listaUsuarios)
+            foreach (UsuarioADO userADO in listaUsuariosADO)
             {
-                if (usuario.Nombre == user.Nombre && usuario.Contraseña == user.Contraseña && user.dni == usuario.dni)
+                if (usuarioADO.Nombre == userADO.Nombre && usuarioADO.Contraseña == userADO.Contraseña && userADO.Documento == usuarioADO.Documento)
                 {
-                    usuario = user;
+                    usuarioADO = userADO;
 
                     break;
                 }
             }
 
-            return usuario;
+            return usuarioADO;
         }
         public Administrador DevolverAdminitrador(Administrador admin)
         {
@@ -134,7 +135,7 @@ namespace Biblioteca_Clases
 
             return admin;
         }
-        public bool VerificarDatosIngresados(string nombre, string clave, string dni)
+        public static bool VerificarDatosIngresados(string nombre, string clave, string dni)
         {
             bool verificacion = true;
             int documento;
@@ -182,279 +183,302 @@ namespace Biblioteca_Clases
         }
 
 
-        public Activos ObtenerActivo(string distintivo, ETipoMoneda tipoMoneda)
+        public ActivosADO ObtenerActivo(string nombreTabla, string idActivo)
         {
-            //EN EL CASO DE COMPRARLE A UN USUARIO, DEBERA TAMBIEN RECORRER LA LISTA DE LOS ACTIVOS EN VENTAS DE CADA USUARIO, ACORDATE
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
-            listaUsuarios = serializadorJson.Deserializar();
-            Activos activo = null;
-
-            foreach (Usuario user in listaUsuarios)
-            {
-                foreach (Activos act in user.ListaActivosVentas)
-                {
-                    if (distintivo == act.Distintivo && act.Moneda == tipoMoneda)
-                    {
-                        activo = act;
-                        break;
-                    }
-                }
-
-                foreach (Activos act in user.listaActivos)
-                {
-                    if (distintivo == act.Distintivo && act.Moneda == tipoMoneda)
-                    {
-                        activo = act;
-                        break;
-                    }
-                }
-            }
 
 
 
 
-            return activo;
+            DataBase db = new DataBase();
+
+            ActivosADO activoADO = db.DevolverActivo(nombreTabla, idActivo);
+
+            return activoADO;
+          
         }
 
 
 
-        public bool verificarActivosEnUsuario(Usuario usuario, int cantidadAVender, Activos activo)
+        public static bool VerificarActivosEnUsuario(Usuario usuario, int cantidadAVender, ActivosADO activo)
         {
-            bool verificar = true;
-            foreach(Activos act in usuario.ListaActivos)
+            bool verificar = false;
+            DataBase db = new DataBase();
+
+           
+
+            string id = db.DevolverIDUsuario(usuario.Dni);
+
+            List<ActivosADO> listaActivosSinVender = DataBase.SelectActivosUsuario(id);
+
+
+            foreach(ActivosADO actADO in listaActivosSinVender)
             {
-                if(act.Distintivo == activo.Distintivo && cantidadAVender > activo.Cv)
+                if (actADO.Distintivo == activo.Distintivo && cantidadAVender >= activo.CantidadVenta)
                 {
-                    verificar = false;
+                    verificar = true;
                     break;
                 }
             }
-            
-            
-            if (usuario.ListaActivos.Count <= 0)
+
+            if (listaActivosSinVender.Count <= 0)
             {
                 verificar = false;
             }
 
+            
+
 
 
             return verificar;
         }
 
 
-        public void ComprarActivo(string idActivo, Usuario usuario, Activos activo,string cantidadCompra, string precioCompra)
+        public void ComprarActivo(string idActivo, UsuarioADO usuario, ActivosADO activo,string cantidadCompra, string precioCompra, string idUsuario)
         {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
-            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
-            
-            listaUsuarios = serializadorJson.Deserializar();
+       
 
-
-
+           
+            UsuarioADO usuarioA = new UsuarioADO();
+            List<UsuarioADO> listaUsuariosADO = usuarioA.Select();
+            ActivosADO activoADO = new ActivosADO();
+            int bandera = 0;
+      
+            List<ActivosADO> listaActivosADO = activoADO.Select();
 
             int cC = int.Parse(cantidadCompra);
             float pC = float.Parse(precioCompra);
-            Activos activoComprado = CrearActivoCompradoVendido(usuario, activo, cC, precioCompra, cantidadCompra, precioCompra);
-          
-            foreach(Usuario user in listaUsuarios)
+            ActivosADO activoComprado = CrearActivoCompradoVendido(usuario, activo, cC, precioCompra, cantidadCompra, precioCompra);
+            //DataBase db = new DataBase();
+            foreach(UsuarioADO userADO in listaUsuariosADO)
             {
-                    
-                foreach (Activos act in user.ListaActivosVentas)
+
+                foreach (ActivosADO act in listaActivosADO)
                 {
-                    if(activo.Distintivo == act.Distintivo && act.Moneda == activo.Moneda)
+                    if(bandera == 0)
                     {
-                        act.Cv -= cC;
-                        ActivosADO actADO = (ActivosADO)act;
-                        actADO.Update(idActivo);
-                        if(act.Moneda == ETipoMoneda.USD)
+                        if (act.IdUsuario == idUsuario && act.Moneda == activo.Moneda.ToString())
                         {
-                            user.sueldoDolares += pC*cC;
+                            act.CantidadVenta -= cC;
+                            //string id = db.DevolverIDUsuario(userADO.Nombre, userADO.Contraseña, userADO.Documento, userADO.Pesos.ToString(), userADO.Dolares.ToString());
+
+                            act.Update(idActivo);
+                            
+                            bandera = 1;
+                            if (act.Moneda == "USD")
+                            {
+                                userADO.Dolares += pC * cC;
+                                
+                                userADO.Update(idUsuario);
+                            }
+                            else
+                            {
+                                userADO.Pesos += pC * cC;
+                                userADO.Update(idUsuario);
+                            }
+
+                        }
+
+                    }
+
+                    if (usuario.Documento == userADO.Documento)
+                    {
+                        DataBase db = new DataBase();
+                        string id;
+                        id = db.DevolverIDUsuario(usuario.Documento);
+                        activoComprado.IdUsuario = id;
+
+                        if (activo.Moneda == "USD")
+                        {
+                            userADO.Dolares -= pC * cC;
+                            userADO.Update(id);
                         }
                         else
                         {
-                            user.Sueldo += pC * cC;
-                            //actADO.Update(idActivo);
-                        }
+                            userADO.Pesos -= pC * cC;
+                            userADO.Update(id);
 
-                    }
-                }
-                    
-                if(usuario.dni == user.dni)
-                {
-                    user.listaActivos.Add(activoComprado);
-                    if(activo.Moneda == ETipoMoneda.USD)
-                    {
-                        user.sueldoDolares -= pC*cC;
-                    }
-                    else
-                    {
-                        user.sueldo -= pC*cC;
-                    }
-                }
-                
-                  
-            }
-
-            serializadorJson2.Serializar(listaUsuarios);
-        }
-
-        
-
-
-
-
-
-
-
-        public Usuario VenderActivoPropio(Usuario usuario, Activos activo, string cantidadCompra, string precioCompra,string cantidadVenta, string precioDeVenta)
-        {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
-            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
-            
-
-
-            listaUsuarios = serializadorJson.Deserializar();
-            int cC = int.Parse(cantidadCompra);
-            int cV = int.Parse(cantidadVenta);
-            Activos activoAVender = CrearActivoCompradoVendido(usuario, activo, cC, precioCompra,cantidadVenta, precioDeVenta);
-            
-            foreach(Usuario user in listaUsuarios)
-            {
-                if(user.dni == usuario.dni)
-                {
-                    user.ListaActivosVentas.Add(activoAVender);
-                }
-                foreach(Activos act in user.listaActivos)
-                {
-                    if(act.Distintivo == user.dni && act.Moneda == activo.Moneda)
-                    {
-                        act.Cc -= cC;
-                        act.Cv -= cV;
-                        if(act.Cv <= 0)
-                        {
-                            user.listaActivos.Remove(act);
-                            break;
-                        }
-                        usuario = user;
-                    }
-                }
-            }
-            serializadorJson2.Serializar(listaUsuarios);
-            return usuario;
-        }
-        public void VenderActivoAUsuario(Usuario usuario, Activos activo,string cantidadVenta, string precioDeVenta)
-        {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
-            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
-
-            listaUsuarios = serializadorJson.Deserializar();
-            int cV = int.Parse(cantidadVenta);
-            Activos activoAVender = CrearActivoCompradoVendido(usuario, activo, cV, precioDeVenta, cantidadVenta, precioDeVenta);
-            foreach(Usuario user in listaUsuarios)
-            {
-                foreach(Activos act in user.ListaActivosVentas) 
-                {
-                    if (activo.Distintivo == user.dni && act.Moneda == activo.Moneda && activo.Empresa == act.Empresa)
-                    {
-                        act.Cc -= cV;
-                        user.ListaActivos.Add(activoAVender);
-                        if(act.Cc <= 0 && act.Cv <= 0)
-                        {
-                            user.ListaActivosVentas.Remove(act);
-                        }
-                        if(act.Moneda == ETipoMoneda.USD)
-                        {
-                            user.SueldoDolares -= float.Parse(precioDeVenta);
-                        }
-                        else
-                        {
-                            user.Sueldo -= float.Parse(precioDeVenta);
                         }
                         break;
                     }
                     
-                }
-
-                if(user.Dni == usuario.Dni)
-                {
-                    foreach(Activos act in user.ListaActivos)
-                    {
-                        if(act.Moneda == activo.Moneda && activo.Empresa == act.Empresa)
-                        {
-                            act.Cv -= cV;
-                            if(act.Cv <= 0)
-                            {
-                                act.Cv = 0;
-                            }
-                        }
-                    }
-                    if (activo.Moneda == ETipoMoneda.USD)
-                    {
-                        user.SueldoDolares += float.Parse(precioDeVenta);
-                    }
-                    else
-                    {
-                        user.Sueldo += float.Parse(precioDeVenta);
-                    }
-                }
-
+                    
+                } 
             }
-            
 
-            serializadorJson2.Serializar(listaUsuarios);
+            activoComprado.Add("activossinvender");
+           
         }
-        public bool VerificarActivoEnUsuario(Usuario usuario, string distintivo,Activos activo)
-        {
-            bool verificar = false;
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
 
-            listaUsuarios = serializadorJson.Deserializar();
+        public UsuarioADO VenderActivoPropio(string cantidadCompra,string cantidadVenta,string idActivo, string idUsuario)
+        {
             
-            foreach(Usuario user in listaUsuarios)
+            int cC = int.Parse(cantidadCompra);
+            int cV = int.Parse(cantidadVenta);
+            
+            DataBase db = new DataBase();
+            ActivosADO activoAVender = db.DevolverActivo("activossinvender", idActivo);
+            activoAVender.CantidadCompra -= cC;
+            activoAVender.CantidadVenta -= cV;
+            if(activoAVender.CantidadVenta <= 0)
             {
-                if(user.dni == distintivo)
-                {
-                    foreach(Activos act in usuario.listaActivos)
-                    {
-                        if(activo.Empresa == act.Empresa)
-                        {
-                            verificar = true;
-                            break;
-                        }
-                    }
-                }
+                activoAVender.Delete(idActivo, "");
             }
-            return verificar;
+
+            UsuarioADO userADO = db.DevolverUsuario(idUsuario);
+            return userADO;
         }
-        private Activos CrearActivoCompradoVendido(Usuario usuario, Activos activo, int cantidadCompra, string precioCompra,string cantidadVenta, string precioVenta) 
+        
+        
+        //FALTA MODIFICARLO CON USUARIOADO
+        public void VenderActivoAUsuario(UsuarioADO usuario, ActivosADO activo,string cantidadVenta, string precioDeVenta, string idUsuario, string idActivo)
         {
+            List<UsuarioADO> listaUsuarios = usuario.Select();
+            DataBase db = new DataBase();
+            string id = db.DevolverIDUsuario(usuario.Documento);
+            List<ActivosADO> listaActivosVenta = DataBase.SelectActivosUsuario(id);
+
+            string idUsuarioAVender = db.DevolverIDUsuario(activo.Distintivo);
+            UsuarioADO usuarioAVender = new UsuarioADO();
+
+            int bandera = 0;
+            int bandera2 = 0;
+
+            int cV = int.Parse(cantidadVenta);
+            ActivosADO activoAVender = CrearActivoCompradoVendido(usuario, activo, cV, precioDeVenta, cantidadVenta, precioDeVenta);
+
+            string idUsuario2 = db.DevolverIDUsuario(usuario.Documento);
+
+            foreach(UsuarioADO userADO in listaUsuarios)
+            {
+                //MODIFICAMOS EL SUELDO DE CARLOS Y MODIFICAR EL ACTIVO EN LA TABLA DE ACTIVOS EN VENTA
+                if(bandera == 0)
+                {
+                    if(usuario.Documento == userADO.Documento)
+                    {
+                        activo.CantidadCompra -= cV;
+                            
+                        if (activo.CantidadCompra <= 0 && activo.CantidadVenta <= 0)
+                        {
+                            activo.Delete(idActivo, "");
+                        }
+                        if(activo.Moneda == "USD")
+                        {
+                            userADO.Dolares += float.Parse(precioDeVenta);
+                                
+                            userADO.Update(idUsuario2);
+                        }
+                        else
+                        {
+                            userADO.Pesos += float.Parse(precioDeVenta);
+                            userADO.Update(idUsuario2);
+
+                        }
+
+                        activo.Update(idActivo);
+                        bandera = 1;
+
+
+                    }
+
+                }
+                //MODIFICAMOS EL SUELDO A PABLITO
+                if(bandera2 == 0)
+                {
+                    if(activo.Distintivo == userADO.Documento)
+                    {
+                        usuarioAVender = userADO;
+
+                        if (activo.Moneda == "USD")
+                        {
+
+                            
+
+                            userADO.Dolares -= float.Parse(precioDeVenta);
+                            userADO.Update(idUsuario);
+
+                        }
+                        else
+                        {
+                            userADO.Pesos -= float.Parse(precioDeVenta);
+                            userADO.Update(idUsuario);
+
+                        }
+                        bandera2 = 1;
+                    }
+
+                }
+                   
+            }
+
+            foreach(ActivosADO actADO in listaActivosVenta)
+            {
+                if (actADO.Distintivo == usuario.Documento)
+                {
+                    string idActivoUsuario = db.DevolverIDActivo(actADO.Distintivo,actADO.Empresa,actADO.CantidadVenta,actADO.CantidadCompra, actADO.Moneda);
+                    actADO.CantidadVenta -= cV;
+                    if(actADO.CantidadVenta <= 0)
+                    {
+                        actADO.Delete(idActivoUsuario, "");
+                    }
+                    break;
+                }
+                
+            }
+
+
+            activoAVender.Distintivo = activo.Distintivo;
+            activoAVender.IdUsuario = idUsuarioAVender;
+            activoAVender.Add("activossinvender");
+                
+            
+          
+        }
+       
+        public ActivosADO CrearActivoCompradoVendido(UsuarioADO usuario, ActivosADO activo, int cantidadCompra, string precioCompra,string cantidadVenta, string precioVenta) 
+        {
+
+            ETipoMoneda tipoMoneda = ETipoMoneda.ARG;
+            if(activo.Moneda == "USD")
+            {
+                tipoMoneda = ETipoMoneda.USD;
+            }
+            
             int cV = int.Parse(cantidadVenta);
             int cC = cantidadCompra;
             float pC = float.Parse(precioCompra);
             float pV = float.Parse(precioVenta);
             Activos activoAVender = null;
+           // ActivosADO actADO = null; 
             switch (activo.Activo)
             {
-                case ETipoActivo.Cedear:
-                    activoAVender = new Cedear(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                case "Cedear":
+                    activoAVender = new Cedear(activo.Empresa, cC, pC, cV, pV, ETipoActivo.Cedear, tipoMoneda, activo.Intereses, usuario.Documento);
                     break;
-                case ETipoActivo.Accion:
-                    activoAVender = new Acciones(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                case "Accion":
+                    activoAVender = new Acciones(activo.Empresa, cC, pC, cV, pV, ETipoActivo.Accion, tipoMoneda, activo.Intereses, usuario.Documento);
                     break;
-                case ETipoActivo.Bono:
-                    activoAVender = new Bonos(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                case "Bono":
+                    activoAVender = new Bonos(activo.Empresa, cC, pC, cV, pV, ETipoActivo.Bono, tipoMoneda, activo.Intereses, usuario.Documento);
                     break;
-                case ETipoActivo.MEP:
-                    activoAVender = new dolarMep(activo.Empresa, cC, pC, cV, pV, activo.Activo, activo.Moneda, activo.Intereses, usuario.dni);
+                case "MEP":
+                    activoAVender = new dolarMep(activo.Empresa, cC, pC, cV, pV, ETipoActivo.MEP, tipoMoneda, activo.Intereses, usuario.Documento);
                     break;
             }
 
-            return activoAVender;
+            return (ActivosADO)activoAVender;
 
         }
 
 
+        public static explicit operator Usuario(UsuarioADO usuario)
+        {
+            var documento = usuario.Documento;
+            var nombre = usuario.Nombre;
+            var contraseña = usuario.Contraseña;
+            var empresa = usuario.Empresa.ToString();
 
+            return new Usuario(nombre, documento, contraseña, empresa);
+        }
 
 
 

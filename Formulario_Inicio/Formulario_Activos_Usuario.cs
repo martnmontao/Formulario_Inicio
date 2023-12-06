@@ -1,4 +1,5 @@
 ﻿using Biblioteca_Clases;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,14 @@ namespace Formulario_Inicio
 {
     public partial class Formulario_Activos_Usuario : Form
     {
-        private Usuario usuario;
+        private UsuarioADO usuario;
+        private Usuario user;
+
         private string pathActivos = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Activos.json";
         string moneda;
         ETipoActivo tipoActivo;
         ETipoMoneda tipoMoneda;
-        public Formulario_Activos_Usuario(Usuario usuario)
+        public Formulario_Activos_Usuario(UsuarioADO usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -29,7 +32,8 @@ namespace Formulario_Inicio
 
         private void Formulario_Activos_Usuario_Load(object sender, EventArgs e)
         {
-            dgvActivosUsuario.DataSource = usuario.ListaActivos;
+            user = (Usuario)usuario;
+            dgvActivosUsuario.DataSource = user.ListaActivos;
             
 
             
@@ -43,22 +47,27 @@ namespace Formulario_Inicio
             {
                 Administrador admin = new Administrador();
                 int cantidadAVender = int.Parse(txtCantidadVenta.Text);
-                Activos activo = null;
+                ActivosADO activo = null;
+                string idActivo;
                 string distintivo;
                 string intereses;
                 string empresa;
-                if (usuario.Empresa == false)
+                DataBase db = new DataBase();
+                string idUsuario = db.DevolverIDUsuario(usuario.Documento);
+
+                if (usuario.Empresa == "False")
                 {
                     //intereses = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[8].Value.ToString();
-                    empresa = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[1].Value.ToString();
-                    distintivo = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[8].Value.ToString();
+                    empresa = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[2].Value.ToString();
+                    idActivo = dgvActivosUsuario.Rows[dgvActivosUsuario.CurrentRow.Index].Cells[0].Value.ToString();
 
-                    activo = usuario.ObtenerActivo(distintivo, tipoMoneda);
-                    if (usuario.verificarActivosEnUsuario(usuario, cantidadAVender, activo))
+                    activo = user.ObtenerActivo("activossinvender", idActivo);
+                    if (Usuario.VerificarActivosEnUsuario(user, cantidadAVender, activo))
                     {
-                        admin.AgregarActivoMySql(tipoActivo, empresa, moneda, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, "1", usuario.Dni);
-                        usuario.VenderActivoPropio(usuario, activo, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text);
-                        MostrarActivos(usuario.ListaActivosVentas);
+                        admin.AgregarActivoMySql(tipoActivo, empresa, moneda, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, "1", usuario.Documento, usuario);
+                        
+                        user.VenderActivoPropio(txtCantidadCompra.Text,txtCantidadVenta.Text, idActivo, idUsuario);
+                        MostrarActivos(user.ListaActivosVentas);
                     }
                     else
                     {
@@ -75,8 +84,8 @@ namespace Formulario_Inicio
                         if (moneda == "ARG" || moneda == "USD")
                         {
                         
-                            admin.AgregarActivoMySql(tipoActivo, txtNombreEmpresa.Text, moneda, txtCantidadCompra.Text,txtPrecioCompra.Text, txtCantidadVenta.Text,txtPrecioVenta.Text,txtIntereses.Text, usuario.Dni);
-                            admin.CrearActivo(usuario, tipoActivo, txtNombreEmpresa.Text, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, tipoMoneda, txtIntereses.Text, usuario.Dni, pathActivos);
+                            admin.AgregarActivoMySql(tipoActivo, txtNombreEmpresa.Text, moneda, txtCantidadCompra.Text,txtPrecioCompra.Text, txtCantidadVenta.Text,txtPrecioVenta.Text,txtIntereses.Text, usuario.Documento, usuario);
+                            //admin.CrearActivo(usuario, tipoActivo, txtNombreEmpresa.Text, txtCantidadCompra.Text, txtPrecioCompra.Text, txtCantidadVenta.Text, txtPrecioVenta.Text, tipoMoneda, txtIntereses.Text, usuario.Documento, pathActivos);
                         }
                         else
                         {
@@ -122,7 +131,7 @@ namespace Formulario_Inicio
                     break;
                 case ETipoActivo.Bono:
                     AlternarTextBox(true);
-                    if(usuario.Empresa == false)
+                    if(usuario.Empresa == "False")
                     {
                         txtIntereses.Visible = false;
                         lblIntereses.Visible = false;
@@ -130,7 +139,7 @@ namespace Formulario_Inicio
                     break;
             }
 
-            if (usuario.Empresa == false)
+            if (usuario.Empresa == "False")
             {
                 txtNombreEmpresa.Visible = false;
                 lblEmpresa.Visible = false;
@@ -146,14 +155,19 @@ namespace Formulario_Inicio
 
         private void btnActivosUsuario_Click(object sender, EventArgs e)
         {
-            dgvActivosUsuario.DataSource = usuario.ListaActivos;
+            DataBase db = new DataBase();
+            string idUsuario = db.DevolverIDUsuario(usuario.Documento);
+            string query = $"SELECT * FROM activossinvender WHERE idUsuario = '{idUsuario}';";
+            LlenarDataGridView(dgvActivosUsuario, query);
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
-            Administrador admin = new Administrador();
-            usuario = usuario.DevolverUsuarios(usuario);
-            dgvActivosUsuario.DataSource = usuario.ListaActivosVentas;
+            
+            DataBase db = new DataBase();
+            string idUsuario = db.DevolverIDUsuario(usuario.Documento);
+            string query = $"SELECT * FROM activos WHERE idUsuario = '{idUsuario}';";
+            LlenarDataGridView(dgvActivosUsuario,query);
         }
 
         private void btnRealizarVenta_Click(object sender, EventArgs e)
@@ -172,7 +186,7 @@ namespace Formulario_Inicio
             lblEmpresa.Visible = true;
             btnVender.Visible = true;
 
-            if (usuario.Empresa == true)
+            if (usuario.Empresa == "True")
             {
                 txtCantidadCompra.Visible = true;
                 txtPrecioCompra.Visible = true;
@@ -225,6 +239,28 @@ namespace Formulario_Inicio
             Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(usuario);
             fm.Show();
             this.Hide();
+        }
+        public static void LlenarDataGridView(DataGridView dataGridView, string query)
+        {
+            try
+            {
+                DataBase dataBase = new DataBase();
+
+
+                dataGridView.DataSource = null;
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, dataBase.OpenDataGridView());
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView.DataSource = dt;
+                dataBase.CloseDataGridView();
+
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("No se pudo mostrar");
+            }
         }
     }
 

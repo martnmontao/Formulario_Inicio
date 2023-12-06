@@ -92,6 +92,7 @@
             txtUsuario.PlaceholderText = "Usuario";
             txtUsuario.Size = new Size(392, 19);
             txtUsuario.TabIndex = 1;
+            txtUsuario.Text = "carlos";
             txtUsuario.Enter += txtUsuario_Enter;
             txtUsuario.Leave += txtUsuario_Leave;
             // 
@@ -106,6 +107,7 @@
             txtContraseña.PlaceholderText = "Contraseña";
             txtContraseña.Size = new Size(392, 19);
             txtContraseña.TabIndex = 3;
+            txtContraseña.Text = "carlos";
             txtContraseña.Enter += txtContraseña_Enter;
             txtContraseña.Leave += txtContraseña_Leave;
             // 
@@ -198,6 +200,7 @@
             txtDocumento.PlaceholderText = "Nro. Documento";
             txtDocumento.Size = new Size(392, 19);
             txtDocumento.TabIndex = 2;
+            txtDocumento.Text = "46000000";
             // 
             // Formulario_Iniciar_Sesion
             // 

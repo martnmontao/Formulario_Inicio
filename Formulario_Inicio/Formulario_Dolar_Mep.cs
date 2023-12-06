@@ -13,12 +13,12 @@ namespace Formulario_Inicio
 {
     public partial class Formulario_Dolar_Mep : Form
     {
-        private Usuario usuario;
+        private UsuarioADO usuario;
         Administrador admin;
         string pathMisUsuarios = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\MisUsuarios.json";
         string pathAdmin = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Administrador.json";
 
-        public Formulario_Dolar_Mep(Usuario usuario)
+        public Formulario_Dolar_Mep(UsuarioADO usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -39,8 +39,8 @@ namespace Formulario_Inicio
         private void Formulario_Dolar_Mep_Load(object sender, EventArgs e)
         {
             ObtenerAdmin();
-            int sueldoDolares = Convert.ToInt32(usuario.SueldoDolares);
-            lblDolaresUsuario.Text = "Disponible: " + "US$ " + usuario.SueldoDolares.ToString();
+            int sueldoDolares = Convert.ToInt32(usuario.Dolares);
+            lblDolaresUsuario.Text = "Disponible: " + "US$ " + usuario.Dolares.ToString();
             tkbMontoDolares.Maximum = sueldoDolares;
             lblValorVenta.Text = admin.ValorDolarVenta.ToString();
             lblValorCompra.Text = admin.ValorDolarCompra.ToString();
@@ -56,16 +56,21 @@ namespace Formulario_Inicio
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            var serializadorJson = new SerializadorJSON<Usuario>(pathMisUsuarios);
-            var serializadorJson2 = new SerializadorJSON<List<Usuario>>(pathMisUsuarios);
+            UsuarioADO usuarioADO = (UsuarioADO)usuario;
+            List<UsuarioADO> listaUsuarioADO = usuarioADO.Select();
+            DataBase db = new DataBase();
+            string idUsuario = db.DevolverIDUsuario(usuarioADO.Documento);
+            
 
-            List<Usuario> listaUsuarios = serializadorJson.Deserializar();
-            foreach (Usuario user in listaUsuarios)
+
+            
+            foreach (UsuarioADO user in listaUsuarioADO)
             {
-                if (usuario.Dni == user.Dni && user.SueldoDolares > 0)
+                if (usuarioADO.Documento == user.Documento && user.Dolares > 0)
                 {
-                    user.SueldoDolares -= tkbMontoDolares.Value;
-                    user.Sueldo += (Convert.ToInt32(tkbMontoDolares.Value) * admin.ValorDolarVenta);
+                    user.Dolares -= tkbMontoDolares.Value;
+                    user.Pesos += (Convert.ToInt32(tkbMontoDolares.Value) * admin.ValorDolarVenta);
+                    user.Update(idUsuario);
                     MessageBox.Show("Se le ha transferido la equivalencia. Consulte su billetera para ver su dinero disponible.");
                     break;
                 }
@@ -75,8 +80,8 @@ namespace Formulario_Inicio
                     break;
                 }
             }
-            serializadorJson2.Serializar(listaUsuarios);
-            lblDolaresUsuario.Text = usuario.SueldoDolares.ToString();
+            
+            lblDolaresUsuario.Text = usuarioADO.Dolares.ToString();
 
         }
 

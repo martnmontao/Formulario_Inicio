@@ -30,14 +30,16 @@ namespace Formulario_Inicio
 
             serializadorXML2.Serializar(listaUsuarioARegistrar);
             listaUsuarioARegistrar = serializadorXML.Deserializar();
-            Usuario usuario = new Usuario(nombreUsuario, dni, contraseña, false);
-            if (usuario.VerificarDatosIngresados(nombreUsuario, contraseña, dni))
+            Usuario usuario = new Usuario(nombreUsuario, dni, contraseña, "false");
+            if (Usuario.VerificarDatosIngresados(nombreUsuario, contraseña, dni))
             {
                 if (usuario.VerificarUsuarioRegistradoRepetido(usuario))
                 {
                     listaUsuarioARegistrar.Add(usuario);
                     serializadorXML2.Serializar(listaUsuarioARegistrar);
-                 
+                    UsuarioADO usuarioARegistrar = new UsuarioADO(usuario.Nombre, usuario.Dni, usuario.Contraseña, 0.0, 0.0, usuario.Empresa);
+                    usuarioARegistrar.Add("registro");
+
 
                     MessageBox.Show("Se ha registrado con éxito!");
 

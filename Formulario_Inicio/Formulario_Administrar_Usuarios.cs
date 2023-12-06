@@ -36,7 +36,7 @@ namespace Formulario_Inicio
         {
             InitializeComponent();
             this.admin = new Administrador();
-            this.btnEliminarUsuarios.Visible = false;
+
             this.btnValidarUsuarios.Visible = false;
 
             ConfigurarGridView();
@@ -47,9 +47,9 @@ namespace Formulario_Inicio
             {
                 var serializadorJson = new SerializadorJSON<Usuario>(pathUsuarios);
                 lista = serializadorJson.Deserializar();
-                btnEliminarUsuarios.Visible = true;
+
                 btnValidarUsuarios.Visible = false;
-                btnVerificarEmpresa.Visible = true;
+
                 gridUsuariosMySql.Visible = false;
 
                 AlternarMuestraBotones(false);
@@ -74,15 +74,13 @@ namespace Formulario_Inicio
             try
             {
 
-                var serializadorXML = new SerializadorXML<Usuario>(pathUsuariosARegistrar);
-                lista = serializadorXML.Deserializar();
-                OrdenarPersonas(lista, (usuario1, usuario2) => usuario1.Nombre.CompareTo(usuario2.Nombre));
-                AlternarMuestraBotones(false);
-                gridUsuariosMySql.Visible = false;
-                MostrarUsuariosOrdenados();
+                
+                this.Size = new System.Drawing.Size(743, 696);
+
+                LlenarDataGridView(gridUsuariosMySql, "SELECT * FROM registro");
                 btnValidarUsuarios.Visible = true;
-                btnEliminarUsuarios.Visible = false;
-                btnVerificarEmpresa.Visible = false;
+                lblTitulo.Location = new System.Drawing.Point(226, 9);
+
             }
             catch
             {
@@ -99,23 +97,14 @@ namespace Formulario_Inicio
 
         private void btnValidarUsuarios_Click(object sender, EventArgs e)
         {
-
-            var serializadorXML = new SerializadorXML<Usuario>(pathUsuariosARegistrar);
-            var listaUsuariosARegistrar = serializadorXML.Deserializar();
-            var serializadorJSON = new SerializadorJSON<List<Usuario>>(pathUsuarios);
-            var serializadorJSON2 = new SerializadorJSON<Usuario>(pathUsuarios);
-
-            listaUsuarios = serializadorJSON2.Deserializar();
-
-
             try
             {
-                nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[idNombreDGV].Value.ToString();
-                listaUsuarios = admin.ValidarUsuario(listaUsuariosARegistrar, nombre);
-                admin.EliminarUsuario(listaUsuariosARegistrar, nombre, pathUsuariosARegistrar, false);
-                serializadorJSON.Serializar(listaUsuarios);
-                admin.AgregarAMySql();
-                MostrarUsuariosOrdenados();
+                UsuarioADO usuarioADO = new UsuarioADO(txtNombre.Text, txtDocumento.Text, txtContraseña.Text, double.Parse(txtPesos.Text), double.Parse(txtDolares.Text), txtEmpresa.Text);
+                usuarioADO.Add("usuarios");
+               
+                admin.EliminarUsuarioMySql(usuarioADO, txtID.Text, "registro");
+
+
 
 
             }
@@ -123,39 +112,17 @@ namespace Formulario_Inicio
             {
                 MessageBox.Show("No hay usuarios para validar.");
             }
-
-
-        }
-
-        private void btnEliminarUsuarios_Click(object sender, EventArgs e)
-        {
-            var jsonSerializador = new SerializadorJSON<Usuario>(pathUsuarios);
-
-            try
+            finally
             {
-                nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[2].Value.ToString();
-                listaUsuarios = jsonSerializador.Deserializar();
-                admin.EliminarUsuario(listaUsuarios, nombre, pathUsuarios, true);
-                MostrarUsuariosOrdenados();
-
+                LlenarDataGridView(gridUsuariosMySql, "SELECT * FROM registro");
 
             }
-            catch
-            {
-                MessageBox.Show("No hay usuarios para eliminar.");
-            }
-
 
         }
 
-        private void btnVerificarEmpresa_Click(object sender, EventArgs e)
-        {
-            nombre = gridUsuarios.Rows[gridUsuarios.CurrentRow.Index].Cells[2].Value.ToString();
-            admin.VerificarEmpresa(nombre, pathUsuarios);
-            admin.AgregarAMySql();
-            MostrarUsuariosOrdenados();
+       
 
-        }
+
 
 
 
@@ -192,7 +159,9 @@ namespace Formulario_Inicio
 
         private void Formulario_Administrar_Usuarios_Load(object sender, EventArgs e)
         {
-            //MostrarUsuariosOrdenados();
+            this.Size = new System.Drawing.Size(743, 696);
+            lblTitulo.Location = new System.Drawing.Point(226, 9);
+
         }
 
 
@@ -200,7 +169,7 @@ namespace Formulario_Inicio
         private void btnModificarUsuario_Click(object sender, EventArgs e)
         {
             admin.ModificarUsuarios(txtID.Text, txtNombre.Text, txtContraseña.Text, txtDocumento.Text, txtPesos.Text, txtDolares.Text, txtEmpresa.Text);
-            LlenarDataGridView(gridUsuariosMySql);
+            LlenarDataGridView(gridUsuariosMySql, "SELECT * FROM usuarios");
         }
 
 
@@ -213,24 +182,12 @@ namespace Formulario_Inicio
             AlternarMuestraBotones(true);
             try
             {
-                UsuarioADO usuarioADO = new UsuarioADO();
-                Usuario usuario = new Usuario();
+                LlenarDataGridView(gridUsuariosMySql, "SELECT * FROM usuarios");
+                btnValidarUsuarios.Visible = false;
+                this.Size = new System.Drawing.Size(1463, 696);
+                lblTitulo.Location = new System.Drawing.Point(578, 9);
 
 
-                List<UsuarioADO> listaUsuarioADOs = new List<UsuarioADO>();
-
-                var serializadorJSON = new SerializadorJSON<Usuario>(pathUsuarios);
-                List<Usuario> listaUsuarios = serializadorJSON.Deserializar();
-                foreach (Usuario user in listaUsuarios)
-                {
-                    usuarioADO = (UsuarioADO)user;
-                    break;
-                }
-
-                listaUsuarioADOs = usuarioADO.Select();
-
-                gridUsuariosMySql.Visible = true;
-                MostrarGridUsuarios(gridUsuariosMySql);
 
             }
             catch
@@ -261,20 +218,15 @@ namespace Formulario_Inicio
             txtDolares.Text = dolaresUsuario;
         }
 
-        private void MostrarGridUsuarios(DataGridView dataGridView)
-        {
-
-            //gridUsuariosMySql.DataSource = listaGenerica;
-            LlenarDataGridView(dataGridView);
-        }
 
 
-        public static void LlenarDataGridView(DataGridView dataGridView)
+
+        public static void LlenarDataGridView(DataGridView dataGridView, string query)
         {
             try
             {
                 DataBase dataBase = new DataBase();
-                string query = "SELECT * FROM usuarios";
+
 
                 dataGridView.DataSource = null;
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, dataBase.OpenDataGridView());
@@ -294,8 +246,9 @@ namespace Formulario_Inicio
 
         private void btnEliminarMySql_Click(object sender, EventArgs e)
         {
-            admin.EliminarUsuarioMySql(txtID.Text);
-            LlenarDataGridView(gridUsuariosMySql);
+
+            admin.EliminarUsuarioMySql(new UsuarioADO(), txtID.Text, "usuarios");
+            LlenarDataGridView(gridUsuariosMySql, "SELECT * FROM usuarios");
         }
 
 
@@ -320,5 +273,6 @@ namespace Formulario_Inicio
             btnEliminarMySql.Visible = alternar;
 
         }
+
     }
 }

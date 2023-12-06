@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 
 namespace Biblioteca_Clases
 {
@@ -62,7 +63,7 @@ namespace Biblioteca_Clases
 
 
         }*/
-        public static void InsertUsuarios(string documento, string nombre, string contraseña, double pesos, double dolares, string empresa)
+        public static void InsertUsuarios(string nombreTabla, string documento, string nombre, string contraseña, double pesos, double dolares, string empresa)
         {
             try
             {
@@ -70,7 +71,7 @@ namespace Biblioteca_Clases
 
                 commandMySql.Parameters.Clear();
 
-                var query = $"INSERT INTO usuarios(Documento,Nombre,Contraseña,Pesos,Dolares,Empresa) VALUES(@Documento, @Nombre, @Contraseña, @Pesos, @Dolares,@Empresa)";
+                var query = $"INSERT INTO {nombreTabla}(Documento,Nombre,Contraseña,Pesos,Dolares,Empresa) VALUES(@Documento, @Nombre, @Contraseña, @Pesos, @Dolares,@Empresa)";
                
                 commandMySql.CommandText = query;
                 commandMySql.Parameters.AddWithValue("@Documento", documento);
@@ -152,12 +153,12 @@ namespace Biblioteca_Clases
             }
         }
 
-        public static void DeleteUsuario(string id)
+        public static void DeleteUsuario(string id, string nombreTabla)
         {
             try
             {
                 OpenConnection();
-                var query = $"DELETE FROM usuarios where id= '"+id+"';";
+                var query = $"DELETE FROM {nombreTabla} where id= '"+id+"';";
                 commandMySql.ExecuteNonQuery();
                 commandMySql = new MySqlCommand(query, OpenConnectionUpdate());
                 MySqlDataReader reader = commandMySql.ExecuteReader();
@@ -212,6 +213,46 @@ namespace Biblioteca_Clases
 
 
         }
+        public static List<ActivosADO> SelectActivosUsuario(string id)
+        {
+
+
+            try
+            {
+
+                OpenConnection();
+                var query = $"SELECT * FROM activossinvender WHERE idUsuario = '{id}'";
+                List<ActivosADO> listaActivos = new List<ActivosADO>();
+                commandMySql.CommandText = query;
+
+                using (var reader = commandMySql.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ActivosADO dato = (ActivosADO)reader;
+                        listaActivos.Add(dato);
+                    }
+                }
+                return listaActivos;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+
+
+        }
+
+
+
+       
+
+
+        
 
 
 
@@ -219,7 +260,7 @@ namespace Biblioteca_Clases
 
 
 
-        public static void InsertActivos(string tipoActivo, string empresa, string moneda, int cantidadCompra, double precioCompra, int cantidadVenta, double precioVenta, int intereses, string distintivo)
+        public static void InsertActivos(string nombreTabla, string tipoActivo, string empresa, string moneda, int cantidadCompra, double precioCompra, int cantidadVenta, double precioVenta, int intereses, string distintivo, string idUsuario)
         {
             try
             {
@@ -227,8 +268,8 @@ namespace Biblioteca_Clases
 
                 commandMySql.Parameters.Clear();
 
-                var query = "INSERT INTO activos(activo, empresa, cantidadCompra, precioCompra, cantidadVenta, precioVenta, moneda, intereses, distintivo) " +
-                       "VALUES (@activo, @empresa, @cantidadCompra, @precioCompra, @cantidadVenta, @precioVenta, @moneda, @intereses, @distintivo)";
+                var query = $"INSERT INTO {nombreTabla}(activo, empresa, cantidadCompra, precioCompra, cantidadVenta, precioVenta, moneda, intereses, distintivo, idUsuario) " +
+                       "VALUES (@activo, @empresa, @cantidadCompra, @precioCompra, @cantidadVenta, @precioVenta, @moneda, @intereses, @distintivo, @idUsuario)";
 
                 commandMySql.CommandText = query;
                 commandMySql.Parameters.AddWithValue("@activo", tipoActivo);
@@ -240,7 +281,9 @@ namespace Biblioteca_Clases
                 commandMySql.Parameters.AddWithValue("@precioVenta", precioVenta);
                 commandMySql.Parameters.AddWithValue("@intereses", intereses);
                 commandMySql.Parameters.AddWithValue("@distintivo", distintivo);
-     
+                commandMySql.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+
 
 
 
@@ -303,6 +346,216 @@ namespace Biblioteca_Clases
         {
             connectionMySql.Close();
         }
+
+        public  string DevolverIDUsuario(string documento)
+        {
+
+            var query = $"SELECT id FROM usuarios WHERE Documento = '{documento}';";
+
+            try
+            {
+
+                OpenConnection();
+
+                commandMySql.CommandText = query;
+
+                string idUsuario;
+
+                object result = commandMySql.ExecuteScalar();
+
+                idUsuario = result.ToString();
+
+                return idUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+
+
+        }
+        public string DevolverIDUsuarioConID(string id)
+        {
+
+            var query = $"SELECT id FROM usuarios WHERE id = '{id}';";
+
+            try
+            {
+
+                OpenConnection();
+
+                commandMySql.CommandText = query;
+
+                string idUsuario;
+
+                object result = commandMySql.ExecuteScalar();
+
+                idUsuario = result.ToString();
+
+                return idUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+
+
+        }
+
+        public string DevolverIDActivo(string distintivo, string empresa, int cantidadVenta, int cantidadCompra, string moneda)
+        {
+
+            var query = $"SELECT id FROM activossinvender WHERE distintivo = '{distintivo}' AND empresa = '{empresa}' AND cantidadVenta = '{cantidadVenta}' AND cantidadCompra = '{cantidadCompra}' AND moneda = '{moneda}';";
+
+            try
+            {
+
+                OpenConnection();
+
+                commandMySql.CommandText = query;
+
+                string idActivo;
+
+                object result = commandMySql.ExecuteScalar();
+
+                idActivo = result.ToString();
+
+                return idActivo;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+
+
+        }
+        public UsuarioADO DevolverUsuario(string idUsuario)
+        {
+
+            var query = $"SELECT * FROM usuarios WHERE id = '{idUsuario}';";
+
+            UsuarioADO usuario = null;
+            try
+            {
+
+                OpenConnection();
+
+                commandMySql.CommandText = query;
+
+                using (var reader = commandMySql.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        usuario = (UsuarioADO)reader;
+                        
+                    }
+                }
+
+                
+
+                
+
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+
+
+        }
+
+        public ActivosADO DevolverActivo(string nombreTabla,string idActivo)
+        {
+
+            var query = $"SELECT * FROM {nombreTabla} WHERE id = '{idActivo}';";
+
+            ActivosADO activo = null;
+            try
+            {
+
+                OpenConnection();
+
+                commandMySql.CommandText = query;
+
+                using (var reader = commandMySql.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        activo = (ActivosADO)reader;
+
+                    }
+                }
+
+
+
+
+
+                return activo;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+
+
+        }
+
+
+
+
+        public static void DeleteActivo(string id)
+        {
+            try
+            {
+                OpenConnection();
+                var query = $"DELETE FROM activossinvender where id= '{id}';";
+                commandMySql.ExecuteNonQuery();
+                commandMySql = new MySqlCommand(query, OpenConnectionUpdate());
+                MySqlDataReader reader = commandMySql.ExecuteReader();
+                Console.WriteLine("Se modifico el activo");
+                while (reader.Read())
+                {
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                connectionMySql.Close();
+            }
+        }
+
+
+
+
+
+
+
 
     }
 }

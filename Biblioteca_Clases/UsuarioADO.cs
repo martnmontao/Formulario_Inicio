@@ -17,7 +17,7 @@ namespace Biblioteca_Clases
         public double Dolares {  get; set; }
         public string Empresa { get; set; }
 
-        public string Id { get; set; }
+        
 
         public UsuarioADO():base("usuarios", ["Documento", "Nombre", "Contraseña", "Pesos", "Dolares", "Empresa"])
         {
@@ -36,9 +36,9 @@ namespace Biblioteca_Clases
         }
 
         //Va a agregar un elemento a mySql
-        public bool Add()
+        public bool Add(string nombreTabla)
         {            
-            DataBase.InsertUsuarios(Documento, Nombre, Contraseña, Pesos, Dolares, Empresa);
+            DataBase.InsertUsuarios(nombreTabla,Documento, Nombre, Contraseña, Pesos, Dolares, Empresa);
             return true;
         }
 
@@ -50,9 +50,9 @@ namespace Biblioteca_Clases
         }
 
         //Va a eliminar mi elemento de mySql
-        public bool Delete(string id) 
+        public bool Delete(string id, string nombreTabla) 
         {
-            DataBase.DeleteUsuario(id);
+            DataBase.DeleteUsuario(id, nombreTabla);
             return true;
         }
 
@@ -75,12 +75,13 @@ namespace Biblioteca_Clases
             var documento = reader["Documento"].ToString();
             var nombre = reader["Nombre"].ToString();
             var contraseña = reader["Contraseña"].ToString();
-            var pesos = Convert.ToInt32(reader["Pesos"]);
-            var dolares =   Convert.ToInt32(reader["Dolares"]);
+            var pesos = float.Parse(reader["Pesos"].ToString());
+            var dolares = float.Parse(reader["Dolares"].ToString());
             var empresa =  reader["Empresa"].ToString();
-
             return new UsuarioADO(nombre, documento, contraseña, pesos, dolares, empresa);
         }
+
+        
 
         public static explicit operator UsuarioADO(Usuario usuario)
         {
@@ -89,12 +90,12 @@ namespace Biblioteca_Clases
             var contraseña = usuario.Contraseña;
             var pesos = usuario.Sueldo;
             var dolares = usuario.SueldoDolares;
-            var empresa = usuario.Empresa.ToString();
+            var empresa = usuario.Empresa;
 
             return new UsuarioADO(nombre, documento, contraseña, pesos, dolares, empresa);
         }
         
-
+        
         
 
     }

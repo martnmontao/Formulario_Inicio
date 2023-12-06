@@ -69,7 +69,7 @@ namespace Formulario_Inicio
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-     
+
             this.nombre = txtUsuario.Text;
             this.contraseña = txtContraseña.Text;
             this.documento = txtDocumento.Text;
@@ -77,9 +77,10 @@ namespace Formulario_Inicio
 
             if (usuario.IniciarSesion(usuario))
             {
-   
-                usuario = usuario.DevolverUsuarios(usuario);
-                Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(usuario);
+                DataBase db = new DataBase();
+                string idUsuario = db.DevolverIDUsuario(documento);
+                UsuarioADO userADO = db.DevolverUsuario(idUsuario);
+                Formulario_Menu_Usuario fm = new Formulario_Menu_Usuario(userADO);
                 fm.Show();
                 this.Hide();
 
